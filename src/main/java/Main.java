@@ -14,5 +14,5 @@ public class Main {
 
         window.setLocationRelativeTo(null); // отображение окна по центру
         window.setVisible(true); // установка отображения окна
-  }
+    }
 }
