@@ -32,4 +32,8 @@ public class GamePanel extends JPanel implements Runnable {
 
         }
     }
+
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics); // отрисовка изображения
+    }
 }
