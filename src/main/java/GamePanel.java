@@ -16,6 +16,11 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread; // создание потока
 
+    // начальная позиция игрока
+    int playerX = 100;
+    int playerY = 100;
+    int playerSpeed = 4;
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // размеры окна
         this.setBackground(Color.black); // цвет фона
@@ -42,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D graphics2D = (Graphics2D) graphics; // класс-наследник с расширенным функционалом
 
         graphics2D.setColor(Color.white);
-        graphics2D.fillRect(100, 100, tileSize, tileSize); // рисует прямоугольник
+        graphics2D.fillRect(playerX, playerY, tileSize, tileSize); // рисует прямоугольник (игрок)
         graphics2D.dispose(); // удаляет метод для освобождения памяти
     }
 }
