@@ -64,15 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        // обновление позиции игрока
-        if (keyHandler.upPressed)
-            playerY -= playerSpeed;
-        else if (keyHandler.downPressed)
-            playerY += playerSpeed;
-        else if (keyHandler.leftPressed)
-            playerX -= playerSpeed;
-        else if (keyHandler.rightPressed)
-            playerX += playerSpeed;
+        player.update();
     }
 
     public void paintComponent(Graphics graphics) {
