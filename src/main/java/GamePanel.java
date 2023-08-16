@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int tileSize = originalTileSize * scale; // итоговый размер плитки 48x48
     final int maxScreenCol = 16;
     final int maxScreenRow = 12;
-    final int screenWidth = tileSize * maxScreenCol; // ширирна 768 пикселей
+    final int screenWidth = tileSize * maxScreenCol; // ширина 768 пикселей
     final int screenHeight = tileSize * maxScreenRow; // высота 576 пикселей
 
     Thread gameThread; // создание потока
@@ -28,6 +28,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
+        while (gameThread != null) {
 
+        }
     }
 }
