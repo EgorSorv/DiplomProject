@@ -29,11 +29,17 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() {
         while (gameThread != null) {
-
+            repaint(); // встроенный метод вызова paintComponent
         }
     }
 
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics); // отрисовка изображения
+
+        Graphics2D graphics2D = (Graphics2D) graphics; // класс-наследник с расширенным функционалом
+
+        graphics2D.setColor(Color.white);
+        graphics2D.fillRect(100, 100, tileSize, tileSize); // рисует прямоугольник
+        graphics2D.dispose(); // удаляет метод для освобождения памяти
     }
 }
