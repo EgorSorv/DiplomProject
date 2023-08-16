@@ -13,6 +13,8 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenWidth = tileSize * maxScreenCol; // ширина 768 пикселей
     final int screenHeight = tileSize * maxScreenRow; // высота 576 пикселей
 
+    double FPS = 60;
+
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread; // создание потока
 
@@ -36,10 +38,23 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        while (gameThread != null) {
-            update(); // обновление данных игры
+        double drawInterval = 1000000000 / FPS; // частота обновления
+        double delta = 0;
+        long lastTime = System.nanoTime(); // начало интервала
+        long currentTime; // конец интервала
 
-            repaint(); // встроенный метод вызова paintComponent
+        while (gameThread != null) {
+            currentTime = System.nanoTime(); // обновление конца интервала
+
+            delta += (currentTime - lastTime) / drawInterval; // накапливание интервалов до требуемого времени
+
+            lastTime = currentTime; // обновление начала интервала
+
+            if (delta >= 1) {
+                update(); // обновление данных игры
+                repaint(); // встроенный метод вызова paintComponent
+                delta--; // сброс счетчика
+            }
         }
     }
 
@@ -52,7 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
         else if (keyHandler.leftPressed)
             playerX -= playerSpeed;
         else if (keyHandler.rightPressed)
-            playerY += playerSpeed;
+            playerX += playerSpeed;
     }
 
     public void paintComponent(Graphics graphics) {
