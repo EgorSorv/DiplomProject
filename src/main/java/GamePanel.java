@@ -13,12 +13,15 @@ public class GamePanel extends JPanel implements Runnable {
     final int screenWidth = tileSize * maxScreenCol; // ширина 768 пикселей
     final int screenHeight = tileSize * maxScreenRow; // высота 576 пикселей
 
+    KeyHandler keyHandler = new KeyHandler();
     Thread gameThread; // создание потока
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // размеры окна
         this.setBackground(Color.black); // цвет фона
         this.setDoubleBuffered(true); // улучшенный рендеринг
+        this.addKeyListener(keyHandler); // распознование работы с клавиатурой
+        this.setFocusable(true); // установка фокуса на получение данных с клавиатуры
     }
 
     public void startGameThread() {
