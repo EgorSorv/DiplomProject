@@ -37,8 +37,22 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() {
         while (gameThread != null) {
+            update(); // обновление данных игры
+
             repaint(); // встроенный метод вызова paintComponent
         }
+    }
+
+    public void update() {
+        // обновление позиции игрока
+        if (keyHandler.upPressed)
+            playerY -= playerSpeed;
+        else if (keyHandler.downPressed)
+            playerY += playerSpeed;
+        else if (keyHandler.leftPressed)
+            playerX -= playerSpeed;
+        else if (keyHandler.rightPressed)
+            playerY += playerSpeed;
     }
 
     public void paintComponent(Graphics graphics) {
