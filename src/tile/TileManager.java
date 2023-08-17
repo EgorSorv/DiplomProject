@@ -4,19 +4,25 @@ import main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class TileManager {
     GamePanel gamePanel;
     Tile[] tiles; // массив для хранения плиток
+    int[][] mapTileNum; // двумерный массив для хранения карт
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
         tiles = new Tile[10];
+        mapTileNum = new int [gamePanel.maxScreenCol][gamePanel.maxScreenRow];
 
         getTileImage();
+        loadMap();
     }
 
     public void getTileImage() {
@@ -37,6 +43,41 @@ public class TileManager {
         }
     }
 
+    // загрузка карты
+    public void loadMap() {
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/maps/map1.txt"); // импорт файла
+            assert inputStream != null;
+            // чтение файла
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+            int col = 0;
+            int row = 0;
+
+            while (col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow) {
+                String line = bufferedReader.readLine(); // построчное чтение
+
+                while (col < gamePanel.maxScreenCol) {
+                    String[] numbers = line.split(" "); // помещение строки в массив
+
+                    int num = Integer.parseInt(numbers[col]);
+
+                    mapTileNum[col][row] = num;
+                    col++;
+                }
+
+                if (col == gamePanel.maxScreenCol) {
+                    col = 0;
+                    row++;
+                }
+            }
+
+            bufferedReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void draw(Graphics2D graphics2D) {
         int col = 0;
         int row = 0;
@@ -45,7 +86,10 @@ public class TileManager {
 
         // автозаполнение экрана
         while (col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow) {
-            graphics2D.drawImage(tiles[0].image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+            int tileNum = mapTileNum[col][row];
+
+            graphics2D.drawImage(tiles[tileNum].image, x, y,
+                    gamePanel.tileSize, gamePanel.tileSize, null);
 
             col++;
             x += gamePanel.tileSize;
