@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // размеры окна
-        this.setBackground(Color.black); // цвет фона
+        this.setBackground(Color.white); // цвет фона
         this.setDoubleBuffered(true); // улучшенный рендеринг
         this.addKeyListener(keyHandler); // распознование работы с клавиатурой
         this.setFocusable(true); // установка фокуса на получение данных с клавиатуры

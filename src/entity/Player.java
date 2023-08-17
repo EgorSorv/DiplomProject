@@ -26,6 +26,7 @@ public class Player extends Entity {
         y = 100;
         speed = 4;
         direction = "down";
+        check = false;
     }
 
     // получение изображения
@@ -71,24 +72,47 @@ public class Player extends Entity {
         }
     }
 
+    // обновление позиции игрока
     public void update() {
-        // обновление позиции игрока
-        if (keyHandler.upPressed) {
-            direction = "up";
-            y -= speed;
+        if (keyHandler.upPressed || keyHandler.downPressed ||
+                keyHandler.leftPressed || keyHandler.rightPressed) {
+
+            if (keyHandler.upPressed) {
+                direction = "up";
+                y -= speed;
+            }
+            else if (keyHandler.downPressed) {
+                direction = "down";
+                y += speed;
+            }
+            else if (keyHandler.leftPressed) {
+                direction = "left";
+                x -= speed;
+            }
+            else {
+                direction = "right";
+                x += speed;
+            }
+
+            spriteCounter++;
+
+            if (spriteCounter > 10 - speed) {
+                if (spriteNum == 0 && !check) {
+                    spriteNum = 1;
+                    check = true;
+                } else if (spriteNum == 0) {
+                    spriteNum = 2;
+                    check = false;
+                } else if (spriteNum == 1)
+                    spriteNum = 0;
+                else if (spriteNum == 2)
+                    spriteNum = 0;
+
+                spriteCounter = 0;
+            }
         }
-        else if (keyHandler.downPressed) {
-            direction = "down";
-            y += speed;
-        }
-        else if (keyHandler.leftPressed) {
-            direction = "left";
-            x -= speed;
-        }
-        else if (keyHandler.rightPressed) {
-            direction = "right";
-            x += speed;
-        }
+        else
+            spriteNum = 0;
     }
 
     // отрисовка изображений
