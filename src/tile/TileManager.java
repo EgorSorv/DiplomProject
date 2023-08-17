@@ -91,26 +91,35 @@ public class TileManager {
     }
 
     public void draw(Graphics2D graphics2D) {
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
+        int worldCol = 0;
+        int worldRow = 0;
 
         // автозаполнение экрана
-        while (col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow) {
-            int tileNum = mapTileNum[col][row];
+        while (worldCol < gamePanel.maxWorldCol && worldRow < gamePanel.maxWorldRow) {
+            int tileNum = mapTileNum[worldCol][worldRow];
 
-            graphics2D.drawImage(tiles[tileNum].image, x, y,
-                    gamePanel.tileSize, gamePanel.tileSize, null);
+            // позиция плитки на карте
+            int worldX = worldCol * gamePanel.tileSize;
+            int worldY = worldRow * gamePanel.tileSize;
+            // позиция плитки на экране
+            int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
+            int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
 
-            col++;
-            x += gamePanel.tileSize;
+            // отрисовка плиток в пределах экрана
+            if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
+                worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
+                worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
+                worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
 
-            if (col == gamePanel.maxScreenCol) {
-                col = 0;
-                x = 0;
-                row++;
-                y += gamePanel.tileSize;
+                graphics2D.drawImage(tiles[tileNum].image, screenX, screenY,
+                        gamePanel.tileSize, gamePanel.tileSize, null);
+            }
+
+            worldCol++;
+
+            if (worldCol == gamePanel.maxWorldCol) {
+                worldCol = 0;
+                worldRow++;
             }
         }
     }
