@@ -5,6 +5,7 @@ import main.KeyHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -92,7 +93,43 @@ public class Player extends Entity {
 
     // отрисовка изображений
     public void draw(Graphics2D graphics2D) {
-        graphics2D.setColor(Color.white);
-        graphics2D.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize); // рисует прямоугольник (игрок)
+        BufferedImage image = null;
+
+        switch (direction) {
+            case "up" -> {
+                if (spriteNum == 0)
+                    image = upIdle;
+                if (spriteNum == 1)
+                    image = up1;
+                if (spriteNum == 2)
+                    image = up2;
+            }
+            case "down" -> {
+                if (spriteNum == 0)
+                    image = downIdle;
+                if (spriteNum == 1)
+                    image = down1;
+                if (spriteNum == 2)
+                    image = down2;
+            }
+            case "left" -> {
+                if (spriteNum == 0)
+                    image = leftIdle;
+                if (spriteNum == 1)
+                    image = left1;
+                if (spriteNum == 2)
+                    image = left2;
+            }
+            case "right" -> {
+                if (spriteNum == 0)
+                    image = rightIdle;
+                if (spriteNum == 1)
+                    image = right1;
+                if (spriteNum == 2)
+                    image = right2;
+            }
+        }
+
+        graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 }
