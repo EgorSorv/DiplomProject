@@ -3,7 +3,8 @@ package entity;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
-    public int x, y, speed; // координаты и скорость
+    public int worldX, worldY; // координаты мира
+    public int speed; // скорость перемещения
     public BufferedImage upIdle, up1, up2, downIdle, down1, down2,
             leftIdle, left1, left2, rightIdle, right1, right2; // набор изображений
     public String direction; // направление движения
