@@ -24,6 +24,7 @@ public class Player extends Entity {
         x = 100;
         y = 100;
         speed = 4;
+        direction = "down";
     }
 
     // получение изображения
@@ -71,16 +72,25 @@ public class Player extends Entity {
 
     public void update() {
         // обновление позиции игрока
-        if (keyHandler.upPressed)
+        if (keyHandler.upPressed) {
+            direction = "up";
             y -= speed;
-        else if (keyHandler.downPressed)
+        }
+        else if (keyHandler.downPressed) {
+            direction = "down";
             y += speed;
-        else if (keyHandler.leftPressed)
+        }
+        else if (keyHandler.leftPressed) {
+            direction = "left";
             x -= speed;
-        else if (keyHandler.rightPressed)
+        }
+        else if (keyHandler.rightPressed) {
+            direction = "right";
             x += speed;
+        }
     }
 
+    // отрисовка изображений
     public void draw(Graphics2D graphics2D) {
         graphics2D.setColor(Color.white);
         graphics2D.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize); // рисует прямоугольник (игрок)
