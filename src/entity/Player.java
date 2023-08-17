@@ -13,9 +13,14 @@ public class Player extends Entity {
     GamePanel gamePanel;
     KeyHandler keyHandler;
 
+    public final int screenX, screenY; // позиция игрока на экране
+
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
+
+        screenX = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2; // перенос персонажа в центр экрана
+        screenY = gamePanel.screenHeight / 2 - gamePanel.tileSize / 2;
 
         setDefaultValues();
         getPlayerImage();
@@ -154,6 +159,6 @@ public class Player extends Entity {
             }
         }
 
-        graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+        graphics2D.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 }
