@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // SCREEN SETTINGS
     final int originalTileSize = 16; // начальный размер плитки для отображения объектов 16x16
-    final int scale = 3;
+    public final int scale = 3;
 
     public final int tileSize = originalTileSize * scale; // итоговый размер плитки 48x48
     public final int maxScreenCol = 16;
@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread; // создание потока
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyHandler);
 
     public GamePanel() {

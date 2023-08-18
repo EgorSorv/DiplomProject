@@ -12,8 +12,8 @@ import java.util.Objects;
 
 public class TileManager {
     GamePanel gamePanel;
-    Tile[] tiles; // массив для хранения плиток
-    int[][] mapTileNum; // двумерный массив для хранения карт
+    public Tile[] tiles; // массив для хранения плиток
+    public int[][] mapTileNum; // двумерный массив для хранения карт
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
