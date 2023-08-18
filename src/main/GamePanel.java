@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import object.GameObject;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -30,7 +31,9 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread; // создание потока
     public CollisionChecker collisionChecker = new CollisionChecker(this);
+    public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new Player(this, keyHandler);
+    public GameObject[] obj = new GameObject[10]; // массив для хранения предметов
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // размеры окна
@@ -38,6 +41,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true); // улучшенный рендеринг
         this.addKeyListener(keyHandler); // распознование работы с клавиатурой
         this.setFocusable(true); // установка фокуса на получение данных с клавиатуры
+    }
+
+    public void setupGame() {
+        assetSetter.setObject();
     }
 
     public void startGameThread() {
