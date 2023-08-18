@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
@@ -11,4 +12,6 @@ public abstract class Entity {
     public int spriteCounter = 0; // интервал обновления изображения
     public int spriteNum = 0; // номер изображения
     public boolean check; // переменная для срабатывания idle анимаций во время движения
+    public Rectangle solidArea; // сплошная часть объекта
+    public boolean collisionOn = false;
 }

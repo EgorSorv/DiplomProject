@@ -22,6 +22,8 @@ public class Player extends Entity {
         screenX = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2; // перенос персонажа в центр экрана
         screenY = gamePanel.screenHeight / 2 - gamePanel.tileSize / 2;
 
+        solidArea = new Rectangle(8, 16, 32, 32); // сплошная часть игрока
+
         setDefaultValues();
         getPlayerImage();
     }
