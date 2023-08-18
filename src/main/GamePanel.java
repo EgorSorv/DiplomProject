@@ -85,6 +85,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileManager.draw(graphics2D);
 
+        for (GameObject gameObject : obj)
+            if (gameObject != null)
+                gameObject.draw(graphics2D, this);
+
         player.draw(graphics2D);
 
         graphics2D.dispose(); // удаляет метод для освобождения памяти
