@@ -90,6 +90,12 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D graphics2D = (Graphics2D) graphics; // класс-наследник с расширенным функционалом
 
+        // DEBUG (BEGIN)
+        long drawStart = 0;
+
+        if (keyHandler.checkDrawTime)
+            drawStart = System.nanoTime();
+
         // TILE
         tileManager.draw(graphics2D);
 
@@ -103,6 +109,15 @@ public class GamePanel extends JPanel implements Runnable {
 
         // UI
         userInterface.draw(graphics2D);
+
+        //  DEBUG (END)
+        if (keyHandler.checkDrawTime) {
+            long drawEnd = System.nanoTime();
+            long passed = drawEnd - drawStart;
+
+            graphics2D.setColor(Color.green);
+            graphics2D.drawString("Draw Time: " + passed, 10, 400);
+        }
 
         graphics2D.dispose(); // удаляет метод для освобождения памяти
     }
