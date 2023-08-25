@@ -153,6 +153,10 @@ public class Player extends Entity {
                     if (hasKey > 0)
                         gamePanel.obj[index] = null;
                 }
+                case "boots" -> {
+                    speed += 2;
+                    gamePanel.obj[index] = null;
+                }
             }
         }
     }
