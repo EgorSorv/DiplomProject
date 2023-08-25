@@ -149,6 +149,7 @@ public class Player extends Entity {
                     gamePanel.playSoundEffects(1);
                     hasKey++;
                     gamePanel.obj[index] = null;
+                    gamePanel.userInterface.showMessage("You got a key!");
                 }
                 case "door" -> {
                     if (hasKey > 0) {

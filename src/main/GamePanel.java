@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     Sound music = new Sound();
     Sound soundEffect = new Sound();
-    UserInterface userInterface = new UserInterface(this);
+    public UserInterface userInterface = new UserInterface(this);
     Thread gameThread; // создание потока
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
