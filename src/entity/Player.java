@@ -25,6 +25,8 @@ public class Player extends Entity {
         solidArea = new Rectangle(); // сплошная часть игрока
         solidArea.x = 4 * gamePanel.scale - 1;
         solidArea.y = 8 * gamePanel.scale - 1;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         solidArea.height = 8 * gamePanel.scale - 1;
         solidArea.width = 8 * gamePanel.scale - 1;
 
@@ -100,6 +102,9 @@ public class Player extends Entity {
             // CHECK TILE COLLISION
             collisionOn = false;
             gamePanel.collisionChecker.checkTile(this);
+
+            // CHECK OBJECT COLLISION
+            int objectIndex = gamePanel.collisionChecker.checkObject(this, true);
 
             if (!collisionOn) {
                 switch (direction) {

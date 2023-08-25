@@ -10,6 +10,8 @@ public class GameObject {
     public String name;
     public boolean collision = false;
     public int worldX, worldY;
+    public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+    public int solidAreaDefaultX, solidAreaDefaultY;
 
     // отрисовка предметов
     public void draw(Graphics2D graphics2D, GamePanel gamePanel) {

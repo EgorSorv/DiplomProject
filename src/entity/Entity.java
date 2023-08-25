@@ -13,5 +13,6 @@ public abstract class Entity {
     public int spriteNum = 0; // номер изображения
     public boolean check; // переменная для срабатывания idle анимаций во время движения
     public Rectangle solidArea; // сплошная часть объекта
+    public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
 }
