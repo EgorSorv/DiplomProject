@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     Sound music = new Sound();
     Sound soundEffect = new Sound();
+    UserInterface userInterface = new UserInterface(this);
     Thread gameThread; // создание потока
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
@@ -89,13 +90,19 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D graphics2D = (Graphics2D) graphics; // класс-наследник с расширенным функционалом
 
+        // TILE
         tileManager.draw(graphics2D);
 
+        // OBJECT
         for (GameObject gameObject : obj)
             if (gameObject != null)
                 gameObject.draw(graphics2D, this);
 
+        // PLAYER
         player.draw(graphics2D);
+
+        // UI
+        userInterface.draw(graphics2D);
 
         graphics2D.dispose(); // удаляет метод для освобождения памяти
     }
