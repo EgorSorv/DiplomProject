@@ -1,6 +1,7 @@
 package object;
 
 import main.GamePanel;
+import main.UtilityTool;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,6 +13,7 @@ public class GameObject {
     public int worldX, worldY;
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public int solidAreaDefaultX, solidAreaDefaultY;
+    UtilityTool utilityTool = new UtilityTool();
 
     // отрисовка предметов
     public void draw(Graphics2D graphics2D, GamePanel gamePanel) {
