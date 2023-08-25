@@ -34,5 +34,10 @@ public class Sound {
         clip.start();
     }
 
+    // зацикливание звука
+    public void loop() {
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
 
 }
