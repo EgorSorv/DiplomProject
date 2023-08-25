@@ -15,6 +15,8 @@ public class Player extends Entity {
 
     public final int screenX, screenY; // позиция игрока на экране
 
+    int hasKey = 0; // количество ключей у игрока
+
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
@@ -105,6 +107,7 @@ public class Player extends Entity {
 
             // CHECK OBJECT COLLISION
             int objectIndex = gamePanel.collisionChecker.checkObject(this, true);
+            pickUpObject(objectIndex);
 
             if (!collisionOn) {
                 switch (direction) {
@@ -134,6 +137,24 @@ public class Player extends Entity {
         }
         else
             spriteNum = 0;
+    }
+
+    // подобрать объект
+    public void pickUpObject(int index) {
+        if (index != -1) {
+            String objectName = gamePanel.obj[index].name;
+
+            switch (objectName) {
+                case "key" -> {
+                    hasKey++;
+                    gamePanel.obj[index] = null;
+                }
+                case "door" -> {
+                    if (hasKey > 0)
+                        gamePanel.obj[index] = null;
+                }
+            }
+        }
     }
 
     // отрисовка изображений
