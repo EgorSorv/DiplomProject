@@ -159,7 +159,7 @@ public class Player extends Entity {
                 }
                 case "boots" -> {
                     gamePanel.playSoundEffects(2);
-                    speed += 2;
+                    speed += 1;
                     gamePanel.obj[index] = null;
                 }
             }

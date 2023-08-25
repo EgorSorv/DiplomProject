@@ -25,6 +25,6 @@ public class UserInterface {
         graphics2D.setColor(Color.white);
         graphics2D.drawImage(keyImage, gamePanel.tileSize / 2, gamePanel.tileSize / 2,
                 gamePanel.tileSize, gamePanel.tileSize, null);
-        graphics2D.drawString("x " + gamePanel.player.hasKey, 74, 50); // текст
+        graphics2D.drawString("x " + gamePanel.player.hasKey, 74, 65); // текст
     }
 }
