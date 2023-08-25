@@ -11,6 +11,7 @@ public class UserInterface {
     BufferedImage keyImage;
     public boolean messageOn = false;
     public String message = "";
+    int messageCounter = 0;
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -39,6 +40,14 @@ public class UserInterface {
         if (messageOn) {
             graphics2D.setFont(graphics2D.getFont().deriveFont(30F)); // изменение размера текста
             graphics2D.drawString(message, gamePanel.tileSize / 2,  gamePanel.tileSize * 5);
+
+            messageCounter++;
+
+            // убрать сообщение через определенное время
+            if (messageCounter > 120) {
+                messageCounter = 0;
+                messageOn = false;
+            }
         }
     }
 }
