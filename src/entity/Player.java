@@ -146,22 +146,31 @@ public class Player extends Entity {
 
             switch (objectName) {
                 case "key" -> {
-                    gamePanel.playSoundEffects(1);
+                    gamePanel.playSoundEffect(1);
                     hasKey++;
                     gamePanel.obj[index] = null;
                     gamePanel.userInterface.showMessage("You got a key!");
                 }
                 case "door" -> {
                     if (hasKey > 0) {
-                        gamePanel.playSoundEffects(3);
+                        gamePanel.playSoundEffect(3);
                         gamePanel.obj[index] = null;
                         hasKey--;
+                        gamePanel.userInterface.showMessage("The door is now open!");
                     }
+                    else
+                        gamePanel.userInterface.showMessage("You need a key!");
                 }
                 case "boots" -> {
-                    gamePanel.playSoundEffects(2);
+                    gamePanel.playSoundEffect(2);
                     speed += 1;
                     gamePanel.obj[index] = null;
+                    gamePanel.userInterface.showMessage("Speed up!");
+                }
+                case "chest" -> {
+                    gamePanel.userInterface.gameFinished = true;
+                    gamePanel.stopMusic();
+                    gamePanel.playSoundEffect(4);
                 }
             }
         }

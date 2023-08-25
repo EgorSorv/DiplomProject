@@ -12,6 +12,7 @@ public class UserInterface {
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
+    public boolean gameFinished = false;
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
