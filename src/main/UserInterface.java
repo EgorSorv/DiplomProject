@@ -4,6 +4,7 @@ import object.Key;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 
 public class UserInterface {
     GamePanel gamePanel;
@@ -13,6 +14,10 @@ public class UserInterface {
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
+
+    // время в игре
+    double playTime;
+    DecimalFormat decimalFormat = new DecimalFormat("#0.00"); // округление до сотых
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -51,6 +56,14 @@ public class UserInterface {
 
             graphics2D.drawString(text, x, y);
 
+            text = "Your time is " + decimalFormat.format(playTime) + "!";
+
+            textLength = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
+            x = gamePanel.screenWidth / 2 - textLength / 2;
+            y = gamePanel.screenHeight / 2 + gamePanel.tileSize * 4;
+
+            graphics2D.drawString(text, x, y);
+
             graphics2D.setFont(arial_80B);
             graphics2D.setColor(Color.yellow);
 
@@ -69,6 +82,11 @@ public class UserInterface {
             graphics2D.drawImage(keyImage, gamePanel.tileSize / 2, gamePanel.tileSize / 2,
                     gamePanel.tileSize, gamePanel.tileSize, null);
             graphics2D.drawString("x " + gamePanel.player.hasKey, 74, 65); // текст
+
+            // TIME
+            playTime += (double) 1 / 60;
+            graphics2D.drawString("Time:" + decimalFormat.format(playTime),
+                    gamePanel.tileSize * 11, 65);
 
             // MESSAGE
             if (messageOn) {
