@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -46,45 +47,33 @@ public class Player extends Entity {
 
     // получение изображения
     public void getPlayerImage() {
+        upIdle = setup("Player_up_idle");
+        up1 = setup("Player_up_1");
+        up2 = setup("Player_up_2");
+        downIdle = setup("Player_down_idle");
+        down1 = setup("Player_down_1");
+        down2 = setup("Player_down_2");
+        leftIdle = setup("Player_left_idle");
+        left1 = setup("Player_left_1");
+        left2 = setup("Player_left_2");
+        rightIdle = setup("Player_right_idle");
+        right1 = setup("Player_right_1");
+        right2 = setup("Player_right_2");
+    }
+
+    public  BufferedImage setup(String imageName) {
+        UtilityTool utilityTool = new UtilityTool();
+        BufferedImage image = null;
+
         try {
-            upIdle = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_up_idle.png")));
-
-            up1 = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_up_1.png")));
-
-            up2 = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_up_2.png")));
-
-            downIdle = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_down_idle.png")));
-
-            down1 = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_down_1.png")));
-
-            down2 = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_down_2.png")));
-
-            leftIdle = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_left_idle.png")));
-
-            left1 = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_left_1.png")));
-
-            left2 = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_left_2.png")));
-
-            rightIdle = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_right_idle.png")));
-
-            right1 = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_right_1.png")));
-
-            right2 = ImageIO.read(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/player/Player_right_2.png")));
+            image = ImageIO.read(Objects.requireNonNull(getClass().
+                    getResourceAsStream("/player/" + imageName + ".png")));
+            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return image;
     }
 
     // обновление позиции игрока
@@ -215,6 +204,6 @@ public class Player extends Entity {
             }
         }
 
-        graphics2D.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+        graphics2D.drawImage(image, screenX, screenY, null);
     }
 }
