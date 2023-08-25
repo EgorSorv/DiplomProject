@@ -15,7 +15,7 @@ public class Player extends Entity {
 
     public final int screenX, screenY; // позиция игрока на экране
 
-    int hasKey = 0; // количество ключей у игрока
+    public int hasKey = 0; // количество ключей у игрока
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
