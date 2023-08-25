@@ -28,4 +28,11 @@ public class Sound {
             e.printStackTrace();
         }
     }
+
+    // запуск звука
+    public void play() {
+        clip.start();
+    }
+
+
 }
