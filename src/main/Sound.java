@@ -39,5 +39,8 @@ public class Sound {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-
+    // остановка звука
+    public void stop() {
+        clip.stop();
+    }
 }
