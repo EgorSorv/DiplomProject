@@ -1,15 +1,12 @@
 package main;
 
-import object.Key;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 
 public class UserInterface {
     GamePanel gamePanel;
+    Graphics2D graphics2D;
     Font arial_40, arial_80B; // шрифт
-    BufferedImage keyImage;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
@@ -24,9 +21,6 @@ public class UserInterface {
 
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B  = new Font("Arial", Font.BOLD, 80);
-
-        Key key = new Key(gamePanel);
-        keyImage = key.image;
     }
 
     // отображение сообщений
@@ -37,70 +31,29 @@ public class UserInterface {
 
     // отображение интерфейса
     public void draw(Graphics2D graphics2D) {
-        if (gameFinished) {
-//            String text;
-//            int textLength;
-//            int x;
-//            int y;
-//
-//            graphics2D.setFont(arial_40);
-//            graphics2D.setColor(Color.white);
-//
-//            text = "You found the treasure!";
-//
-//            // длина строки
-//            textLength = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
-//            // отображение текста по центру
-//            x = gamePanel.screenWidth / 2 - textLength / 2;
-//            y = gamePanel.screenHeight / 2 - gamePanel.tileSize * 3;
-//
-//            graphics2D.drawString(text, x, y);
-//
-//            text = "Your time is " + decimalFormat.format(playTime) + "!";
-//
-//            textLength = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
-//            x = gamePanel.screenWidth / 2 - textLength / 2;
-//            y = gamePanel.screenHeight / 2 + gamePanel.tileSize * 4;
-//
-//            graphics2D.drawString(text, x, y);
-//
-//            graphics2D.setFont(arial_80B);
-//            graphics2D.setColor(Color.yellow);
-//
-//            text = "Congratulations!";
-//
-//            textLength = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
-//            x = gamePanel.screenWidth / 2 - textLength / 2;
-//            y = gamePanel.screenHeight / 2 + gamePanel.tileSize * 2;
-//
-//            graphics2D.drawString(text, x, y);
+        this.graphics2D = graphics2D;
 
-            gamePanel.gameThread = null; // выключение игры
-        } else {
-            graphics2D.setFont(arial_40);
-            graphics2D.setColor(Color.white);
-            graphics2D.drawImage(keyImage, gamePanel.tileSize / 2, gamePanel.tileSize / 2,
-                    gamePanel.tileSize, gamePanel.tileSize, null);
-            graphics2D.drawString("x " + gamePanel.player.hasKey, 74, 65); // текст
+        graphics2D.setFont(arial_40);
+        graphics2D.setColor(Color.white);
 
-            // TIME
-//            playTime += (double) 1 / 60;
-//            graphics2D.drawString("Time:" + decimalFormat.format(playTime),
-//                    gamePanel.tileSize * 11, 65);
+        if (gamePanel.gameState == gamePanel.playState) {
 
-            // MESSAGE
-            if (messageOn) {
-                graphics2D.setFont(graphics2D.getFont().deriveFont(30F)); // изменение размера текста
-                graphics2D.drawString(message, gamePanel.tileSize / 2,  gamePanel.tileSize * 5);
+        } else if (gamePanel.gameState == gamePanel.pauseState)
+            drawPauseScreen();
+    }
 
-                messageCounter++;
+    // надрись во время паузы
+    public void drawPauseScreen() {
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 80F));
+        String text = "PAUSED";
+        int y = gamePanel.screenHeight / 2;
 
-                // убрать сообщение через определенное время
-                if (messageCounter > 120) {
-                    messageCounter = 0;
-                    messageOn = false;
-                }
-            }
-        }
+        graphics2D.drawString(text, getXForCenteredText(text), y);
+    }
+
+    public int getXForCenteredText(String text) {
+        int length = (int) graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
+
+        return gamePanel.screenWidth / 2 - length / 2;
     }
 }
