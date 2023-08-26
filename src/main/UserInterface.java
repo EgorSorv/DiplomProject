@@ -38,42 +38,42 @@ public class UserInterface {
     // отображение интерфейса
     public void draw(Graphics2D graphics2D) {
         if (gameFinished) {
-            String text;
-            int textLength;
-            int x;
-            int y;
-
-            graphics2D.setFont(arial_40);
-            graphics2D.setColor(Color.white);
-
-            text = "You found the treasure!";
-
-            // длина строки
-            textLength = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
-            // отображение текста по центру
-            x = gamePanel.screenWidth / 2 - textLength / 2;
-            y = gamePanel.screenHeight / 2 - gamePanel.tileSize * 3;
-
-            graphics2D.drawString(text, x, y);
-
-            text = "Your time is " + decimalFormat.format(playTime) + "!";
-
-            textLength = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
-            x = gamePanel.screenWidth / 2 - textLength / 2;
-            y = gamePanel.screenHeight / 2 + gamePanel.tileSize * 4;
-
-            graphics2D.drawString(text, x, y);
-
-            graphics2D.setFont(arial_80B);
-            graphics2D.setColor(Color.yellow);
-
-            text = "Congratulations!";
-
-            textLength = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
-            x = gamePanel.screenWidth / 2 - textLength / 2;
-            y = gamePanel.screenHeight / 2 + gamePanel.tileSize * 2;
-
-            graphics2D.drawString(text, x, y);
+//            String text;
+//            int textLength;
+//            int x;
+//            int y;
+//
+//            graphics2D.setFont(arial_40);
+//            graphics2D.setColor(Color.white);
+//
+//            text = "You found the treasure!";
+//
+//            // длина строки
+//            textLength = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
+//            // отображение текста по центру
+//            x = gamePanel.screenWidth / 2 - textLength / 2;
+//            y = gamePanel.screenHeight / 2 - gamePanel.tileSize * 3;
+//
+//            graphics2D.drawString(text, x, y);
+//
+//            text = "Your time is " + decimalFormat.format(playTime) + "!";
+//
+//            textLength = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
+//            x = gamePanel.screenWidth / 2 - textLength / 2;
+//            y = gamePanel.screenHeight / 2 + gamePanel.tileSize * 4;
+//
+//            graphics2D.drawString(text, x, y);
+//
+//            graphics2D.setFont(arial_80B);
+//            graphics2D.setColor(Color.yellow);
+//
+//            text = "Congratulations!";
+//
+//            textLength = (int)graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
+//            x = gamePanel.screenWidth / 2 - textLength / 2;
+//            y = gamePanel.screenHeight / 2 + gamePanel.tileSize * 2;
+//
+//            graphics2D.drawString(text, x, y);
 
             gamePanel.gameThread = null; // выключение игры
         } else {
@@ -84,9 +84,9 @@ public class UserInterface {
             graphics2D.drawString("x " + gamePanel.player.hasKey, 74, 65); // текст
 
             // TIME
-            playTime += (double) 1 / 60;
-            graphics2D.drawString("Time:" + decimalFormat.format(playTime),
-                    gamePanel.tileSize * 11, 65);
+//            playTime += (double) 1 / 60;
+//            graphics2D.drawString("Time:" + decimalFormat.format(playTime),
+//                    gamePanel.tileSize * 11, 65);
 
             // MESSAGE
             if (messageOn) {

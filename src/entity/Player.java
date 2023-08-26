@@ -13,10 +13,7 @@ import java.util.Objects;
 public class Player extends Entity {
     GamePanel gamePanel;
     KeyHandler keyHandler;
-
     public final int screenX, screenY; // позиция игрока на экране
-
-    public int hasKey = 0; // количество ключей у игрока
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -130,38 +127,8 @@ public class Player extends Entity {
 
     // подобрать объект
     public void pickUpObject(int index) {
-        if (index != -1) {
-            String objectName = gamePanel.obj[index].name;
+        if (index != 999) {
 
-            switch (objectName) {
-                case "key" -> {
-                    gamePanel.playSoundEffect(1);
-                    hasKey++;
-                    gamePanel.obj[index] = null;
-                    gamePanel.userInterface.showMessage("You got a key!");
-                }
-                case "door" -> {
-                    if (hasKey > 0) {
-                        gamePanel.playSoundEffect(3);
-                        gamePanel.obj[index] = null;
-                        hasKey--;
-                        gamePanel.userInterface.showMessage("The door is now open!");
-                    }
-                    else
-                        gamePanel.userInterface.showMessage("You need a key!");
-                }
-                case "boots" -> {
-                    gamePanel.playSoundEffect(2);
-                    speed += 1;
-                    gamePanel.obj[index] = null;
-                    gamePanel.userInterface.showMessage("Speed up!");
-                }
-                case "chest" -> {
-                    gamePanel.userInterface.gameFinished = true;
-                    gamePanel.stopMusic();
-                    gamePanel.playSoundEffect(4);
-                }
-            }
         }
     }
 

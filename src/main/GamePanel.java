@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // SYSTEM
     TileManager tileManager = new TileManager(this);
-    KeyHandler keyHandler = new KeyHandler();
+    KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
     public UserInterface userInterface = new UserInterface(this);
@@ -39,6 +39,11 @@ public class GamePanel extends JPanel implements Runnable {
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyHandler);
     public GameObject[] obj = new GameObject[10]; // массив для хранения предметов
+
+    // GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // размеры окна
@@ -52,6 +57,8 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setObject();
 
         playMusic(0);
+
+        gameState = playState;
     }
 
     public void startGameThread() {
@@ -82,7 +89,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.update();
+        // обновление состояния игры
+        if (gameState == playState) {
+            player.update();
+            music.play();
+            music.loop();
+        }
+        if (gameState == pauseState)
+            music.stop();
     }
 
     public void paintComponent(Graphics graphics) {
