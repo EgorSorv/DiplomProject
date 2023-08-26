@@ -96,7 +96,7 @@ public class GamePanel extends JPanel implements Runnable {
             music.loop();
         }
         if (gameState == pauseState)
-            music.stop();
+            stopMusic();
     }
 
     public void paintComponent(Graphics graphics) {
