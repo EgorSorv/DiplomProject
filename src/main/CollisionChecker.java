@@ -193,4 +193,46 @@ public class CollisionChecker {
 
         return index;
     }
+
+
+    // проверка игрока
+    public void checkPlayer(Entity entity) {
+        entity.solidArea.x = entity.worldX + entity.solidArea.x;
+        entity.solidArea.y = entity.worldY + entity.solidArea.y;
+
+        gamePanel.player.solidArea.x = gamePanel.player.worldX + gamePanel.player.solidArea.x;
+        gamePanel.player.solidArea.y = gamePanel.player.worldY + gamePanel.player.solidArea.y;
+
+        switch (entity.direction) {
+            case "up" -> {
+                entity.solidArea.y -= entity.speed;
+
+                if(entity.solidArea.intersects(gamePanel.player.solidArea))
+                    entity.collisionOn = true;
+            }
+            case "down" -> {
+                entity.solidArea.y += entity.speed;
+
+                if (entity.solidArea.intersects(gamePanel.player.solidArea))
+                    entity.collisionOn = true;
+            }
+            case "left" -> {
+                entity.solidArea.x -= entity.speed;
+
+                if (entity.solidArea.intersects(gamePanel.player.solidArea))
+                    entity.collisionOn = true;
+            }
+            case "right" -> {
+                entity.solidArea.x += entity.speed;
+
+                if (entity.solidArea.intersects(gamePanel.player.solidArea))
+                    entity.collisionOn = true;
+            }
+        }
+
+        entity.solidArea.x = entity.solidAreaDefaultX;
+        entity.solidArea.y = entity.solidAreaDefaultY;
+        gamePanel.player.solidArea.x = gamePanel.player.solidAreaDefaultX;
+        gamePanel.player.solidArea.y = gamePanel.player.solidAreaDefaultY;
+    }
 }
