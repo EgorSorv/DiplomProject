@@ -11,12 +11,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Player extends Entity {
-    GamePanel gamePanel;
     KeyHandler keyHandler;
     public final int screenX, screenY; // позиция игрока на экране
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
-        this.gamePanel = gamePanel;
+        super(gamePanel);
         this.keyHandler = keyHandler;
 
         screenX = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2; // перенос персонажа в центр экрана
