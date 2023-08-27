@@ -2,13 +2,9 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
-import main.UtilityTool;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 
 public class Player extends Entity {
     KeyHandler keyHandler;
@@ -79,6 +75,10 @@ public class Player extends Entity {
             int objectIndex = gamePanel.collisionChecker.checkObject(this, true);
             pickUpObject(objectIndex);
 
+            // CHECK NPC COLLISION
+            int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
+            interactNPC(npcIndex);
+
             if (!collisionOn) {
                 switch (direction) {
                     case "up" -> worldY -= speed;
@@ -111,7 +111,14 @@ public class Player extends Entity {
 
     // подобрать объект
     public void pickUpObject(int index) {
-        if (index != 999) {
+        if (index != -1) {
+
+        }
+    }
+
+    // взаимодействие с нип
+    public void interactNPC(int i) {
+        if (i != -1) {
 
         }
     }
