@@ -29,6 +29,9 @@ public abstract class Entity {
         this.gamePanel = gamePanel;
     }
 
+    // модель поведения
+    public void setAction() {}
+
     public void draw (Graphics2D graphics2D) {
         BufferedImage image = null;
 
