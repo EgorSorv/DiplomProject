@@ -24,6 +24,7 @@ public abstract class Entity {
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
+    public int actionLockCounter = 0; // продолжительность поведения
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;

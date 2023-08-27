@@ -30,16 +30,22 @@ public class OldMan extends Entity {
     }
 
     public void setAction() {
-        Random random = new Random();
-        int integer = random.nextInt(100) + 1;
+        actionLockCounter++;
 
-        if (integer <= 25)
-            direction = "up";
-        else if (integer <= 50)
-            direction = "down";
-        else if (integer <= 75)
-            direction = "left";
-        else
-            direction = "right";
+        if (actionLockCounter == 120) {
+            Random random = new Random();
+            int integer = random.nextInt(100) + 1;
+
+            if (integer <= 25)
+                direction = "up";
+            else if (integer <= 50)
+                direction = "down";
+            else if (integer <= 75)
+                direction = "left";
+            else
+                direction = "right";
+
+            actionLockCounter = 0;
+        }
     }
 }
