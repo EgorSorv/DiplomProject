@@ -95,6 +95,11 @@ public class GamePanel extends JPanel implements Runnable {
         // обновление состояния игры
         if (gameState == playState) {
             player.update();
+
+            for (Entity entity : npc)
+                if (entity != null)
+                    entity.update();
+
             music.play();
             music.loop();
         }
@@ -122,9 +127,9 @@ public class GamePanel extends JPanel implements Runnable {
                 gameObject.draw(graphics2D, this);
 
         // NPC
-        for (Entity npc : npc)
-            if (npc != null)
-                npc.draw(graphics2D);
+        for (Entity entity : npc)
+            if (entity != null)
+                entity.draw(graphics2D);
 
         // PLAYER
         player.draw(graphics2D);

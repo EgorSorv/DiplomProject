@@ -32,6 +32,39 @@ public abstract class Entity {
     // модель поведения
     public void setAction() {}
 
+    public void update() {
+        setAction();
+
+        collisionOn = false;
+        gamePanel.collisionChecker.checkTile(this);
+
+        if (!collisionOn) {
+            switch (direction) {
+                case "up" -> worldY -= speed;
+                case "down" -> worldY += speed;
+                case "left" -> worldX -= speed;
+                case "right" -> worldX += speed;
+            }
+        }
+
+        spriteCounter++;
+
+        if (spriteCounter > 10 - speed) {
+            if (spriteNum == 0 && !check) {
+                spriteNum = 1;
+                check = true;
+            } else if (spriteNum == 0) {
+                spriteNum = 2;
+                check = false;
+            } else if (spriteNum == 1)
+                spriteNum = 0;
+            else if (spriteNum == 2)
+                spriteNum = 0;
+
+            spriteCounter = 0;
+        }
+    }
+
     public void draw (Graphics2D graphics2D) {
         BufferedImage image = null;
 
