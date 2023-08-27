@@ -43,33 +43,18 @@ public class Player extends Entity {
 
     // получение изображения
     public void getPlayerImage() {
-        upIdle = setup("Player_up_idle");
-        up1 = setup("Player_up_1");
-        up2 = setup("Player_up_2");
-        downIdle = setup("Player_down_idle");
-        down1 = setup("Player_down_1");
-        down2 = setup("Player_down_2");
-        leftIdle = setup("Player_left_idle");
-        left1 = setup("Player_left_1");
-        left2 = setup("Player_left_2");
-        rightIdle = setup("Player_right_idle");
-        right1 = setup("Player_right_1");
-        right2 = setup("Player_right_2");
-    }
-
-    public  BufferedImage setup(String imageName) {
-        UtilityTool utilityTool = new UtilityTool();
-        BufferedImage image = null;
-
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().
-                    getResourceAsStream("/player/" + imageName + ".png")));
-            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return image;
+        upIdle = setup("/player/Player_up_idle");
+        up1 = setup("/player/Player_up_1");
+        up2 = setup("/player/Player_up_2");
+        downIdle = setup("/player/Player_down_idle");
+        down1 = setup("/player/Player_down_1");
+        down2 = setup("/player/Player_down_2");
+        leftIdle = setup("/player/Player_left_idle");
+        left1 = setup("/player/Player_left_1");
+        left2 = setup("/player/Player_left_2");
+        rightIdle = setup("/player/Player_right_idle");
+        right1 = setup("/player/Player_right_1");
+        right2 = setup("/player/Player_right_2");
     }
 
     // обновление позиции игрока

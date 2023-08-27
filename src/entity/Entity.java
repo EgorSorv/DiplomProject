@@ -1,9 +1,13 @@
 package entity;
 
 import main.GamePanel;
+import main.UtilityTool;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
 public abstract class Entity {
     GamePanel gamePanel;
@@ -23,5 +27,20 @@ public abstract class Entity {
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+    }
+
+    public  BufferedImage setup(String imagePath) {
+        UtilityTool utilityTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try {
+            image = ImageIO.read(Objects.requireNonNull(getClass().
+                    getResourceAsStream(imagePath + ".png")));
+            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return image;
     }
 }
