@@ -121,6 +121,11 @@ public class GamePanel extends JPanel implements Runnable {
             if (gameObject != null)
                 gameObject.draw(graphics2D, this);
 
+        // NPC
+        for (Entity npc : npc)
+            if (npc != null)
+                npc.draw(graphics2D);
+
         // PLAYER
         player.draw(graphics2D);
 

@@ -23,10 +23,8 @@ public class GameObject {
         if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
                 worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
                 worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
-                worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
-
+                worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY)
             graphics2D.drawImage(image, screenX, screenY,
                     gamePanel.tileSize, gamePanel.tileSize, null);
-        }
     }
 }
