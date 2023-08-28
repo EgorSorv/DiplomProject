@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.*;
-import java.text.DecimalFormat;
 
 public class UserInterface {
     GamePanel gamePanel;
@@ -12,9 +11,6 @@ public class UserInterface {
     int messageCounter = 0;
     public boolean gameFinished = false;
 
-    // время в игре
-    double playTime;
-    DecimalFormat decimalFormat = new DecimalFormat("#0.00"); // округление до сотых
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -36,19 +32,51 @@ public class UserInterface {
         graphics2D.setFont(arial_40);
         graphics2D.setColor(Color.white);
 
+        // PLAY STATE
         if (gamePanel.gameState == gamePanel.playState) {
 
-        } else if (gamePanel.gameState == gamePanel.pauseState)
+        }
+        // PAUSE STATE
+        else if (gamePanel.gameState == gamePanel.pauseState)
             drawPauseScreen();
+        // DIALOGUE STATE
+        else if (gamePanel.gameState == gamePanel.dialogueState)
+            drawDialogueScreen();
     }
 
-    // надрись во время паузы
+    // надпись во время паузы
     public void drawPauseScreen() {
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 80F));
         String text = "PAUSED";
         int y = gamePanel.screenHeight / 2;
 
         graphics2D.drawString(text, getXForCenteredText(text), y);
+    }
+
+    // диалоговое окно
+    public void drawDialogueScreen() {
+        // WINDOW
+        int x = gamePanel.tileSize * 2;
+        int y = gamePanel.tileSize / 2;
+        int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
+        int height = gamePanel.tileSize * 4;
+
+        drawSubWindow(x, y, width, height);
+    }
+
+    // фон окна
+    public void drawSubWindow(int x, int y, int width, int height) {
+        Color color = new Color(0, 0, 0, 210);
+        graphics2D.setColor(color);
+
+        graphics2D.fillRoundRect(x, y, width, height, 35, 35);
+
+        color = new Color(255, 255, 255);
+        graphics2D.setColor(color);
+
+        graphics2D.setStroke(new BasicStroke(5)); // рамка
+        graphics2D.drawRoundRect(x + 5, y + 5, width - 10, height - 10,
+                25, 25);
     }
 
     public int getXForCenteredText(String text) {

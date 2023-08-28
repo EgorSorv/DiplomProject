@@ -124,9 +124,8 @@ public class Player extends Entity {
 
     // взаимодействие с нип
     public void interactNPC(int i) {
-        if (i != -1) {
-
-        }
+        if (i != -1)
+            gamePanel.gameState = gamePanel.dialogueState;
     }
 
     // отрисовка изображений

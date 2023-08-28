@@ -22,15 +22,13 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode(); // возращает код клавиши
 
+        // MOVEMENT
         if (code == KeyEvent.VK_W)
             upPressed = true;
-
         if (code == KeyEvent.VK_A)
             leftPressed = true;
-
         if (code == KeyEvent.VK_S)
             downPressed = true;
-
         if (code == KeyEvent.VK_D)
             rightPressed = true;
 
@@ -43,10 +41,8 @@ public class KeyHandler implements KeyListener {
         }
 
         // DEBUG (KEY)
-        if (code == KeyEvent.VK_F1) {
+        if (code == KeyEvent.VK_F1)
             checkDrawTime = !checkDrawTime;
-        }
-
     }
 
     @Override
