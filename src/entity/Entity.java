@@ -25,6 +25,8 @@ public abstract class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0; // продолжительность поведения
+    String[] dialogues = new String[20]; // массив для диалогов
+    int dialogueIndex = 0;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -32,6 +34,7 @@ public abstract class Entity {
 
     // модель поведения
     public void setAction() {}
+    public void speak() {}
 
     public void update() {
         if (!collisionOn) {

@@ -12,6 +12,7 @@ public class OldMan extends Entity {
         speed = 1;
 
         getImage();
+        setDialogue();
     }
 
     public void getImage() {
@@ -27,6 +28,13 @@ public class OldMan extends Entity {
         rightIdle = setup("/npc/oldman_right_idle");
         right1 = setup("/npc/oldman_right_1");
         right2 = setup("/npc/oldman_right_2");
+    }
+
+    public void setDialogue() {
+        dialogues[0] = "STANDING HERE... I REALIZE...";
+        dialogues[1] = "I'm just an old man";
+        dialogues[2] = "But in the past I was know as the greatest wizard of these lands - Ab'dul Zef-fir!";
+        dialogues[3] = "So... what do you think?";
     }
 
     public void setAction() {
@@ -47,5 +55,10 @@ public class OldMan extends Entity {
 
             actionLockCounter = 0;
         }
+    }
+
+    public void speak() {
+        gamePanel.userInterface.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
     }
 }

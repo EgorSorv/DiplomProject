@@ -10,7 +10,7 @@ public class UserInterface {
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
-
+    public String currentDialogue = "";
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -62,6 +62,13 @@ public class UserInterface {
         int height = gamePanel.tileSize * 4;
 
         drawSubWindow(x, y, width, height);
+
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 32F));
+
+        x += gamePanel.tileSize;
+        y += gamePanel.tileSize;
+
+        graphics2D.drawString(currentDialogue, x, y);
     }
 
     // фон окна
