@@ -34,7 +34,6 @@ public class Player extends Entity {
         worldY = gamePanel.tileSize * 21;
         speed = 4;
         direction = "down";
-        check = false;
     }
 
     // получение изображения
@@ -55,58 +54,65 @@ public class Player extends Entity {
 
     // обновление позиции игрока
     public void update() {
-        if (keyHandler.upPressed || keyHandler.downPressed ||
-                keyHandler.leftPressed || keyHandler.rightPressed) {
+        if (!collisionOn) {
+            if (keyHandler.upPressed || keyHandler.downPressed ||
+                    keyHandler.leftPressed || keyHandler.rightPressed) {
 
-            if (keyHandler.upPressed)
-                direction = "up";
-            else if (keyHandler.downPressed)
-                direction = "down";
-            else if (keyHandler.leftPressed)
-                direction = "left";
-            else
-                direction = "right";
+                if (keyHandler.upPressed)
+                    direction = "up";
+                else if (keyHandler.downPressed)
+                    direction = "down";
+                else if (keyHandler.leftPressed)
+                    direction = "left";
+                else
+                    direction = "right";
 
-            // CHECK TILE COLLISION
-            collisionOn = false;
-            gamePanel.collisionChecker.checkTile(this);
+                // CHECK TILE COLLISION
+                gamePanel.collisionChecker.checkTile(this);
 
-            // CHECK OBJECT COLLISION
-            int objectIndex = gamePanel.collisionChecker.checkObject(this, true);
-            pickUpObject(objectIndex);
+                // CHECK OBJECT COLLISION
+                int objectIndex = gamePanel.collisionChecker.checkObject(this, true);
+                pickUpObject(objectIndex);
 
-            // CHECK NPC COLLISION
-            int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
-            interactNPC(npcIndex);
+                // CHECK NPC COLLISION
+                int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
+                interactNPC(npcIndex);
 
-            if (!collisionOn) {
-                switch (direction) {
-                    case "up" -> worldY -= speed;
-                    case "down" -> worldY += speed;
-                    case "left" -> worldX -= speed;
-                    case "right" -> worldX += speed;
+                if (!collisionOn) {
+                    switch (direction) {
+                        case "up" -> worldY -= speed;
+                        case "down" -> worldY += speed;
+                        case "left" -> worldX -= speed;
+                        case "right" -> worldX += speed;
+                    }
+                }
+
+                spriteCounter++;
+
+                if (!collisionOn) {
+                    if (spriteCounter > 10 - speed) {
+                        if (spriteNum == 0 && !idleCheck) {
+                            spriteNum = 1;
+                            idleCheck = true;
+                        } else if (spriteNum == 0) {
+                            spriteNum = 2;
+                            idleCheck = false;
+                        } else if (spriteNum == 1)
+                            spriteNum = 0;
+                        else if (spriteNum == 2)
+                            spriteNum = 0;
+
+                        spriteCounter = 0;
+                    }
                 }
             }
-
-            spriteCounter++;
-
-            if (spriteCounter > 10 - speed) {
-                if (spriteNum == 0 && !check) {
-                    spriteNum = 1;
-                    check = true;
-                } else if (spriteNum == 0) {
-                    spriteNum = 2;
-                    check = false;
-                } else if (spriteNum == 1)
-                    spriteNum = 0;
-                else if (spriteNum == 2)
-                    spriteNum = 0;
-
-                spriteCounter = 0;
-            }
+            else
+                spriteNum = 0;
         }
-        else
+        else {
+            collisionOn = false;
             spriteNum = 0;
+        }
     }
 
     // подобрать объект

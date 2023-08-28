@@ -18,7 +18,7 @@ public abstract class Entity {
     public String direction; // направление движения
     public int spriteCounter = 0; // интервал обновления изображения
     public int spriteNum = 0; // номер изображения
-    public boolean check; // переменная для срабатывания idle анимаций во время движения
+    public boolean idleCheck; // переменная для срабатывания idle анимаций во время движения
 
     // сплошная часть объекта
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
@@ -34,37 +34,43 @@ public abstract class Entity {
     public void setAction() {}
 
     public void update() {
-        setAction();
-
-        collisionOn = false;
-        gamePanel.collisionChecker.checkTile(this);
-        gamePanel.collisionChecker.checkObject(this, false);
-        gamePanel.collisionChecker.checkPlayer(this);
-
         if (!collisionOn) {
-            switch (direction) {
-                case "up" -> worldY -= speed;
-                case "down" -> worldY += speed;
-                case "left" -> worldX -= speed;
-                case "right" -> worldX += speed;
+            setAction();
+
+            gamePanel.collisionChecker.checkTile(this);
+            gamePanel.collisionChecker.checkObject(this, false);
+            gamePanel.collisionChecker.checkPlayer(this);
+
+            if (!collisionOn) {
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
             }
-        }
 
-        spriteCounter++;
+            spriteCounter++;
 
-        if (spriteCounter > 10 - speed) {
-            if (spriteNum == 0 && !check) {
-                spriteNum = 1;
-                check = true;
-            } else if (spriteNum == 0) {
-                spriteNum = 2;
-                check = false;
-            } else if (spriteNum == 1)
-                spriteNum = 0;
-            else if (spriteNum == 2)
-                spriteNum = 0;
+            if (!collisionOn) {
+                if (spriteCounter > 10 - speed) {
+                    if (spriteNum == 0 && !idleCheck) {
+                        spriteNum = 1;
+                        idleCheck = true;
+                    } else if (spriteNum == 0) {
+                        spriteNum = 2;
+                        idleCheck = false;
+                    } else if (spriteNum == 1)
+                        spriteNum = 0;
+                    else if (spriteNum == 2)
+                        spriteNum = 0;
 
-            spriteCounter = 0;
+                    spriteCounter = 0;
+                }
+            }
+        } else {
+            collisionOn = false;
+            spriteNum = 0;
         }
     }
 
