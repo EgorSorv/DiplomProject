@@ -1,11 +1,13 @@
 package main;
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class UserInterface {
     GamePanel gamePanel;
     Graphics2D graphics2D;
-    Font arial_40, arial_80B; // шрифт
+    Font maruMonica; // шрифт
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
@@ -15,8 +17,13 @@ public class UserInterface {
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
-        arial_40 = new Font("Arial", Font.PLAIN, 40);
-        arial_80B  = new Font("Arial", Font.BOLD, 80);
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/font/MaruMonica.ttf");
+            assert inputStream != null;
+            maruMonica = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // отображение сообщений
@@ -29,7 +36,7 @@ public class UserInterface {
     public void draw(Graphics2D graphics2D) {
         this.graphics2D = graphics2D;
 
-        graphics2D.setFont(arial_40);
+        graphics2D.setFont(maruMonica);
         graphics2D.setColor(Color.white);
 
         // PLAY STATE
@@ -63,7 +70,7 @@ public class UserInterface {
 
         drawSubWindow(x, y, width, height);
 
-        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 28F));
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 32F));
 
         x += gamePanel.tileSize;
         y += gamePanel.tileSize;
