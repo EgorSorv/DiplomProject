@@ -31,10 +31,11 @@ public class OldMan extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0] = "STANDING HERE... I REALIZE...";
+        dialogues[0] = "STANDING HERE \n I REALIZE";
         dialogues[1] = "I'm just an old man";
-        dialogues[2] = "But in the past I was know as the greatest wizard of these lands - Ab'dul Zef-fir!";
-        dialogues[3] = "So... what do you think?";
+        dialogues[2] = "But in the past I was know \n as the greatest wizard of these lands...";
+        dialogues[3] = "Ab'dul Zef-fir!!!";
+        dialogues[4] = "So... what do you think?";
     }
 
     public void setAction() {
@@ -58,7 +59,6 @@ public class OldMan extends Entity {
     }
 
     public void speak() {
-        gamePanel.userInterface.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
+        super.speak();
     }
 }

@@ -63,12 +63,15 @@ public class UserInterface {
 
         drawSubWindow(x, y, width, height);
 
-        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 32F));
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 28F));
 
         x += gamePanel.tileSize;
         y += gamePanel.tileSize;
 
-        graphics2D.drawString(currentDialogue, x, y);
+        for (String line: currentDialogue.split("\n")) {
+            graphics2D.drawString(line, x, y);
+            y += 40;
+        }
     }
 
     // фон окна

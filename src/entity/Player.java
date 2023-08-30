@@ -125,9 +125,13 @@ public class Player extends Entity {
     // взаимодействие с нип
     public void interactNPC(int index) {
         if (index != -1) {
-            gamePanel.gameState = gamePanel.dialogueState;
-            gamePanel.npc[index].speak();
+            if (gamePanel.keyHandler.interactPressed) {
+                gamePanel.gameState = gamePanel.dialogueState;
+                gamePanel.npc[index].speak();
+            }
         }
+
+        gamePanel.keyHandler.interactPressed = false;
     }
 
     // отрисовка изображений
