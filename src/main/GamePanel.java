@@ -99,9 +99,8 @@ public class GamePanel extends JPanel implements Runnable {
             for (Entity entity : npc)
                 if (entity != null)
                     entity.update();
-
-            playMusic(0);
         }
+
         if (gameState == pauseState)
             stopMusic();
     }

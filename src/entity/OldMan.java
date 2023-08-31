@@ -31,11 +31,10 @@ public class OldMan extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0] = "STANDING HERE\nI REALIZE";
-        dialogues[1] = "I'm just an old man";
-        dialogues[2] = "But in the past I was know\nas the greatest wizard of these lands...";
-        dialogues[3] = "Ab'dul Zef-fir!!!";
-        dialogues[4] = "So... what do you think?";
+        dialogues[0] = "Hello, lad!";
+        dialogues[1] = "So you've come to this island\nto find the treasure?";
+        dialogues[2] = "I used to be a great wizard but now...\nI'm a bit too old for taking an adventure.";
+        dialogues[3] = "Well, good luck on you.";
     }
 
     public void setAction() {

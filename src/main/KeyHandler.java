@@ -22,6 +22,33 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode(); // возращает код клавиши
 
+        // TITLE STATE
+        if (gamePanel.gameState == gamePanel.titleState) {
+            if (code == KeyEvent.VK_W) {
+                gamePanel.userInterface.commandNumber--;
+
+                if (gamePanel.userInterface.commandNumber < 0)
+                    gamePanel.userInterface.commandNumber = 2;
+            }
+
+            if (code == KeyEvent.VK_S) {
+                gamePanel.userInterface.commandNumber++;
+
+                if (gamePanel.userInterface.commandNumber > 2)
+                    gamePanel.userInterface.commandNumber = 0;
+            }
+
+            if (code == KeyEvent.VK_E) {
+                if (gamePanel.userInterface.commandNumber == 0) {
+                    gamePanel.gameState = gamePanel.playState;
+                    gamePanel.playMusic(0);
+                }
+
+                if (gamePanel.userInterface.commandNumber == 2)
+                    System.exit(0);
+            }
+        }
+
         // PLAY STATE
         if (gamePanel.gameState == gamePanel.playState) {
             // MOVEMENT
@@ -49,8 +76,12 @@ public class KeyHandler implements KeyListener {
 
         // PAUSE STATE
         else if (gamePanel.gameState == gamePanel.pauseState)
-            if (code == KeyEvent.VK_P)
+            if (code == KeyEvent.VK_P) {
                 gamePanel.gameState = gamePanel.playState;
+
+                gamePanel.music.play();
+                gamePanel.music.loop();
+            }
 
         // DIALOGUE STATE
         if (gamePanel.gameState == gamePanel.dialogueState)

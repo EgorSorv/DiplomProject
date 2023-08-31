@@ -1,15 +1,8 @@
 package main;
 
-import entity.Entity;
-import object.BlueHeart;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
-import java.util.concurrent.BlockingDeque;
 
 public class UserInterface {
     GamePanel gamePanel;
@@ -20,6 +13,7 @@ public class UserInterface {
     int messageCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int commandNumber = 0;
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -94,15 +88,24 @@ public class UserInterface {
         y += gamePanel.tileSize * 3.5;
         graphics2D.drawString(text, x, y);
 
+        if (commandNumber == 0)
+            graphics2D.drawString("<>", x - gamePanel.tileSize, y);
+
         text = "LOAD GAME";
         x = getXForCenteredText(text);
         y += gamePanel.tileSize;
         graphics2D.drawString(text, x, y);
 
+        if (commandNumber == 1)
+            graphics2D.drawString("<>", x - gamePanel.tileSize, y);
+
         text = "QUIT";
         x = getXForCenteredText(text);
         y += gamePanel.tileSize;
         graphics2D.drawString(text, x, y);
+
+        if (commandNumber == 2)
+            graphics2D.drawString("<>", x - gamePanel.tileSize, y);
     }
 
     // надпись во время паузы
@@ -126,11 +129,12 @@ public class UserInterface {
 
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.PLAIN, 32F));
 
-        x += gamePanel.tileSize;
-        y += gamePanel.tileSize;
+        int count = countLines(currentDialogue);
+        y = (height + 11 * count) / 2;
 
+        // текст
         for (String line: currentDialogue.split("\n")) {
-            graphics2D.drawString(line, x, y);
+            graphics2D.drawString(line, getXForCenteredText(line), y);
             y += 40;
         }
     }
@@ -150,9 +154,20 @@ public class UserInterface {
                 25, 25);
     }
 
+    public int countLines(String text) {
+        int count = 1;
+
+        for (char element : text.toCharArray())
+            if (element == '\n')
+                count++;
+
+        return count;
+    }
+
+    // выравнивание по x
     public int getXForCenteredText(String text) {
         int length = (int) graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
 
-        return gamePanel.screenWidth / 2 - length / 2;
+        return (gamePanel.screenWidth - length) / 2;
     }
 }
