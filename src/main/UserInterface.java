@@ -1,6 +1,10 @@
 package main;
 
+import object.GameObject;
+import object.Heart;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -8,6 +12,7 @@ public class UserInterface {
     GamePanel gamePanel;
     Graphics2D graphics2D;
     Font maruMonica; // шрифт
+    BufferedImage heart_full, heart_half, heart_blank;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
@@ -25,6 +30,12 @@ public class UserInterface {
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
+
+        // CREATE HUD OBJECT
+        GameObject heart = new Heart(gamePanel);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_blank = heart.image3;
     }
 
     // отображение сообщений
@@ -45,7 +56,7 @@ public class UserInterface {
             drawTitleScreen();
         // PLAY STATE
         if (gamePanel.gameState == gamePanel.playState) {
-
+            drawPlayerLife();
         }
         // PAUSE STATE
         else if (gamePanel.gameState == gamePanel.pauseState)
@@ -53,6 +64,36 @@ public class UserInterface {
         // DIALOGUE STATE
         else if (gamePanel.gameState == gamePanel.dialogueState)
             drawDialogueScreen();
+    }
+
+    // здоровье игрока
+    public void drawPlayerLife() {
+        int x = gamePanel.tileSize / 2;
+        int y = gamePanel.tileSize / 2;
+        int i = 0;
+
+        // DRAW MAX LIFE
+        while (i < gamePanel.player.maxLife / 2) {
+            graphics2D.drawImage(heart_blank, x, y, null);
+            i++;
+            x += gamePanel.tileSize;
+        }
+
+        // RESET
+        x = gamePanel.tileSize / 2;
+        i = 0;
+
+        // DRAW CURRENT LIFE
+        while (i < gamePanel.player.currentLife) {
+            graphics2D.drawImage(heart_half, x, y, null);
+            i++;
+
+            if (i < gamePanel.player.currentLife)
+                graphics2D.drawImage(heart_full, x, y, null);
+
+            i++;
+            x += gamePanel.tileSize;
+        }
     }
 
     // главное меню

@@ -28,6 +28,10 @@ public abstract class Entity {
     String[] dialogues = new String[20]; // массив для диалогов
     int dialogueIndex = 0;
 
+    // CHARACTER STATUS
+    public int maxLife; // максимальное здоровье
+    public int currentLife; // текущее здоровье
+
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }

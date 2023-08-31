@@ -34,6 +34,9 @@ public class Player extends Entity {
         worldY = gamePanel.tileSize * 21;
         speed = 4;
         direction = "down";
+
+        maxLife = 6;
+        currentLife = maxLife;
     }
 
     // получение изображения
