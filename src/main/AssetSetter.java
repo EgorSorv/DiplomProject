@@ -1,6 +1,7 @@
 package main;
 
 import entity.OldMan;
+import object.BlueHeart;
 
 public class AssetSetter {
     GamePanel gamePanel;
@@ -11,7 +12,7 @@ public class AssetSetter {
 
     // размещение предметов на карте
     public void setObject() {
-
+        gamePanel.obj[0] = new BlueHeart(gamePanel);
     }
 
     // размещение нип  на карте

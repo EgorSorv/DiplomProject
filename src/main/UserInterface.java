@@ -1,8 +1,15 @@
 package main;
 
+import entity.Entity;
+import object.BlueHeart;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
+import java.util.concurrent.BlockingDeque;
 
 public class UserInterface {
     GamePanel gamePanel;
@@ -39,6 +46,9 @@ public class UserInterface {
         graphics2D.setFont(maruMonica);
         graphics2D.setColor(Color.white);
 
+        // TITLE STATE
+        if (gamePanel.gameState == gamePanel.titleState)
+            drawTitleScreen();
         // PLAY STATE
         if (gamePanel.gameState == gamePanel.playState) {
 
@@ -49,6 +59,50 @@ public class UserInterface {
         // DIALOGUE STATE
         else if (gamePanel.gameState == gamePanel.dialogueState)
             drawDialogueScreen();
+    }
+
+    // главное меню
+    public void drawTitleScreen() {
+        // BACKGROUND
+        graphics2D.setColor(new Color(0, 0,0));
+        graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+        // TITLE
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 96F));
+        String text = "Game";
+
+        int x = getXForCenteredText(text);
+        int y = gamePanel.tileSize * 3;
+
+        graphics2D.setColor(Color.darkGray);
+        graphics2D.drawString(text, x + 4, y + 4); // тень
+
+        graphics2D.setColor(Color.white);
+        graphics2D.drawString(text, x, y);
+
+        // IMAGE
+        x = gamePanel.screenWidth / 2 - gamePanel.tileSize;
+        y += gamePanel.tileSize * 2;
+        graphics2D.drawImage(gamePanel.obj[0].image, x, y,
+                gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
+
+        // MENU
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 48F));
+
+        text = "NEW GAME";
+        x = getXForCenteredText(text);
+        y += gamePanel.tileSize * 3.5;
+        graphics2D.drawString(text, x, y);
+
+        text = "LOAD GAME";
+        x = getXForCenteredText(text);
+        y += gamePanel.tileSize;
+        graphics2D.drawString(text, x, y);
+
+        text = "QUIT";
+        x = getXForCenteredText(text);
+        y += gamePanel.tileSize;
+        graphics2D.drawString(text, x, y);
     }
 
     // надпись во время паузы

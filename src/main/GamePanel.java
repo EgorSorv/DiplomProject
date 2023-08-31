@@ -44,13 +44,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     // GAME STATE
     public int gameState;
+    public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // размеры окна
-        this.setBackground(Color.white); // цвет фона
+        this.setBackground(Color.black); // цвет фона
         this.setDoubleBuffered(true); // улучшенный рендеринг
         this.addKeyListener(keyHandler); // распознование работы с клавиатурой
         this.setFocusable(true); // установка фокуса на получение данных с клавиатуры
@@ -60,9 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setObject();
         assetSetter.setNPC();
 
-        playMusic(0);
-
-        gameState = playState;
+        gameState = titleState;
     }
 
     public void startGameThread() {
@@ -101,8 +100,7 @@ public class GamePanel extends JPanel implements Runnable {
                 if (entity != null)
                     entity.update();
 
-            music.play();
-            music.loop();
+            playMusic(0);
         }
         if (gameState == pauseState)
             stopMusic();
@@ -119,24 +117,29 @@ public class GamePanel extends JPanel implements Runnable {
         if (keyHandler.checkDrawTime)
             drawStart = System.nanoTime();
 
-        // TILE
-        tileManager.draw(graphics2D);
+        // TITLE SCREEN
+        if (gameState == titleState) {
+            userInterface.draw(graphics2D);
+        } else {
+            // TILE
+            tileManager.draw(graphics2D);
 
-        // OBJECT
-        for (GameObject gameObject : obj)
-            if (gameObject != null)
-                gameObject.draw(graphics2D, this);
+            // OBJECT
+//            for (GameObject gameObject : obj)
+//                if (gameObject != null)
+//                    gameObject.draw(graphics2D, this);
 
-        // NPC
-        for (Entity entity : npc)
-            if (entity != null)
-                entity.draw(graphics2D);
+            // NPC
+            for (Entity entity : npc)
+                if (entity != null)
+                    entity.draw(graphics2D);
 
-        // PLAYER
-        player.draw(graphics2D);
+            // PLAYER
+            player.draw(graphics2D);
 
-        // UI
-        userInterface.draw(graphics2D);
+            // UI
+            userInterface.draw(graphics2D);
+        }
 
         //  DEBUG (END)
         if (keyHandler.checkDrawTime) {
