@@ -81,6 +81,10 @@ public class Player extends Entity {
                 int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
                 interactNPC(npcIndex);
 
+                // CHECK EVENT
+                gamePanel.eventHandler.checkEvent();
+
+                // PLAYER MOVEMENT
                 if (!collisionOn) {
                     switch (direction) {
                         case "up" -> worldY -= speed;

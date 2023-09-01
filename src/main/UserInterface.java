@@ -59,8 +59,10 @@ public class UserInterface {
             drawPlayerLife();
         }
         // PAUSE STATE
-        else if (gamePanel.gameState == gamePanel.pauseState)
+        else if (gamePanel.gameState == gamePanel.pauseState) {
+            drawPlayerLife();
             drawPauseScreen();
+        }
         // DIALOGUE STATE
         else if (gamePanel.gameState == gamePanel.dialogueState)
             drawDialogueScreen();
