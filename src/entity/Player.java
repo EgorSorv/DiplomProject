@@ -84,6 +84,8 @@ public class Player extends Entity {
                 // CHECK EVENT
                 gamePanel.eventHandler.checkEvent();
 
+                gamePanel.keyHandler.interactPressed = false;
+
                 // PLAYER MOVEMENT
                 if (!collisionOn) {
                     switch (direction) {
@@ -137,8 +139,6 @@ public class Player extends Entity {
                 gamePanel.npc[index].speak();
             }
         }
-
-        gamePanel.keyHandler.interactPressed = false;
     }
 
     // отрисовка изображений
