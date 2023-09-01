@@ -24,8 +24,11 @@ public class EventHandler {
     public void checkEvent() {
         if (hit(27, 16, "right"))
             damagePit(gamePanel.dialogueState);
+        else if (hit(30,37, "right"))
+            teleport(gamePanel.dialogueState, 8, 38);
+        else if (hit(8, 37, "up"))
+            teleport(gamePanel.dialogueState, 30, 37);
         else {
-
             eventRect.width = gamePanel.tileSize;
             eventRect.height = gamePanel.tileSize;
 
@@ -96,10 +99,20 @@ public class EventHandler {
     public void healingPool(int gameState) {
         if (gamePanel.keyHandler.interactPressed) {
             gamePanel.gameState = gameState;
+
             if (gamePanel.player.currentLife < gamePanel.player.maxLife) {
                 gamePanel.userInterface.currentDialogue = "You drink the water.\nYour health has been increased.";
                 gamePanel.player.currentLife += 1;
             } else gamePanel.userInterface.currentDialogue = "Your health is full.";
         }
+    }
+
+    // перемещение
+    public void teleport(int gameState, int destinationX, int destinationY) {
+        gamePanel.gameState = gameState;
+        gamePanel.userInterface.currentDialogue = "Teleport!";
+
+        gamePanel.player.worldX = gamePanel.tileSize * destinationX;
+        gamePanel.player.worldY = gamePanel.tileSize * destinationY;
     }
 }
