@@ -1,69 +1,92 @@
 package main;
 
-import java.awt.*;
-
 public class EventHandler {
     GamePanel gamePanel;
-    Rectangle eventRect;
-    int eventRectDefaultX, getEventRectDefaultY;
+    EventRectangle[][] eventRect;
+
+    int previousEventX, previousEventY;
+    boolean canTouchEvent = true;
 
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
         // зона срабатывания события
-        eventRect = new Rectangle();
-        eventRect.x = 23;
-        eventRect.y = 23;
-        eventRect.width = 2;
-        eventRect.height = 2;
-        eventRectDefaultX = eventRect.x;
-        getEventRectDefaultY = eventRect.y;
-    }
+        eventRect = new EventRectangle[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
 
-    // проверка события
-    public void checkEvent() {
-        if (hit(27, 16, "right"))
-            damagePit(gamePanel.dialogueState);
-        else if (hit(30,37, "right"))
-            teleport(gamePanel.dialogueState, 8, 38);
-        else if (hit(8, 37, "up"))
-            teleport(gamePanel.dialogueState, 30, 37);
-        else {
-            eventRect.width = gamePanel.tileSize;
-            eventRect.height = gamePanel.tileSize;
+        int col = 0;
+        int row = 0;
 
-            if (hit(21, 12, "up") ||
-                hit(22, 12, "up") ||
-                hit(23, 12, "up") ||
-                hit(24, 12, "up") ||
+        while (col < gamePanel.maxWorldCol && row < gamePanel.maxWorldRow) {
+            eventRect[col][row] = new EventRectangle();
 
-                hit(25, 12, "up") ||
-                hit(20, 8, "right") ||
-                hit(20, 9, "right") ||
-                hit(20, 10, "right") ||
-                hit(20, 11, "right") ||
+            eventRect[col][row].x = 23;
+            eventRect[col][row].y = 23;
+            eventRect[col][row].width = 2;
+            eventRect[col][row].height = 2;
 
-                hit(21, 7, "down") ||
-                hit(22, 7, "down") ||
-                hit(23, 7, "down") ||
-                hit(24, 7, "down") ||
-                hit(25, 7, "down") ||
+            eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
+            eventRect[col][row].getEventRectDefaultY = eventRect[col][row].y;
 
-                hit(26, 8, "left") ||
-                hit(26, 9, "left") ||
-                hit(26, 10, "left") ||
-                hit(26, 11, "left")) {
+            col++;
 
-                healingPool(gamePanel.dialogueState);
-
-                eventRect.width = 2;
-                eventRect.height = 2;
+            if (col == gamePanel.maxWorldCol) {
+                col = 0;
+                row++;
             }
         }
     }
 
+    // проверка события
+    public void checkEvent() {
+        // игрок находится на определенном расстоянии для повторного срабатывания события
+        int xDistance = Math.abs(gamePanel.player.worldX - previousEventX);
+        int yDistance = Math.abs(gamePanel.player.worldY - previousEventY);
+        int distance = Math.max(xDistance, yDistance);
+
+        if (distance > gamePanel.tileSize / 2)
+            canTouchEvent = true;
+
+        if (canTouchEvent) {
+            if (hit(27, 16, "right", false))
+                damagePit(27, 16, gamePanel.dialogueState, false);
+
+            if (hit(23, 18, "up", false))
+                damagePit(23, 18, gamePanel.dialogueState, true);
+
+            if (hit(30, 37, "right", false))
+                teleport(gamePanel.dialogueState, 8, 38);
+
+            if (hit(8, 38, "up", false))
+                teleport(gamePanel.dialogueState, 30, 37);
+
+            if (hit(21, 12, "up", true) ||
+                hit(22, 12, "up", true) ||
+                hit(23, 12, "up", true) ||
+                hit(24, 12, "up", true) ||
+                hit(25, 12, "up", true) ||
+
+                hit(20, 8, "right", true) ||
+                hit(20, 9, "right", true) ||
+                hit(20, 10, "right", true) ||
+                hit(20, 11, "right", true) ||
+
+                hit(21, 7, "down", true) ||
+                hit(22, 7, "down", true) ||
+                hit(23, 7, "down", true) ||
+                hit(24, 7, "down", true) ||
+                hit(25, 7, "down", true) ||
+
+                hit(26, 8, "left", true) ||
+                hit(26, 9, "left", true) ||
+                hit(26, 10, "left", true) ||
+                hit(26, 11, "left", true))
+
+                healingPool(gamePanel.dialogueState);
+        }
+    }
+
     // активацция события
-    public boolean hit(int eventCol, int eventRow, String reqDirection) {
+    public boolean hit(int col, int row, String reqDirection, boolean fullTile) {
         boolean hit = false;
 
         // позиция игрока
@@ -71,28 +94,42 @@ public class EventHandler {
         gamePanel.player.solidArea.y = gamePanel.player.worldY + gamePanel.player.solidArea.y;
 
         // позиция события
-        eventRect.x = eventCol * gamePanel.tileSize + eventRect.x;
-        eventRect.y = eventRow * gamePanel.tileSize + eventRect.y;
+        eventRect[col][row].x = col * gamePanel.tileSize + eventRect[col][row].x;
+        eventRect[col][row].y = row * gamePanel.tileSize + eventRect[col][row].y;
+
+        if (fullTile) {
+            eventRect[col][row].width = gamePanel.tileSize;
+            eventRect[col][row].height = gamePanel.tileSize;
+        }
         
         // проверка направления игрока
-        if (gamePanel.player.solidArea.intersects(eventRect))
-            if (gamePanel.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any"))
+        if (gamePanel.player.solidArea.intersects(eventRect[col][row]) && !eventRect[col][row].eventDone)
+            if (gamePanel.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
                 hit = true;
+
+                previousEventX = gamePanel.player.worldX;
+                previousEventY = gamePanel.player.worldY;
+            }
         
         // сброс
         gamePanel.player.solidArea.x = gamePanel.player.solidAreaDefaultX;
         gamePanel.player.solidArea.y = gamePanel.player.solidAreaDefaultY;
-        eventRect.x = eventRectDefaultX;
-        eventRect.y = getEventRectDefaultY;
+        eventRect[col][row].x = eventRect[col][row].eventRectDefaultX;
+        eventRect[col][row].y = eventRect[col][row].getEventRectDefaultY;
 
         return hit;
     }
 
     // яма
-    public void damagePit(int gameState) {
+    public void damagePit(int col, int row, int gameState, boolean oneTimeEvent) {
         gamePanel.gameState = gameState;
         gamePanel.userInterface.currentDialogue = "You fall into a pit!";
         gamePanel.player.currentLife -= 1;
+
+        if (oneTimeEvent)
+            eventRect[col][row].eventDone = true;
+
+        canTouchEvent = false;
     }
 
     // лечение
