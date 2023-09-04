@@ -9,6 +9,6 @@ public class Chest extends Entity {
 
         name = "chest";
 
-        downIdle = setup("/objects/chest.png");
+        downIdle = setup("/objects/chest");
     }
 }

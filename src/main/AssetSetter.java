@@ -20,6 +20,5 @@ public class AssetSetter {
         gamePanel.npc[0] = new OldMan(gamePanel);
         gamePanel.npc[0].worldX = gamePanel.tileSize * 21;
         gamePanel.npc[0].worldY = gamePanel.tileSize * 21;
-
     }
 }

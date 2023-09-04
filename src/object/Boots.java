@@ -9,6 +9,6 @@ public class Boots extends Entity {
 
         name = "boots";
 
-        downIdle = setup("/objects/boots.png");
+        downIdle = setup("/objects/boots");
     }
 }

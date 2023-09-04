@@ -21,7 +21,7 @@ public abstract class Entity {
     public boolean idleCheck; // переменная для срабатывания idle анимаций во время движения
 
     // сплошная часть объекта
-    public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+    public Rectangle solidArea = new Rectangle();
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0; // продолжительность поведения
@@ -37,6 +37,13 @@ public abstract class Entity {
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+
+        solidArea.x = 4 * gamePanel.scale - 1;
+        solidArea.y = 8 * gamePanel.scale - 1;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 8 * gamePanel.scale - 1;
+        solidArea.height = 8 * gamePanel.scale - 1;
     }
 
     // модель поведения

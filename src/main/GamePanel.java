@@ -6,6 +6,8 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -41,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyHandler);
     public Entity[] obj = new Entity[10]; // массив для хранения предметов
     public Entity[] npc = new Entity[10]; // массив для хранения нип
+    ArrayList<Entity> entities = new ArrayList<>(); // список всех сущностей
 
     // GAME STATE
     public int gameState;
@@ -123,18 +126,25 @@ public class GamePanel extends JPanel implements Runnable {
             // TILE
             tileManager.draw(graphics2D);
 
-            // OBJECT
-//            for (GameObject gameObject : obj)
-//                if (gameObject != null)
-//                    gameObject.draw(graphics2D, this);
+            // ADD ENTITIES
+            entities.add(player);
 
-            // NPC
             for (Entity entity : npc)
                 if (entity != null)
-                    entity.draw(graphics2D);
+                    entities.add(entity);
 
-            // PLAYER
-            player.draw(graphics2D);
+            for (Entity entity : obj)
+                if (entity != null)
+                    entities.add(entity);
+
+            // SORT ENTITIES
+            entities.sort(Comparator.comparingInt(e -> e.worldY));
+
+            // DRAW ENTITIES
+            for (Entity entity : entities) entity.draw(graphics2D);
+
+            // RESET ENTITIES
+            entities.clear();
 
             // UI
             userInterface.draw(graphics2D);

@@ -9,6 +9,6 @@ public class BlueHeart extends Entity {
 
         name = "blueHeart";
 
-        downIdle = setup("/objects/blueheart.png");
+        downIdle = setup("/objects/blueheart");
     }
 }

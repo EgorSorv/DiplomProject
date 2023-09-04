@@ -10,6 +10,6 @@ public class Key extends Entity {
 
         name = "key";
 
-        downIdle = setup("/objects/key.png");
+        downIdle = setup("/objects/key");
     }
 }

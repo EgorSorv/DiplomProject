@@ -9,7 +9,7 @@ public class Door extends Entity {
 
         name = "door";
 
-        downIdle = setup("/objects/door.png");
+        downIdle = setup("/objects/door");
 
         collision = true;
     }
