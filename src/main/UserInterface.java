@@ -1,6 +1,6 @@
 package main;
 
-import object.GameObject;
+import entity.Entity;
 import object.Heart;
 
 import java.awt.*;
@@ -32,7 +32,7 @@ public class UserInterface {
         }
 
         // CREATE HUD OBJECT
-        GameObject heart = new Heart(gamePanel);
+        Entity heart = new Heart(gamePanel);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
@@ -120,7 +120,7 @@ public class UserInterface {
         // IMAGE
         x = gamePanel.screenWidth / 2 - gamePanel.tileSize;
         y += gamePanel.tileSize * 2;
-        graphics2D.drawImage(gamePanel.obj[0].image, x, y,
+        graphics2D.drawImage(gamePanel.obj[0].downIdle, x, y,
                 gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
 
         // MENU

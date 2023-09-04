@@ -2,7 +2,6 @@ package main;
 
 import entity.Entity;
 import entity.Player;
-import object.GameObject;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -40,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // ENTITY AND OBJECT
     public Player player = new Player(this, keyHandler);
-    public GameObject[] obj = new GameObject[10]; // массив для хранения предметов
+    public Entity[] obj = new Entity[10]; // массив для хранения предметов
     public Entity[] npc = new Entity[10]; // массив для хранения нип
 
     // GAME STATE

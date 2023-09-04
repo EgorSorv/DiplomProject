@@ -15,7 +15,7 @@ public abstract class Entity {
     public int speed; // скорость перемещения
     public BufferedImage upIdle, up1, up2, downIdle, down1, down2,
             leftIdle, left1, left2, rightIdle, right1, right2; // набор изображений
-    public String direction; // направление движения
+    public String direction = "down"; // направление движения
     public int spriteCounter = 0; // интервал обновления изображения
     public int spriteNum = 0; // номер изображения
     public boolean idleCheck; // переменная для срабатывания idle анимаций во время движения
@@ -27,6 +27,9 @@ public abstract class Entity {
     public int actionLockCounter = 0; // продолжительность поведения
     String[] dialogues = new String[20]; // массив для диалогов
     int dialogueIndex = 0;
+    public BufferedImage image, image2, image3;
+    public String name;
+    public boolean collision = false;
 
     // CHARACTER STATUS
     public int maxLife; // максимальное здоровье
