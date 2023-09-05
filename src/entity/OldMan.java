@@ -16,18 +16,18 @@ public class OldMan extends Entity {
     }
 
     public void getImage() {
-        upIdle = setup("/npc/oldman_up_idle");
-        up1 = setup("/npc/oldman_up_1");
-        up2 = setup("/npc/oldman_up_2");
-        downIdle = setup("/npc/oldman_down_idle");
-        down1 = setup("/npc/oldman_down_1");
-        down2 = setup("/npc/oldman_down_2");
-        leftIdle = setup("/npc/oldman_left_idle");
-        left1 = setup("/npc/oldman_left_1");
-        left2 = setup("/npc/oldman_left_2");
-        rightIdle = setup("/npc/oldman_right_idle");
-        right1 = setup("/npc/oldman_right_1");
-        right2 = setup("/npc/oldman_right_2");
+        upIdle = setup("/npc/oldman_up_idle", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("/npc/oldman_up_1", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/npc/oldman_up_2", gamePanel.tileSize, gamePanel.tileSize);
+        downIdle = setup("/npc/oldman_down_idle", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/npc/oldman_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/npc/oldman_down_2", gamePanel.tileSize, gamePanel.tileSize);
+        leftIdle = setup("/npc/oldman_left_idle", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/npc/oldman_left_1", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/npc/oldman_left_2", gamePanel.tileSize, gamePanel.tileSize);
+        rightIdle = setup("/npc/oldman_right_idle", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/npc/oldman_right_1", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/npc/oldman_right_2", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public void setDialogue() {

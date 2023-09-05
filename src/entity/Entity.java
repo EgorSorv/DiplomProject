@@ -11,30 +11,44 @@ import java.util.Objects;
 
 public abstract class Entity {
     GamePanel gamePanel;
-    public int worldX, worldY; // координаты мира
-    public int speed; // скорость перемещения
+
+    // IMAGES
     public BufferedImage upIdle, up1, up2, downIdle, down1, down2,
             leftIdle, left1, left2, rightIdle, right1, right2; // набор изображений
-    public String direction = "down"; // направление движения
-    public int spriteCounter = 0; // интервал обновления изображения
-    public int spriteNum = 0; // номер изображения
-    public boolean idleCheck; // переменная для срабатывания idle анимаций во время движения
+    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2,
+            attackLeft1, attackLeft2, attackRight1, attackRight2;
+    public BufferedImage image, image2, image3;
 
-    // сплошная часть объекта
+    // SOLID AREA
     public Rectangle solidArea = new Rectangle();
     public int solidAreaDefaultX, solidAreaDefaultY;
-    public boolean collisionOn = false;
-    public int actionLockCounter = 0; // продолжительность поведения
-    public boolean invincible = false;  // неуязвимость
-    public int invincibleCounter = 0; // действие неуязвимости
-    String[] dialogues = new String[20]; // массив для диалогов
-    int dialogueIndex = 0;
-    public BufferedImage image, image2, image3;
-    public String name;
-    public boolean collision = false;
-    public int entityType; // тип сущности
+    public Rectangle attackArea = new Rectangle(); // зона удара
 
-    // CHARACTER STATUS
+    // STATES
+    public int worldX, worldY; // координаты мира
+    public String direction = "down"; // направление движения
+    public int spriteNum = 0; // номер изображения
+
+    // DIALOGUE
+    int dialogueIndex = 0;
+    String[] dialogues = new String[20]; // массив для диалогов
+
+    // BOOLEAN FLAGS
+    public boolean collision = false;
+    public boolean collisionOn = false;
+    public boolean invincible = false;  // неуязвимость
+    boolean attacking = false;
+    public boolean idleCheck; // переменная для срабатывания idle анимаций во время движения
+
+    // COUNTERS
+    public int spriteCounter = 0; // интервал обновления изображения
+    public int actionLockCounter = 0; // продолжительность поведения
+    public int invincibleCounter = 0; // действие неуязвимости
+
+    // CHARACTER ATTRIBUTES
+    public int entityType; // тип сущности
+    public String name;
+    public int speed; // скорость перемещения
     public int maxLife; // максимальное здоровье
     public int currentLife; // текущее здоровье
 
@@ -110,6 +124,16 @@ public abstract class Entity {
                     spriteCounter = 0;
                 }
             }
+
+            // INVINCIBLE
+            if (invincible) {
+                invincibleCounter++;
+
+                if (invincibleCounter > 40) {
+                    invincible = false;
+                    invincibleCounter = 0;
+                }
+            }
         } else {
             collisionOn = false;
             spriteNum = 0;
@@ -129,52 +153,45 @@ public abstract class Entity {
 
             switch (direction) {
                 case "up" -> {
-                    if (spriteNum == 0)
-                        image = upIdle;
-                    if (spriteNum == 1)
-                        image = up1;
-                    if (spriteNum == 2)
-                        image = up2;
+                    if (spriteNum == 0) image = upIdle;
+                    if (spriteNum == 1) image = up1;
+                    if (spriteNum == 2) image = up2;
                 }
                 case "down" -> {
-                    if (spriteNum == 0)
-                        image = downIdle;
-                    if (spriteNum == 1)
-                        image = down1;
-                    if (spriteNum == 2)
-                        image = down2;
+                    if (spriteNum == 0) image = downIdle;
+                    if (spriteNum == 1) image = down1;
+                    if (spriteNum == 2) image = down2;
                 }
                 case "left" -> {
-                    if (spriteNum == 0)
-                        image = leftIdle;
-                    if (spriteNum == 1)
-                        image = left1;
-                    if (spriteNum == 2)
-                        image = left2;
+                    if (spriteNum == 0) image = leftIdle;
+                    if (spriteNum == 1) image = left1;
+                    if (spriteNum == 2) image = left2;
                 }
                 case "right" -> {
-                    if (spriteNum == 0)
-                        image = rightIdle;
-                    if (spriteNum == 1)
-                        image = right1;
-                    if (spriteNum == 2)
-                        image = right2;
+                    if (spriteNum == 0) image = rightIdle;
+                    if (spriteNum == 1) image = right1;
+                    if (spriteNum == 2) image = right2;
                 }
             }
 
+            if (invincible)
+                graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+
             graphics2D.drawImage(image, screenX, screenY,
                     gamePanel.tileSize, gamePanel.tileSize, null);
+
+            graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         }
     }
 
-    public  BufferedImage setup(String imagePath) {
+    public  BufferedImage setup(String imagePath, int width, int height) {
         UtilityTool utilityTool = new UtilityTool();
         BufferedImage image = null;
 
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass().
                     getResourceAsStream(imagePath + ".png")));
-            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
+            image = utilityTool.scaleImage(image, width, height);
         } catch (IOException e) {
             e.printStackTrace();
         }

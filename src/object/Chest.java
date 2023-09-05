@@ -9,6 +9,6 @@ public class Chest extends Entity {
 
         name = "chest";
 
-        downIdle = setup("/objects/chest");
+        downIdle = setup("/objects/chest", gamePanel.tileSize, gamePanel.tileSize);
     }
 }

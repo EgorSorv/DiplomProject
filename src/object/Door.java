@@ -9,7 +9,7 @@ public class Door extends Entity {
 
         name = "door";
 
-        downIdle = setup("/objects/door");
+        downIdle = setup("/objects/door", gamePanel.tileSize, gamePanel.tileSize);
 
         collision = true;
     }

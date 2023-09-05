@@ -9,6 +9,6 @@ public class Boots extends Entity {
 
         name = "boots";
 
-        downIdle = setup("/objects/boots");
+        downIdle = setup("/objects/boots", gamePanel.tileSize, gamePanel.tileSize);
     }
 }

@@ -6,8 +6,11 @@ import main.GamePanel;
 import java.util.Random;
 
 public class GreenSlime extends Entity {
+    GamePanel gamePanel;
+
     public GreenSlime(GamePanel gamePanel) {
         super(gamePanel);
+        this.gamePanel = gamePanel;
 
         entityType = 2;
         name = "green slime";
@@ -26,18 +29,18 @@ public class GreenSlime extends Entity {
     }
 
     public void getImage() {
-        upIdle = setup("/monsters/greenslime_idle");
-        up1 = setup("/monsters/greenslime_move");
-        up2 = setup("/monsters/greenslime_move");
-        downIdle = setup("/monsters/greenslime_idle");
-        down1 = setup("/monsters/greenslime_move");
-        down2 = setup("/monsters/greenslime_move");
-        leftIdle = setup("/monsters/greenslime_idle");
-        left1 = setup("/monsters/greenslime_move");
-        left2 = setup("/monsters/greenslime_move");
-        rightIdle = setup("/monsters/greenslime_idle");
-        right1 = setup("/monsters/greenslime_move");
-        right2 = setup("/monsters/greenslime_move");
+        upIdle = setup("/monsters/greenslime_idle", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        downIdle = setup("/monsters/greenslime_idle", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        leftIdle = setup("/monsters/greenslime_idle", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        rightIdle = setup("/monsters/greenslime_idle", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public void setAction() {

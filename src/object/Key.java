@@ -10,6 +10,6 @@ public class Key extends Entity {
 
         name = "key";
 
-        downIdle = setup("/objects/key");
+        downIdle = setup("/objects/key", gamePanel.tileSize, gamePanel.tileSize);
     }
 }
