@@ -50,7 +50,7 @@ public class EventHandler {
             if (hit(27, 16, "right", false))
                 damagePit(27, 16, gamePanel.dialogueState, false);
 
-            if (hit(23, 18, "up", false))
+            if (hit(23, 18, "any", false))
                 damagePit(23, 18, gamePanel.dialogueState, true);
 
             if (hit(30, 37, "right", false))

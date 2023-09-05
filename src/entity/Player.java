@@ -73,6 +73,10 @@ public class Player extends Entity {
                 int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
                 interactNPC(npcIndex);
 
+                // CHECK MONSTER COLLISION
+                int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
+                contactMonster(monsterIndex);
+
                 // CHECK EVENT
                 gamePanel.eventHandler.checkEvent();
 
@@ -107,12 +111,20 @@ public class Player extends Entity {
                     }
                 }
             }
-            else
-                spriteNum = 0;
-        }
-        else {
+            else spriteNum = 0;
+        } else {
             collisionOn = false;
             spriteNum = 0;
+        }
+
+        // INVINCIBLE
+        if (invincible) {
+            invincibleCounter++;
+
+            if (invincibleCounter > 60) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
         }
     }
 
@@ -131,6 +143,15 @@ public class Player extends Entity {
                 gamePanel.npc[index].speak();
             }
         }
+    }
+
+    // контакт с монстром
+    public void contactMonster(int index) {
+        if (index != -1)
+            if (!invincible) {
+                currentLife -= 1;
+                invincible = true;
+            }
     }
 
     // отрисовка изображений
@@ -172,6 +193,13 @@ public class Player extends Entity {
             }
         }
 
+        // игрок становится прозрачным
+        if (invincible)
+            graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+
         graphics2D.drawImage(image, screenX, screenY, null);
+
+        // сброс прозрачности
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 }

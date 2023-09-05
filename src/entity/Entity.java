@@ -25,11 +25,14 @@ public abstract class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0; // продолжительность поведения
+    public boolean invincible = false;  // неуязвимость
+    public int invincibleCounter = 0; // действие неуязвимости
     String[] dialogues = new String[20]; // массив для диалогов
     int dialogueIndex = 0;
     public BufferedImage image, image2, image3;
     public String name;
     public boolean collision = false;
+    public int entityType; // тип сущности
 
     // CHARACTER STATUS
     public int maxLife; // максимальное здоровье
@@ -70,7 +73,15 @@ public abstract class Entity {
 
             gamePanel.collisionChecker.checkTile(this);
             gamePanel.collisionChecker.checkObject(this, false);
-            gamePanel.collisionChecker.checkPlayer(this);
+            gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
+            gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
+            boolean contactPlayer = gamePanel.collisionChecker.checkPlayer(this);
+
+            if (this.entityType == 2 && contactPlayer)
+                if (!gamePanel.player.invincible) {
+                    gamePanel.player.currentLife -= 1;
+                    gamePanel.player.invincible = true;
+                }
 
             if (!collisionOn) {
                 switch (direction) {
