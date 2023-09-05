@@ -51,7 +51,8 @@ public class Player extends Entity {
     public void update() {
         if (!collisionOn) {
             if (keyHandler.upPressed || keyHandler.downPressed ||
-                    keyHandler.leftPressed || keyHandler.rightPressed) {
+                keyHandler.leftPressed || keyHandler.rightPressed ||
+                keyHandler.interactPressed) {
 
                 if (keyHandler.upPressed)
                     direction = "up";
@@ -59,7 +60,7 @@ public class Player extends Entity {
                     direction = "down";
                 else if (keyHandler.leftPressed)
                     direction = "left";
-                else
+                else if (keyHandler.rightPressed)
                     direction = "right";
 
                 // CHECK TILE COLLISION
@@ -80,10 +81,8 @@ public class Player extends Entity {
                 // CHECK EVENT
                 gamePanel.eventHandler.checkEvent();
 
-                gamePanel.keyHandler.interactPressed = false;
-
                 // PLAYER MOVEMENT
-                if (!collisionOn) {
+                if (!collisionOn && !keyHandler.interactPressed) {
                     switch (direction) {
                         case "up" -> worldY -= speed;
                         case "down" -> worldY += speed;
@@ -91,6 +90,8 @@ public class Player extends Entity {
                         case "right" -> worldX += speed;
                     }
                 }
+
+                gamePanel.keyHandler.interactPressed = false;
 
                 spriteCounter++;
 
