@@ -72,10 +72,11 @@ public class Player extends Entity {
 
     // обновление позиции игрока
     public void update() {
-        if (!collisionOn) {
-            if (attacking) {
-                attacking();
-            } else if (keyHandler.upPressed || keyHandler.downPressed ||
+        if (attacking) {
+            attacking();
+
+        } else if (!collisionOn) {
+            if (keyHandler.upPressed || keyHandler.downPressed ||
                     keyHandler.leftPressed || keyHandler.rightPressed ||
                     keyHandler.interactPressed) {
                 if (keyHandler.upPressed)
@@ -137,9 +138,9 @@ public class Player extends Entity {
                 }
             } else spriteNum = 0;
         } else {
-            collisionOn = false;
-            spriteNum = 0;
-        }
+        collisionOn = false;
+        spriteNum = 0;
+    }
 
         // INVINCIBLE
         if (invincible) {
@@ -156,8 +157,7 @@ public class Player extends Entity {
     public void attacking() {
         spriteCounter++;
 
-        if (spriteCounter <= 5)
-            spriteNum = 1;
+        if (spriteCounter <= 5) spriteNum = 1;
         else if (spriteCounter <= 25) {
             spriteNum = 2;
 
@@ -229,7 +229,7 @@ public class Player extends Entity {
                 gamePanel.monster[index].invincible = true;
 
                 if (gamePanel.monster[index].currentLife <= 0)
-                    gamePanel.monster[index] = null;
+                    gamePanel.monster[index].dying = true;
             }
     }
 
@@ -287,12 +287,11 @@ public class Player extends Entity {
         }
 
         // игрок становится прозрачным
-        if (invincible)
-            graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+        if (invincible) changeTransparency(graphics2D, 0.4f);
 
         graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
 
         // сброс прозрачности
-        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        changeTransparency(graphics2D, 1f);
     }
 }

@@ -37,13 +37,16 @@ public abstract class Entity {
     public boolean collision = false;
     public boolean collisionOn = false;
     public boolean invincible = false;  // неуязвимость
-    boolean attacking = false;
+    public boolean attacking = false;
+    public boolean alive = true;
+    public boolean dying = false;
     public boolean idleCheck; // переменная для срабатывания idle анимаций во время движения
 
     // COUNTERS
     public int spriteCounter = 0; // интервал обновления изображения
     public int actionLockCounter = 0; // продолжительность поведения
     public int invincibleCounter = 0; // действие неуязвимости
+    int dyingCounter = 0;
 
     // CHARACTER ATTRIBUTES
     public int entityType; // тип сущности
@@ -175,13 +178,38 @@ public abstract class Entity {
             }
 
             if (invincible)
-                graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+                changeTransparency(graphics2D, 0.4f);
+
+            if (dying)
+                dyingAnimation(graphics2D);
 
             graphics2D.drawImage(image, screenX, screenY,
                     gamePanel.tileSize, gamePanel.tileSize, null);
 
-            graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+            changeTransparency(graphics2D, 1f);
         }
+    }
+
+    // анимация смерти
+    public void dyingAnimation(Graphics2D graphics2D) {
+        dyingCounter++;
+
+        int time = 5;
+
+        if (dyingCounter <= time) changeTransparency(graphics2D, 0f);
+        else if (dyingCounter <= time * 2) changeTransparency(graphics2D, 1f);
+        else if (dyingCounter <= time * 3) changeTransparency(graphics2D, 0f);
+        else if (dyingCounter <= time * 4) changeTransparency(graphics2D, 1f);
+        else if (dyingCounter <= time * 5) changeTransparency(graphics2D, 0f);
+        else if (dyingCounter <= time * 6) changeTransparency(graphics2D, 1f);
+        else if (dyingCounter <= time * 7) changeTransparency(graphics2D, 0f);
+        else if (dyingCounter <= time * 8) changeTransparency(graphics2D, 1f);
+        else { dying = false; alive = false; }
+    }
+
+    // изменение прозрачности
+    public void changeTransparency(Graphics2D graphics2D, float value) {
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, value));
     }
 
     public  BufferedImage setup(String imagePath, int width, int height) {

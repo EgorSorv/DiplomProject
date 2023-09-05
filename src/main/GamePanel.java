@@ -103,14 +103,14 @@ public class GamePanel extends JPanel implements Runnable {
             player.update();
 
             // NPC
-            for (Entity entity : npc)
-                if (entity != null)
-                    entity.update();
+            for (Entity entity : npc) if (entity != null) entity.update();
 
             // MONSTER
-            for (Entity entity : monster)
-                if (entity != null)
-                    entity.update();
+            for (int i = 0; i < monster.length; i++)
+                if (monster[i] != null) {
+                    if (monster[i].alive && !monster[i].dying) monster[i].update();
+                    if (!monster[i].alive) monster[i] = null;
+                }
         }
 
         if (gameState == pauseState)
@@ -138,17 +138,11 @@ public class GamePanel extends JPanel implements Runnable {
             // ADD ENTITIES
             entities.add(player);
 
-            for (Entity entity : npc)
-                if (entity != null)
-                    entities.add(entity);
+            for (Entity entity : npc) if (entity != null) entities.add(entity);
 
-            for (Entity entity : monster)
-                if (entity != null)
-                    entities.add(entity);
+            for (Entity entity : monster) if (entity != null) entities.add(entity);
 
-            for (Entity entity : obj)
-                if (entity != null)
-                    entities.add(entity);
+            for (Entity entity : obj) if (entity != null) entities.add(entity);
 
             // SORT ENTITIES
             entities.sort(Comparator.comparingInt(e -> e.worldY));
