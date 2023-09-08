@@ -123,6 +123,7 @@ public class EventHandler {
     // яма
     public void damagePit(int col, int row, int gameState, boolean oneTimeEvent) {
         gamePanel.gameState = gameState;
+        gamePanel.playSoundEffect(6);
         gamePanel.userInterface.currentDialogue = "You fall into a pit!";
         gamePanel.player.currentLife -= 1;
 
@@ -136,6 +137,8 @@ public class EventHandler {
     public void healingPool(int gameState) {
         if (gamePanel.keyHandler.interactPressed) {
             gamePanel.gameState = gameState;
+            gamePanel.player.attackCanceled = true;
+            gamePanel.playSoundEffect(2);
 
             if (gamePanel.player.currentLife < gamePanel.player.maxLife) {
                 gamePanel.userInterface.currentDialogue = "You drink the water.\nYour health has been increased.";
@@ -147,6 +150,7 @@ public class EventHandler {
     // перемещение
     public void teleport(int gameState, int destinationX, int destinationY) {
         gamePanel.gameState = gameState;
+        gamePanel.playSoundEffect(7);
         gamePanel.userInterface.currentDialogue = "Teleport!";
 
         gamePanel.player.worldX = gamePanel.tileSize * destinationX;

@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 public class Player extends Entity {
     KeyHandler keyHandler;
     public final int screenX, screenY; // позиция игрока на экране
+    public boolean attackCanceled = false;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         super(gamePanel);
@@ -116,6 +117,13 @@ public class Player extends Entity {
                     }
                 }
 
+                if (keyHandler.interactPressed && !attackCanceled) {
+                    gamePanel.playSoundEffect(7);
+                    attacking = true;
+                    spriteCounter = 0;
+                }
+
+                attackCanceled = false;
                 gamePanel.keyHandler.interactPressed = false;
 
                 spriteCounter++;
@@ -206,11 +214,9 @@ public class Player extends Entity {
     public void interactNPC(int index) {
         if (gamePanel.keyHandler.interactPressed) {
             if (index != -1) {
+                attackCanceled = true;
                 gamePanel.gameState = gamePanel.dialogueState;
                 gamePanel.npc[index].speak();
-            } else {
-                gamePanel.playSoundEffect(7);
-                attacking = true;
             }
         }
     }
