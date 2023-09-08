@@ -24,71 +24,99 @@ public class KeyHandler implements KeyListener {
 
         // TITLE STATE
         if (gamePanel.gameState == gamePanel.titleState) {
-            if (code == KeyEvent.VK_W) {
-                gamePanel.userInterface.commandNumber--;
-
-                if (gamePanel.userInterface.commandNumber < 0)
-                    gamePanel.userInterface.commandNumber = 2;
-            }
-
-            if (code == KeyEvent.VK_S) {
-                gamePanel.userInterface.commandNumber++;
-
-                if (gamePanel.userInterface.commandNumber > 2)
-                    gamePanel.userInterface.commandNumber = 0;
-            }
-
-            if (code == KeyEvent.VK_E) {
-                if (gamePanel.userInterface.commandNumber == 0) {
-                    gamePanel.gameState = gamePanel.playState;
-                    gamePanel.playMusic(0);
-                }
-
-                if (gamePanel.userInterface.commandNumber == 2)
-                    System.exit(0);
-            }
+            titleState(code);
         }
 
         // PLAY STATE
         else if (gamePanel.gameState == gamePanel.playState) {
-            // MOVEMENT
-            if (code == KeyEvent.VK_W)
-                upPressed = true;
-            if (code == KeyEvent.VK_A)
-                leftPressed = true;
-            if (code == KeyEvent.VK_S)
-                downPressed = true;
-            if (code == KeyEvent.VK_D)
-                rightPressed = true;
-
-            // PAUSE
-            if (code == KeyEvent.VK_P)
-                gamePanel.gameState = gamePanel.pauseState;
-
-            // INTERACTION
-            if (code == KeyEvent.VK_E)
-                interactPressed = true;
-
-            // DEBUG (KEY)
-            if (code == KeyEvent.VK_F1)
-                checkDrawTime = !checkDrawTime;
+            playState(code);
         }
 
         // PAUSE STATE
         else if (gamePanel.gameState == gamePanel.pauseState)
-            if (code == KeyEvent.VK_P) {
-                gamePanel.gameState = gamePanel.playState;
-
-                gamePanel.music.play();
-                gamePanel.music.loop();
-            }
+            pauseState(code);
 
         // DIALOGUE STATE
         if (gamePanel.gameState == gamePanel.dialogueState)
-            if (code == KeyEvent.VK_E)
-                gamePanel.gameState = gamePanel.playState;
+            dialogueState(code);
+
+        // CHARACTER STATE
+        if (gamePanel.gameState == gamePanel.characterState)
+            characterState(code);
     }
 
+    public void titleState(int code) {
+        if (code == KeyEvent.VK_W) {
+            gamePanel.userInterface.commandNumber--;
+
+            if (gamePanel.userInterface.commandNumber < 0)
+                gamePanel.userInterface.commandNumber = 2;
+        }
+
+        if (code == KeyEvent.VK_S) {
+            gamePanel.userInterface.commandNumber++;
+
+            if (gamePanel.userInterface.commandNumber > 2)
+                gamePanel.userInterface.commandNumber = 0;
+        }
+
+        if (code == KeyEvent.VK_E) {
+            if (gamePanel.userInterface.commandNumber == 0) {
+                gamePanel.gameState = gamePanel.playState;
+                gamePanel.playMusic(0);
+            }
+
+            if (gamePanel.userInterface.commandNumber == 2)
+                System.exit(0);
+        }
+    }
+
+    public void playState(int code) {
+        // MOVEMENT
+        if (code == KeyEvent.VK_W)
+            upPressed = true;
+        if (code == KeyEvent.VK_A)
+            leftPressed = true;
+        if (code == KeyEvent.VK_S)
+            downPressed = true;
+        if (code == KeyEvent.VK_D)
+            rightPressed = true;
+
+        // PAUSE
+        if (code == KeyEvent.VK_P)
+            gamePanel.gameState = gamePanel.pauseState;
+
+        // CHARACTER INFO
+        if (code == KeyEvent.VK_I)
+            gamePanel.gameState = gamePanel.characterState;
+
+        // INTERACTION
+        if (code == KeyEvent.VK_E)
+            interactPressed = true;
+
+        // DEBUG (KEY)
+        if (code == KeyEvent.VK_F1)
+            checkDrawTime = !checkDrawTime;
+    }
+
+    public void pauseState(int code) {
+        if (code == KeyEvent.VK_P) {
+            gamePanel.gameState = gamePanel.playState;
+
+            gamePanel.music.play();
+            gamePanel.music.loop();
+        }
+    }
+
+    public void dialogueState(int code) {
+        if (code == KeyEvent.VK_E)
+            gamePanel.gameState = gamePanel.playState;
+    }
+
+    public void characterState(int code) {
+        if (code == KeyEvent.VK_I)
+            gamePanel.gameState = gamePanel.playState;
+    }
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();

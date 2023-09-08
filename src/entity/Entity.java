@@ -53,9 +53,23 @@ public abstract class Entity {
     // CHARACTER ATTRIBUTES
     public int entityType; // тип сущности
     public String name;
-    public int speed; // скорость перемещения
+    public int level;
+    public int exp;
+    public int nextLevelExp;
     public int maxLife; // максимальное здоровье
     public int currentLife; // текущее здоровье
+    public int strength;
+    public int dexterity;
+    public int attack;
+    public int defense;
+    public int speed; // скорость перемещения
+    public int coins;
+    public Entity currentWeapon;
+    public Entity currentShield;
+
+    // ITEM ATTRIBUTES
+    public int attackValue;
+    public int defenseValue;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
