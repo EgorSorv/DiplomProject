@@ -70,6 +70,7 @@ public abstract class Entity {
 
     // модель поведения
     public void setAction() {}
+    public void damageReaction() {}
     public void speak() {
         if(dialogues[dialogueIndex] == null)
             dialogueIndex = 0;

@@ -232,6 +232,7 @@ public class Player extends Entity {
                 gamePanel.playSoundEffect(5);
                 gamePanel.monster[index].currentLife -= 1;
                 gamePanel.monster[index].invincible = true;
+                gamePanel.monster[index].damageReaction();
 
                 if (gamePanel.monster[index].currentLife <= 0)
                     gamePanel.monster[index].dying = true;

@@ -62,4 +62,10 @@ public class GreenSlime extends Entity {
             actionLockCounter = 0;
         }
     }
+
+    // реакция на атаку
+    public void damageReaction() {
+        actionLockCounter = 0;
+        direction = gamePanel.player.direction;
+    }
 }
