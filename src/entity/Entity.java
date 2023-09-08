@@ -96,6 +96,7 @@ public abstract class Entity {
 
             if (this.entityType == 2 && contactPlayer)
                 if (!gamePanel.player.invincible) {
+                    gamePanel.playSoundEffect(6);
                     gamePanel.player.currentLife -= 1;
                     gamePanel.player.invincible = true;
                 }

@@ -208,7 +208,10 @@ public class Player extends Entity {
             if (index != -1) {
                 gamePanel.gameState = gamePanel.dialogueState;
                 gamePanel.npc[index].speak();
-            } else attacking = true;
+            } else {
+                gamePanel.playSoundEffect(7);
+                attacking = true;
+            }
         }
     }
 
@@ -216,6 +219,7 @@ public class Player extends Entity {
     public void contactMonster(int index) {
         if (index != -1)
             if (!invincible) {
+                gamePanel.playSoundEffect(6);
                 currentLife -= 1;
                 invincible = true;
             }
@@ -225,6 +229,7 @@ public class Player extends Entity {
     public void damageMonster(int index) {
         if (index != -1)
             if (!gamePanel.monster[index].invincible) {
+                gamePanel.playSoundEffect(5);
                 gamePanel.monster[index].currentLife -= 1;
                 gamePanel.monster[index].invincible = true;
 
