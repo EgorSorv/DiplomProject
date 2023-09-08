@@ -41,11 +41,13 @@ public abstract class Entity {
     public boolean alive = true;
     public boolean dying = false;
     public boolean idleCheck; // переменная для срабатывания idle анимаций во время движения
+    boolean hpBarOn = false;
 
     // COUNTERS
     public int spriteCounter = 0; // интервал обновления изображения
     public int actionLockCounter = 0; // продолжительность поведения
     public int invincibleCounter = 0; // действие неуязвимости
+    int hpBarCounter = 0;
     int dyingCounter = 0;
 
     // CHARACTER ATTRIBUTES
@@ -178,8 +180,30 @@ public abstract class Entity {
                 }
             }
 
-            if (invincible)
+            //  MONSTER HP BAR
+            if (entityType == 2 && hpBarOn) {
+                double oneScale = (double) gamePanel.tileSize / maxLife; // длина 1 ПЗ
+                double hpBarValue = oneScale * currentLife; // длина текущего ПЗ
+
+                graphics2D.setColor(new Color(35, 35, 35));
+                graphics2D.fillRect(screenX - 1, screenY - 16, gamePanel.tileSize + 2, 12);
+
+                graphics2D.setColor(new Color(255, 0, 30));
+                graphics2D.fillRect(screenX, screenY - 15, (int) hpBarValue, 10);
+
+                hpBarCounter++;
+
+                if (hpBarCounter > 600) {
+                    hpBarCounter = 0;
+                    hpBarOn = false;
+                }
+            }
+
+            if (invincible) {
+                hpBarOn = true;
+                hpBarCounter = 0;
                 changeTransparency(graphics2D, 0.4f);
+            }
 
             if (dying)
                 dyingAnimation(graphics2D);
