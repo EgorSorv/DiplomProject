@@ -52,17 +52,19 @@ public class UserInterface {
         // TITLE STATE
         if (gamePanel.gameState == gamePanel.titleState)
             drawTitleScreen();
+
         // PLAY STATE
-        if (gamePanel.gameState == gamePanel.playState) {
+        if (gamePanel.gameState == gamePanel.playState)
             drawPlayerLife();
-        }
+
         // PAUSE STATE
-        else if (gamePanel.gameState == gamePanel.pauseState) {
+        if (gamePanel.gameState == gamePanel.pauseState) {
             drawPlayerLife();
             drawPauseScreen();
         }
+
         // DIALOGUE STATE
-        else if (gamePanel.gameState == gamePanel.dialogueState)
+        if (gamePanel.gameState == gamePanel.dialogueState)
             drawDialogueScreen();
 
         // CHARACTER STATE
@@ -186,9 +188,9 @@ public class UserInterface {
 
     // инфо по игроку
     public void drawCharacterScreen() {
-        final int frameX = gamePanel.tileSize * 2;
+        final int frameX = gamePanel.tileSize;
         final int frameY = gamePanel.tileSize;
-        final int frameWidth = gamePanel.tileSize * 5;
+        final int frameWidth = gamePanel.tileSize * 6;
         final int frameHeight = gamePanel.tileSize * 10;
 
 
@@ -280,14 +282,15 @@ public class UserInterface {
         value = String.valueOf(gamePanel.player.coins);
         textX = getXForAlignToRightText(value, tailX);
         graphics2D.drawString(value, textX, textY);
+        textY += lineHeight;
 
         graphics2D.drawImage(gamePanel.player.currentWeapon.downIdle,
-                tailX - gamePanel.tileSize, textY, null);
+                tailX - gamePanel.tileSize, textY - 15, null);
 
         textY += gamePanel.tileSize;
 
         graphics2D.drawImage(gamePanel.player.currentShield.downIdle,
-                tailX - gamePanel.tileSize, textY, null);
+                tailX - gamePanel.tileSize, textY - 15, null);
     }
 
     // фон окна

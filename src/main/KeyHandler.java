@@ -37,11 +37,11 @@ public class KeyHandler implements KeyListener {
             pauseState(code);
 
         // DIALOGUE STATE
-        if (gamePanel.gameState == gamePanel.dialogueState)
+        else if (gamePanel.gameState == gamePanel.dialogueState)
             dialogueState(code);
 
         // CHARACTER STATE
-        if (gamePanel.gameState == gamePanel.characterState)
+        else if (gamePanel.gameState == gamePanel.characterState)
             characterState(code);
     }
 
