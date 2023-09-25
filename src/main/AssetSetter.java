@@ -25,12 +25,29 @@ public class AssetSetter {
 
     // размещение монстров на карте
     public void setMonster() {
-        gamePanel.monster[0] = new GreenSlime(gamePanel);
-        gamePanel.monster[0].worldX = gamePanel.tileSize * 23;
-        gamePanel.monster[0].worldY = gamePanel.tileSize * 36;
+        int index = 0;
+        gamePanel.monster[index] = new GreenSlime(gamePanel);
+        gamePanel.monster[index].worldX = gamePanel.tileSize * 21;
+        gamePanel.monster[index].worldY = gamePanel.tileSize * 38;
+        index++;
 
-        gamePanel.monster[1] = new GreenSlime(gamePanel);
-        gamePanel.monster[1].worldX = gamePanel.tileSize * 23;
-        gamePanel.monster[1].worldY = gamePanel.tileSize * 37;
+        gamePanel.monster[index] = new GreenSlime(gamePanel);
+        gamePanel.monster[index].worldX = gamePanel.tileSize * 23;
+        gamePanel.monster[index].worldY = gamePanel.tileSize * 42;
+        index++;
+
+        gamePanel.monster[index] = new GreenSlime(gamePanel);
+        gamePanel.monster[index].worldX = gamePanel.tileSize * 24;
+        gamePanel.monster[index].worldY = gamePanel.tileSize * 37;
+        index++;
+
+        gamePanel.monster[index] = new GreenSlime(gamePanel);
+        gamePanel.monster[index].worldX = gamePanel.tileSize * 34;
+        gamePanel.monster[index].worldY = gamePanel.tileSize * 42;
+        index++;
+
+        gamePanel.monster[index] = new GreenSlime(gamePanel);
+        gamePanel.monster[index].worldX = gamePanel.tileSize * 38;
+        gamePanel.monster[index].worldY = gamePanel.tileSize * 42;
     }
 }

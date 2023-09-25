@@ -141,8 +141,10 @@ public class EventHandler {
             gamePanel.playSoundEffect(2);
 
             if (gamePanel.player.currentLife < gamePanel.player.maxLife) {
-                gamePanel.userInterface.currentDialogue = "You drink the water.\nYour health has been increased.";
-                gamePanel.player.currentLife += 1;
+                gamePanel.userInterface.currentDialogue = "You drink the water.\nYour health has been restored.";
+                gamePanel.player.currentLife = gamePanel.player.maxLife;
+
+                gamePanel.assetSetter.setMonster();
             } else gamePanel.userInterface.currentDialogue = "Your health is full.";
         }
     }

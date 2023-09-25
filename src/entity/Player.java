@@ -52,11 +52,11 @@ public class Player extends Entity {
     }
 
     public int getAttack() {
-        return attack = strength * currentWeapon.attackValue;
+        return strength * currentWeapon.attackValue;
     }
 
     public int getDefense() {
-        return attack = dexterity * currentShield.attackValue;
+        return dexterity * currentShield.defenseValue;
     }
 
     // получение изображения
@@ -272,12 +272,39 @@ public class Player extends Entity {
                     damage = 0;
 
                 gamePanel.monster[index].currentLife -= damage;
+                gamePanel.userInterface.addMessage(damage + " damage!");
+
                 gamePanel.monster[index].invincible = true;
                 gamePanel.monster[index].damageReaction();
 
-                if (gamePanel.monster[index].currentLife <= 0)
+                if (gamePanel.monster[index].currentLife <= 0) {
                     gamePanel.monster[index].dying = true;
+
+                    gamePanel.userInterface.addMessage("killed the " + gamePanel.monster[index].name + "!");
+                    gamePanel.userInterface.addMessage(gamePanel.monster[index].exp + " exp");
+
+                    exp += gamePanel.monster[index].exp;
+                    checkLevelUp();
+                }
             }
+    }
+
+    // повышение уровня
+    public void checkLevelUp() {
+        if (exp >= nextLevelExp) {
+            level++;
+            nextLevelExp *= 2;
+            maxLife += 2;
+            currentLife = maxLife;
+            strength++;
+            dexterity++;
+            attack = getAttack();
+            defense = getDefense();
+
+            gamePanel.playSoundEffect(8);
+            gamePanel.gameState = gamePanel.dialogueState;
+            gamePanel.userInterface.currentDialogue = "You are level " + level + " now!\nYou fell stronger!";
+        }
     }
 
     // отрисовка изображений
