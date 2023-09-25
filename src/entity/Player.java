@@ -249,7 +249,13 @@ public class Player extends Entity {
         if (index != -1)
             if (!invincible) {
                 gamePanel.playSoundEffect(6);
-                currentLife -= 1;
+
+                int damage = gamePanel.monster[index].attack - defense;
+
+                if (damage < 0)
+                    damage = 0;
+
+                currentLife -= damage;
                 invincible = true;
             }
     }
@@ -259,7 +265,13 @@ public class Player extends Entity {
         if (index != -1)
             if (!gamePanel.monster[index].invincible) {
                 gamePanel.playSoundEffect(5);
-                gamePanel.monster[index].currentLife -= 1;
+
+                int damage = attack - gamePanel.monster[index].defense;
+
+                if (damage < 0)
+                    damage = 0;
+
+                gamePanel.monster[index].currentLife -= damage;
                 gamePanel.monster[index].invincible = true;
                 gamePanel.monster[index].damageReaction();
 
