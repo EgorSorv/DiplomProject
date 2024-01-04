@@ -2,16 +2,20 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.Key;
 import object.ShieldWood;
 import object.Sword;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends Entity {
     KeyHandler keyHandler;
     public final int screenX, screenY; // позиция игрока на экране
     public boolean attackCanceled = false;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         super(gamePanel);
@@ -26,6 +30,7 @@ public class Player extends Entity {
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItems();
     }
 
     public void setDefaultValues() {
@@ -49,6 +54,13 @@ public class Player extends Entity {
 
         attack = getAttack();
         defense = getDefense();
+    }
+
+    // вещи в инвентаре по умолчанию
+    public void setItems() {
+        inventory.add(currentWeapon);
+        inventory.add(currentShield);
+        inventory.add(new Key(gamePanel));
     }
 
     public int getAttack() {

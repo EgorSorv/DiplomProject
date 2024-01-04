@@ -70,6 +70,7 @@ public abstract class Entity {
     // ITEM ATTRIBUTES
     public int attackValue;
     public int defenseValue;
+    public String description = "";
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;

@@ -11,5 +11,7 @@ public class Key extends Entity {
         name = "key";
 
         downIdle = setup("/objects/key", gamePanel.tileSize, gamePanel.tileSize);
+
+        description = "[" + name + "]\nAn old key.\nIt opens something.";
     }
 }

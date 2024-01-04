@@ -11,5 +11,6 @@ public class Sword extends Entity {
         name = "sword";
         downIdle = setup("/objects/sword", gamePanel.tileSize, gamePanel.tileSize);
         attackValue = 1;
+        description = "[" + name + "]\nAn old sword.";
     }
 }

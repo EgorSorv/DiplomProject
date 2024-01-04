@@ -18,6 +18,8 @@ public class UserInterface {
     ArrayList<Integer> messageCounter = new ArrayList<>();
     public String currentDialogue = "";
     public int commandNumber = 0;
+    public int slotCol = 0;
+    public int slotRow = 0;
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -71,8 +73,10 @@ public class UserInterface {
             drawDialogueScreen();
 
         // CHARACTER STATE
-        else if (gamePanel.gameState == gamePanel.characterState)
+        else if (gamePanel.gameState == gamePanel.characterState) {
             drawCharacterScreen();
+            drawInventory();
+        }
     }
 
     // здоровье игрока
@@ -320,6 +324,74 @@ public class UserInterface {
 
         graphics2D.drawImage(gamePanel.player.currentShield.downIdle,
                 tailX - gamePanel.tileSize, textY - 15, null);
+    }
+
+    // инвентарь игрока
+    public void drawInventory() {
+        // FRAME
+        int frameX = gamePanel.tileSize * 9;
+        int frameY = gamePanel.tileSize;
+        int frameWidth = gamePanel.tileSize * 6;
+        int frameHeight = gamePanel.tileSize * 5;
+
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        // SLOT
+        final int slotXstart = frameX + 20;
+        final int slotYstart = frameY + 20;
+        int slotX = slotXstart;
+        int slotY = slotYstart;
+        int slotSize = gamePanel.tileSize + 3;
+
+        // DRAW PLAYER'S ITEMS
+        for (int i = 0; i < gamePanel.player.inventory.size(); i++) {
+            graphics2D.drawImage(gamePanel.player.inventory.get(i).downIdle, slotX, slotY, null);
+
+            slotX += slotSize;
+
+            if (i == 4 || i == 9 || i == 14) {
+                slotX = slotXstart;
+                slotY += slotSize;
+            }
+        }
+
+        // CURSOR
+        int cursorX = slotXstart + (slotSize * slotCol);
+        int cursorY = slotYstart + (slotSize * slotRow);
+        int cursorWidth = gamePanel.tileSize;
+        int cursorHeight = gamePanel.tileSize;
+
+        // DRAW CURSOR
+        graphics2D.setColor(Color.white);
+        graphics2D.setStroke(new BasicStroke(3));
+        graphics2D.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
+
+        // DESCRIPTION FRAME
+        int dFrameX = frameX;
+        int dFrameY = frameY + frameHeight;
+        int dFrameWidth = frameWidth;
+        int dFrameHeight = gamePanel.tileSize * 3;
+
+        drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+
+        // DRAW DESCRIPTION TEXT
+        int textX = dFrameX + 20;
+        int textY = dFrameY + gamePanel.tileSize;
+        graphics2D.setFont(graphics2D.getFont().deriveFont(28F));
+
+        int itemIndex = getItemIndexOnSlot();
+
+        // разделение и печать строки
+        if (itemIndex < gamePanel.player.inventory.size())
+            for (String line: gamePanel.player.inventory.get(itemIndex).description.split("\n")) {
+                graphics2D.drawString(line, textX, textY);
+                textY += 32;
+            }
+    }
+
+    // индекс предмета в инвентаре
+    public int getItemIndexOnSlot() {
+        return slotCol + slotRow * 5;
     }
 
     // фон окна

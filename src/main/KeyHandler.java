@@ -120,6 +120,27 @@ public class KeyHandler implements KeyListener {
     public void characterState(int code) {
         if (code == KeyEvent.VK_I)
             gamePanel.gameState = gamePanel.playState;
+
+        if (code == KeyEvent.VK_W)
+            if (gamePanel.userInterface.slotRow != 0) {
+                gamePanel.userInterface.slotRow--;
+                gamePanel.playSoundEffect(9);
+            }
+        if (code == KeyEvent.VK_A)
+            if (gamePanel.userInterface.slotCol != 0) {
+                gamePanel.userInterface.slotCol--;
+                gamePanel.playSoundEffect(9);
+            }
+        if (code == KeyEvent.VK_S)
+            if (gamePanel.userInterface.slotRow != 3) {
+                gamePanel.userInterface.slotRow++;
+                gamePanel.playSoundEffect(9);
+            }
+        if (code == KeyEvent.VK_D)
+            if (gamePanel.userInterface.slotCol != 4) {
+                gamePanel.userInterface.slotCol++;
+                gamePanel.playSoundEffect(9);
+            }
     }
     @Override
     public void keyReleased(KeyEvent e) {
