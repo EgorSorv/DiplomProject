@@ -126,7 +126,7 @@ public class GamePanel extends JPanel implements Runnable {
         // DEBUG (BEGIN)
         long drawStart = 0;
 
-        if (keyHandler.checkDrawTime)
+        if (keyHandler.showDebugText)
             drawStart = System.nanoTime();
 
         // TITLE SCREEN
@@ -159,12 +159,26 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         //  DEBUG (END)
-        if (keyHandler.checkDrawTime) {
+        if (keyHandler.showDebugText) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
 
+            graphics2D.setFont(new Font("Arial", Font.PLAIN, 20));
             graphics2D.setColor(Color.green);
-            graphics2D.drawString("Draw Time: " + passed, 10, 400);
+
+            int x = 10;
+            int y = 400;
+            int lineHeight = 20;
+
+            graphics2D.drawString("WorldX: " + player.worldX, x, y);
+            y += lineHeight;
+            graphics2D.drawString("WorldY: " + player.worldY, x, y);
+            y += lineHeight;
+            graphics2D.drawString("Col: " + (player.worldX + player.solidArea.x) / tileSize, x, y);
+            y += lineHeight;
+            graphics2D.drawString("Row: " + (player.worldY + player.solidArea.y) / tileSize, x, y);
+            y += lineHeight;
+            graphics2D.drawString("Draw Time: " + passed, x, y);
         }
 
         graphics2D.dispose(); // удаляет метод для освобождения памяти
