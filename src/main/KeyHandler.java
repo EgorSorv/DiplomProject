@@ -94,9 +94,13 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_E)
             interactPressed = true;
 
-        // DEBUG (KEY)
+        // DEBUG
         if (code == KeyEvent.VK_F1)
             showDebugText = !showDebugText;
+
+        // MAP REFRESH
+        if (code == KeyEvent.VK_F2)
+            gamePanel.tileManager.loadMap("/maps/world.txt");
     }
 
     public void pauseState(int code) {
