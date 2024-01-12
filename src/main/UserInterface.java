@@ -372,8 +372,6 @@ public class UserInterface {
         int dFrameWidth = frameWidth;
         int dFrameHeight = gamePanel.tileSize * 3;
 
-        drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
-
         // DRAW DESCRIPTION TEXT
         int textX = dFrameX + 20;
         int textY = dFrameY + gamePanel.tileSize;
@@ -382,11 +380,16 @@ public class UserInterface {
         int itemIndex = getItemIndexOnSlot();
 
         // разделение и печать строки
-        if (itemIndex < gamePanel.player.inventory.size())
-            for (String line: gamePanel.player.inventory.get(itemIndex).description.split("\n")) {
+        if (itemIndex < gamePanel.player.inventory.size()) {
+
+            drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+
+
+            for (String line : gamePanel.player.inventory.get(itemIndex).description.split("\n")) {
                 graphics2D.drawString(line, textX, textY);
                 textY += 32;
             }
+        }
     }
 
     // индекс предмета в инвентаре
