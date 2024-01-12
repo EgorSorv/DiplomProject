@@ -3,6 +3,7 @@ package main;
 import entity.OldMan;
 import monster.GreenSlime;
 import object.BlueHeart;
+import object.Key;
 
 public class AssetSetter {
     GamePanel gamePanel;
@@ -13,7 +14,24 @@ public class AssetSetter {
 
     // размещение предметов на карте
     public void setObject() {
-        gamePanel.obj[0] = new BlueHeart(gamePanel);
+        int index = 0;
+
+        gamePanel.obj[index] = new BlueHeart(gamePanel);
+        index++;
+
+        gamePanel.obj[index] = new Key(gamePanel);
+        gamePanel.obj[index].worldX = gamePanel.tileSize * 25;
+        gamePanel.obj[index].worldY = gamePanel.tileSize * 23;
+        index++;
+
+        gamePanel.obj[index] = new Key(gamePanel);
+        gamePanel.obj[index].worldX = gamePanel.tileSize * 21;
+        gamePanel.obj[index].worldY = gamePanel.tileSize * 19;
+        index++;
+
+        gamePanel.obj[index] = new Key(gamePanel);
+        gamePanel.obj[index].worldX = gamePanel.tileSize * 26;
+        gamePanel.obj[index].worldY = gamePanel.tileSize * 21;
     }
 
     // размещение нип на карте
@@ -26,6 +44,7 @@ public class AssetSetter {
     // размещение монстров на карте
     public void setMonster() {
         int index = 0;
+
         gamePanel.monster[index] = new GreenSlime(gamePanel);
         gamePanel.monster[index].worldX = gamePanel.tileSize * 21;
         gamePanel.monster[index].worldY = gamePanel.tileSize * 38;
