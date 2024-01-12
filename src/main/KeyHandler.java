@@ -141,6 +141,8 @@ public class KeyHandler implements KeyListener {
                 gamePanel.userInterface.slotCol++;
                 gamePanel.playSoundEffect(9);
             }
+        if (code == KeyEvent.VK_E)
+            gamePanel.player.selectItem();
     }
     @Override
     public void keyReleased(KeyEvent e) {

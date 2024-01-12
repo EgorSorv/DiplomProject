@@ -1,13 +1,17 @@
 package main;
 
 import entity.Entity;
+import object.BlueHeart;
 import object.Heart;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UserInterface {
     GamePanel gamePanel;
@@ -157,7 +161,7 @@ public class UserInterface {
         // IMAGE
         x = gamePanel.screenWidth / 2 - gamePanel.tileSize;
         y += gamePanel.tileSize * 2;
-        graphics2D.drawImage(gamePanel.obj[0].downIdle, x, y,
+        graphics2D.drawImage(gamePanel.obj[0].image, x, y,
                 gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
 
         // MENU
@@ -345,6 +349,14 @@ public class UserInterface {
 
         // DRAW PLAYER'S ITEMS
         for (int i = 0; i < gamePanel.player.inventory.size(); i++) {
+            // EQUIP CURSOR
+            if (gamePanel.player.inventory.get(i) == gamePanel.player.currentWeapon ||
+            gamePanel.player.inventory.get(i) == gamePanel.player.currentShield) {
+                   graphics2D.setColor(new Color(240, 190, 90));
+                   graphics2D.fillRoundRect(slotX, slotY, gamePanel.tileSize,
+                           gamePanel.tileSize, 10, 10);
+            }
+
             graphics2D.drawImage(gamePanel.player.inventory.get(i).downIdle, slotX, slotY, null);
 
             slotX += slotSize;

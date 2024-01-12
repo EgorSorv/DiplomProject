@@ -12,13 +12,13 @@ public class GreenSlime extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        entityType = 2;
+        type = typeMonster;
         name = "green slime";
         speed = 1;
         exp = 2;
         maxLife = 4;
         currentLife = maxLife;
-        attack = 2;
+        attack = 5;
         defense = 0;
 
         solidArea.x = 3;

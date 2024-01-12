@@ -8,7 +8,6 @@ public class BlueHeart extends Entity {
         super(gamePanel);
 
         name = "blueHeart";
-
-        downIdle = setup("/objects/blueheart", gamePanel.tileSize, gamePanel.tileSize);
+        image = setup("/objects/blueheart", gamePanel.tileSize, gamePanel.tileSize);
     }
 }

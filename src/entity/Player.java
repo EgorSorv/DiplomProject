@@ -3,7 +3,7 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import object.Key;
-import object.ShieldWood;
+import object.WoodShield;
 import object.Sword;
 
 import java.awt.*;
@@ -23,9 +23,6 @@ public class Player extends Entity {
 
         screenX = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2; // перенос персонажа в центр экрана
         screenY = gamePanel.screenHeight / 2 - gamePanel.tileSize / 2;
-
-        attackArea.width = 36;
-        attackArea.height = 36;
 
         setDefaultValues();
         getPlayerImage();
@@ -50,7 +47,7 @@ public class Player extends Entity {
         coins = 0;
 
         currentWeapon = new Sword(gamePanel);
-        currentShield = new ShieldWood(gamePanel);
+        currentShield = new WoodShield(gamePanel);
 
         attack = getAttack();
         defense = getDefense();
@@ -64,6 +61,7 @@ public class Player extends Entity {
     }
 
     public int getAttack() {
+        attackArea = currentWeapon.attackArea;
         return strength * currentWeapon.attackValue;
     }
 
@@ -88,22 +86,43 @@ public class Player extends Entity {
     }
 
     public void getPlayerAttackImage() {
-        attackUp1 = setup("/player/player_attack_up_1",
-                gamePanel.tileSize, gamePanel.tileSize * 2);
-        attackUp2 = setup("/player/player_attack_up_2",
-                gamePanel.tileSize, gamePanel.tileSize * 2);
-        attackDown1 = setup("/player/player_attack_down_1",
-                gamePanel.tileSize, gamePanel.tileSize * 2);
-        attackDown2 = setup("/player/player_attack_down_2",
-                gamePanel.tileSize, gamePanel.tileSize * 2);
-        attackLeft1 = setup("/player/player_attack_left_1",
-                gamePanel.tileSize * 2, gamePanel.tileSize);
-        attackLeft2 = setup("/player/player_attack_left_2",
-                gamePanel.tileSize * 2, gamePanel.tileSize);
-        attackRight1 = setup("/player/player_attack_right_1",
-                gamePanel.tileSize * 2, gamePanel.tileSize);
-        attackRight2 = setup("/player/player_attack_right_2",
-                gamePanel.tileSize * 2, gamePanel.tileSize);
+        if (currentWeapon.type == typeSword) {
+            attackUp1 = setup("/player/player_attack_up_1",
+                    gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackUp2 = setup("/player/player_attack_up_2",
+                    gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackDown1 = setup("/player/player_attack_down_1",
+                    gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackDown2 = setup("/player/player_attack_down_2",
+                    gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackLeft1 = setup("/player/player_attack_left_1",
+                    gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackLeft2 = setup("/player/player_attack_left_2",
+                    gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackRight1 = setup("/player/player_attack_right_1",
+                    gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackRight2 = setup("/player/player_attack_right_2",
+                    gamePanel.tileSize * 2, gamePanel.tileSize);
+        }
+
+        if (currentWeapon.type == typeAxe) {
+            attackUp1 = setup("/player/player_axe_up_1",
+                    gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackUp2 = setup("/player/player_axe_up_2",
+                    gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackDown1 = setup("/player/player_axe_down_1",
+                    gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackDown2 = setup("/player/player_axe_down_2",
+                    gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackLeft1 = setup("/player/player_axe_left_1",
+                    gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackLeft2 = setup("/player/player_axe_left_2",
+                    gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackRight1 = setup("/player/player_axe_right_1",
+                    gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackRight2 = setup("/player/player_axe_right_2",
+                    gamePanel.tileSize * 2, gamePanel.tileSize);
+        }
     }
 
     // обновление позиции игрока
@@ -326,6 +345,31 @@ public class Player extends Entity {
             gamePanel.playSoundEffect(8);
             gamePanel.gameState = gamePanel.dialogueState;
             gamePanel.userInterface.currentDialogue = "You are level " + level + " now!\nYou fell stronger!";
+        }
+    }
+
+    // использование предметов
+    public void selectItem() {
+        int itemIndex = gamePanel.userInterface.getItemIndexOnSlot();
+
+        if (itemIndex < inventory.size()) {
+            Entity selectedItem = inventory.get(itemIndex);
+
+            if (selectedItem.type == typeSword || selectedItem.type == typeAxe) {
+                currentWeapon = selectedItem;
+                attack = getAttack();
+                getPlayerAttackImage();
+            }
+
+            if (selectedItem.type == typeShield) {
+                currentShield = selectedItem;
+                defense = getDefense();
+            }
+
+            if (selectedItem.type == typeConsumable) {
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
+            }
         }
     }
 

@@ -51,7 +51,6 @@ public abstract class Entity {
     int dyingCounter = 0;
 
     // CHARACTER ATTRIBUTES
-    public int entityType; // тип сущности
     public String name;
     public int level;
     public int exp;
@@ -71,6 +70,16 @@ public abstract class Entity {
     public int attackValue;
     public int defenseValue;
     public String description = "";
+
+    // TYPE
+    public int type;
+    public final int typePlayer = 0;
+    public final int typeNpc = 1;
+    public final int typeMonster = 2;
+    public final int typeSword = 3;
+    public final int typeAxe = 4;
+    public final int typeShield = 5;
+    public final int typeConsumable = 6;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -102,6 +111,8 @@ public abstract class Entity {
         }
     }
 
+    public void use(Entity entity) {}
+
     public void update() {
         if (!collisionOn) {
             setAction();
@@ -112,7 +123,7 @@ public abstract class Entity {
             gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
             boolean contactPlayer = gamePanel.collisionChecker.checkPlayer(this);
 
-            if (this.entityType == 2 && contactPlayer)
+            if (this.type == typeMonster && contactPlayer)
                 if (!gamePanel.player.invincible) {
                     gamePanel.playSoundEffect(6);
 
@@ -203,7 +214,7 @@ public abstract class Entity {
             }
 
             //  MONSTER HP BAR
-            if (entityType == 2 && hpBarOn) {
+            if (type == typeMonster && hpBarOn) {
                 double oneScale = (double) gamePanel.tileSize / maxLife; // длина 1 ПЗ
                 double hpBarValue = oneScale * currentLife; // длина текущего ПЗ
 

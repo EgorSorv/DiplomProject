@@ -2,8 +2,7 @@ package main;
 
 import entity.OldMan;
 import monster.GreenSlime;
-import object.BlueHeart;
-import object.Key;
+import object.*;
 
 public class AssetSetter {
     GamePanel gamePanel;
@@ -32,6 +31,21 @@ public class AssetSetter {
         gamePanel.obj[index] = new Key(gamePanel);
         gamePanel.obj[index].worldX = gamePanel.tileSize * 26;
         gamePanel.obj[index].worldY = gamePanel.tileSize * 21;
+        index++;
+
+        gamePanel.obj[index] = new Axe(gamePanel);
+        gamePanel.obj[index].worldX = gamePanel.tileSize * 33;
+        gamePanel.obj[index].worldY = gamePanel.tileSize * 21;
+        index++;
+
+        gamePanel.obj[index] = new BlueShield(gamePanel);
+        gamePanel.obj[index].worldX = gamePanel.tileSize * 35;
+        gamePanel.obj[index].worldY = gamePanel.tileSize * 21;
+        index++;
+
+        gamePanel.obj[index] = new RedPotion(gamePanel);
+        gamePanel.obj[index].worldX = gamePanel.tileSize * 22;
+        gamePanel.obj[index].worldY = gamePanel.tileSize * 27;
     }
 
     // размещение нип на карте

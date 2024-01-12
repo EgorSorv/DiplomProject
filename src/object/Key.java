@@ -8,7 +8,7 @@ public class Key extends Entity {
     public Key(GamePanel gamePanel) {
         super(gamePanel);
 
-        name = "key";
+        name = "Key";
 
         downIdle = setup("/objects/key", gamePanel.tileSize, gamePanel.tileSize);
 
