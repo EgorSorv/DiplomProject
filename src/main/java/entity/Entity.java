@@ -262,7 +262,7 @@ public abstract class Entity {
         else if (dyingCounter <= time * 6) changeTransparency(graphics2D, 1f);
         else if (dyingCounter <= time * 7) changeTransparency(graphics2D, 0f);
         else if (dyingCounter <= time * 8) changeTransparency(graphics2D, 1f);
-        else { dying = false; alive = false; }
+        else alive = false;
     }
 
     // изменение прозрачности
