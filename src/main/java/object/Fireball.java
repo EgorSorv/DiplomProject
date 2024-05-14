@@ -12,12 +12,13 @@ public class Fireball extends Projectile {
         this.gamePanel = gamePanel;
 
         name = "Fireball";
-        speed = 10;
-        maxLife = 30;
+        speed = 5;
+        maxLife = 80;
         currentLife = maxLife;
         attack = 2;
         manaCost = 1;
         alive = false;
+
         getImage();
     }
 

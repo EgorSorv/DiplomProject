@@ -28,7 +28,12 @@ public class Projectile extends Entity {
                 alive = false;
             }
         } else {
+            boolean contactPlayer = gamePanel.collisionChecker.checkPlayer(this);
 
+            if (!gamePanel.player.invincible && contactPlayer) {
+                damagePlayer(attack);
+                alive = false;
+            }
         }
 
         switch (direction) {

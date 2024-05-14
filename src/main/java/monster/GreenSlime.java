@@ -2,6 +2,7 @@ package monster;
 
 import entity.Entity;
 import main.GamePanel;
+import object.Rock;
 
 import java.util.Random;
 
@@ -20,6 +21,7 @@ public class GreenSlime extends Entity {
         currentLife = maxLife;
         attack = 5;
         defense = 0;
+        currentProjectile = new Rock(gamePanel);
 
         solidArea.x = 3;
         solidArea.y = 18;
@@ -63,6 +65,16 @@ public class GreenSlime extends Entity {
                 direction = "right";
 
             actionLockCounter = 0;
+        }
+
+        int integer = new Random().nextInt(100) + 1;
+
+        if (integer > 99 && !currentProjectile.alive && useProjectileCounter == 30) {
+            currentProjectile.set(worldX, worldY, direction, true, this);
+
+            gamePanel.projectiles.add(currentProjectile);
+
+            useProjectileCounter = 0;
         }
     }
 
