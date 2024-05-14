@@ -1,5 +1,6 @@
 package object;
 
+import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -35,5 +36,15 @@ public class Fireball extends Projectile {
         rightIdle = setup("/projectiles/fireball_right_idle", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("/projectiles/fireball_right_move", gamePanel.tileSize, gamePanel.tileSize);
         right2 = setup("/projectiles/fireball_right_move", gamePanel.tileSize, gamePanel.tileSize);
+    }
+
+    // проверка текущей маны у игрока для использования снаряда
+    public boolean haveResource(Entity entity) {
+        return entity.currentMana >= manaCost;
+    }
+
+    // вычитание стоимости снаряда
+    public void subtractResource(Entity entity) {
+        entity.currentMana -= manaCost;
     }
 }

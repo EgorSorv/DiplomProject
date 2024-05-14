@@ -3,6 +3,7 @@ package main;
 import entity.Entity;
 import object.BlueHeart;
 import object.Heart;
+import object.ManaCrystal;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,7 +18,7 @@ public class UserInterface {
     GamePanel gamePanel;
     Graphics2D graphics2D;
     Font maruMonica; // шрифт
-    BufferedImage heart_full, heart_half, heart_blank;
+    BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
     public String currentDialogue = "";
@@ -41,6 +42,10 @@ public class UserInterface {
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
+
+        Entity crystal = new ManaCrystal(gamePanel);
+        crystal_full = crystal.image;
+        crystal_blank = crystal.image2;
     }
 
     // обновление сообщений
@@ -110,6 +115,28 @@ public class UserInterface {
 
             i++;
             x += gamePanel.tileSize;
+        }
+
+        // DRAW MAX MANA
+        x = gamePanel.tileSize / 2 - 5;
+        y = (int) (gamePanel.tileSize * 1.5);
+        i = 0;
+
+        while (i < gamePanel.player.maxMana) {
+            graphics2D.drawImage(crystal_blank, x, y, null);
+            i++;
+            x += 35;
+        }
+
+        // DRAW CURRENT MANA
+        x = gamePanel.tileSize / 2 - 5;
+        y = (int) (gamePanel.tileSize * 1.5);
+        i = 0;
+
+        while (i < gamePanel.player.currentMana) {
+            graphics2D.drawImage(crystal_full, x, y, null);
+            i++;
+            x += 35;
         }
     }
 
@@ -252,6 +279,9 @@ public class UserInterface {
         graphics2D.drawString("HP", textX, textY);
         textY += lineHeight;
 
+        graphics2D.drawString("Mana", textX, textY);
+        textY += lineHeight;
+
         graphics2D.drawString("Strength", textX, textY);
         textY += lineHeight;
 
@@ -265,7 +295,7 @@ public class UserInterface {
         textY += lineHeight;
 
         graphics2D.drawString("Coins", textX, textY);
-        textY += lineHeight + 20;
+        textY += lineHeight + 10;
 
         graphics2D.drawString("Weapon", textX, textY);
         textY += lineHeight + 15;
@@ -296,6 +326,11 @@ public class UserInterface {
         graphics2D.drawString(value, textX, textY);
         textY += lineHeight;
 
+        value = gamePanel.player.currentMana + "/" + gamePanel.player.maxMana;
+        textX = getXForAlignToRightText(value, tailX);
+        graphics2D.drawString(value, textX, textY);
+        textY += lineHeight;
+
         value = String.valueOf(gamePanel.player.strength);
         textX = getXForAlignToRightText(value, tailX);
         graphics2D.drawString(value, textX, textY);
@@ -322,12 +357,12 @@ public class UserInterface {
         textY += lineHeight;
 
         graphics2D.drawImage(gamePanel.player.currentWeapon.downIdle,
-                tailX - gamePanel.tileSize, textY - 15, null);
+                tailX - gamePanel.tileSize, textY - 25, null);
 
         textY += gamePanel.tileSize;
 
         graphics2D.drawImage(gamePanel.player.currentShield.downIdle,
-                tailX - gamePanel.tileSize, textY - 15, null);
+                tailX - gamePanel.tileSize, textY - 25, null);
     }
 
     // инвентарь игрока

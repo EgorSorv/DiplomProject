@@ -44,16 +44,19 @@ public class Projectile extends Entity {
         }
 
         currentLife --;
-        if (currentLife <= 0)
-            alive = false;
+        if (currentLife <= 0) alive = false;
 
         spriteCounter++;
         if (spriteCounter > 12) {
-            if (spriteNum == 1)
-                spriteNum = 0;
-            else if (spriteNum == 0)
-                spriteNum = 1;
+            if (spriteNum == 1) spriteNum = 0;
+            else if (spriteNum == 0) spriteNum = 1;
             spriteCounter = 0;
         }
     }
+
+    public boolean haveResource(Entity entity) {
+        return false;
+    }
+
+    public void subtractResource(Entity entity) {}
 }

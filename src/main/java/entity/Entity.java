@@ -64,6 +64,7 @@ public abstract class Entity {
     public int dexterity;
     public int attack;
     public int defense;
+    public int ammo; // количество снарядов
     public int speed; // скорость перемещения
     public int coins;
     public Entity currentWeapon;

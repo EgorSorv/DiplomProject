@@ -1,5 +1,6 @@
 package object;
 
+import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -34,5 +35,15 @@ public class Rock extends Projectile {
         rightIdle = setup("/projectiles/rock", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("/projectiles/rock", gamePanel.tileSize, gamePanel.tileSize);
         right2 = setup("/projectiles/rock", gamePanel.tileSize, gamePanel.tileSize);
+    }
+
+    // проверка текущей маны у игрока для использования снаряда
+    public boolean haveResource(Entity entity) {
+        return entity.ammo >= manaCost;
+    }
+
+    // вычитание стоимости снаряда
+    public void subtractResource(Entity entity) {
+        entity.ammo -= manaCost;
     }
 }

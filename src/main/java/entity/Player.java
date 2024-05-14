@@ -43,6 +43,8 @@ public class Player extends Entity {
         nextLevelExp = 5;
         maxLife = 6;
         currentLife = maxLife;
+        maxMana = 4;
+        currentMana = maxMana;
         strength = 1;
         dexterity = 1;
         coins = 0;
@@ -207,9 +209,13 @@ public class Player extends Entity {
             spriteNum = 0;
         }
 
-        if (gamePanel.keyHandler.shotKeyPressed && !currentProjectile.alive && useProjectileCounter == 30) {
+        if (gamePanel.keyHandler.shotKeyPressed && !currentProjectile.alive
+                && useProjectileCounter == 30 && currentProjectile.haveResource(this)) {
             // SET DEFAULT COORDINATES, DIRECTION AND USER ENTITY
             currentProjectile.set(worldX, worldY, direction, true, this);
+
+            // SUBTRACT THE COST
+            currentProjectile.subtractResource(this);
 
             gamePanel.projectiles.add(currentProjectile);
 
