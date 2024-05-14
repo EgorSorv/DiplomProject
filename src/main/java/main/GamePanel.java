@@ -44,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[] obj = new Entity[10]; // массив для хранения предметов
     public Entity[] npc = new Entity[10]; // массив для хранения нип
     public Entity[] monster = new Entity[20]; // массив для хранения монстров
+    public ArrayList<Entity> projectiles = new ArrayList<>(); // список всех снарядов
     ArrayList<Entity> entities = new ArrayList<>(); // список всех сущностей
 
     // GAME STATE
@@ -112,6 +113,13 @@ public class GamePanel extends JPanel implements Runnable {
                     if (monster[i].alive && !monster[i].dying) monster[i].update();
                     if (!monster[i].alive) monster[i] = null;
                 }
+
+            // PROJECTILE
+            for (int i = 0; i < projectiles.size(); i++)
+                if (projectiles.get(i) != null) {
+                    if (projectiles.get(i).alive) projectiles.get(i).update();
+                    else projectiles.remove(i);
+                }
         }
 
         if (gameState == pauseState)
@@ -144,6 +152,8 @@ public class GamePanel extends JPanel implements Runnable {
             for (Entity entity : monster) if (entity != null) entities.add(entity);
 
             for (Entity entity : obj) if (entity != null) entities.add(entity);
+
+            for (Entity projectile : projectiles) if (projectile != null) entities.add(projectile);
 
             // SORT ENTITIES
             entities.sort(Comparator.comparingInt(e -> e.worldY));

@@ -47,6 +47,7 @@ public abstract class Entity {
     public int spriteCounter = 0; // интервал обновления изображения
     public int actionLockCounter = 0; // продолжительность поведения
     public int invincibleCounter = 0; // действие неуязвимости
+    public int useProjectileCounter = 0; // перезарядка снаряда перед использованием
     int hpBarCounter = 0;
     int dyingCounter = 0;
 
@@ -57,6 +58,8 @@ public abstract class Entity {
     public int nextLevelExp;
     public int maxLife; // максимальное здоровье
     public int currentLife; // текущее здоровье
+    public int maxMana; // максимальная мана
+    public int currentMana; // текущая мана
     public int strength;
     public int dexterity;
     public int attack;
@@ -65,11 +68,13 @@ public abstract class Entity {
     public int coins;
     public Entity currentWeapon;
     public Entity currentShield;
+    public Projectile currentProjectile;
 
     // ITEM ATTRIBUTES
     public int attackValue;
     public int defenseValue;
     public String description = "";
+    public int manaCost; // стоимость действия в мане
 
     // TYPE
     public int type;

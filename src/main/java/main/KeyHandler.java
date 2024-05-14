@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     GamePanel gamePanel;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, interactPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, interactPressed, shotKeyPressed;
 
     // DEBUG (DRAW_TIME)
     boolean showDebugText  = false;
@@ -94,6 +94,10 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_E)
             interactPressed = true;
 
+        // MAGIC USE
+        if (code == KeyEvent.VK_F)
+            shotKeyPressed = true;
+
         // DEBUG
         if (code == KeyEvent.VK_F1)
             showDebugText = !showDebugText;
@@ -159,5 +163,8 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_D)
             rightPressed = false;
+
+        if (code == KeyEvent.VK_F)
+            shotKeyPressed = false;
     }
 }

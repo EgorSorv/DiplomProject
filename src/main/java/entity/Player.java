@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.Fireball;
 import object.Key;
 import object.WoodShield;
 import object.Sword;
@@ -48,6 +49,7 @@ public class Player extends Entity {
 
         currentWeapon = new Sword(gamePanel);
         currentShield = new WoodShield(gamePanel);
+        currentProjectile = new Fireball(gamePanel);
 
         attack = getAttack();
         defense = getDefense();
@@ -199,10 +201,22 @@ public class Player extends Entity {
                     }
                 }
             } else spriteNum = 0;
+
         } else {
-        collisionOn = false;
-        spriteNum = 0;
-    }
+            collisionOn = false;
+            spriteNum = 0;
+        }
+
+        if (gamePanel.keyHandler.shotKeyPressed && !currentProjectile.alive && useProjectileCounter == 30) {
+            // SET DEFAULT COORDINATES, DIRECTION AND USER ENTITY
+            currentProjectile.set(worldX, worldY, direction, true, this);
+
+            gamePanel.projectiles.add(currentProjectile);
+
+            useProjectileCounter = 0;
+
+            gamePanel.playSoundEffect(10);
+        }
 
         // INVINCIBLE
         if (invincible) {
@@ -213,6 +227,10 @@ public class Player extends Entity {
                 invincibleCounter = 0;
             }
         }
+
+        // PROJECTILES COOLDOWN
+        if (useProjectileCounter < 30)
+            useProjectileCounter++;
     }
 
     // игрок атакует
@@ -243,7 +261,7 @@ public class Player extends Entity {
 
             // проверка попал ли монстр в зону удара
             int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack);
 
             // восстановление значений позиции игрока
             worldX = currentWorldX;
@@ -302,12 +320,12 @@ public class Player extends Entity {
     }
 
     // нанесение урона монстрам
-    public void damageMonster(int index) {
+    public void damageMonster(int index, int attackPower) {
         if (index != -1)
             if (!gamePanel.monster[index].invincible) {
                 gamePanel.playSoundEffect(5);
 
-                int damage = attack - gamePanel.monster[index].defense;
+                int damage = attackPower - gamePanel.monster[index].defense;
 
                 if (damage < 0)
                     damage = 0;

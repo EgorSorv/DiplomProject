@@ -5,14 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f121c77a-810b-43af-9510-a1ddb7ed8b1b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/Projectile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/object/Fireball.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/projectiles/fireball_down_idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/projectiles/fireball_down_move.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/projectiles/fireball_left_idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/projectiles/fireball_left_move.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/projectiles/fireball_right_idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/projectiles/fireball_right_move.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/projectiles/fireball_up_idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/projectiles/fireball_up_move.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sounds/burning.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/KeyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Sound.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -21,7 +42,9 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2U1Ufzf505u3acoY9cvVPmS9LSz" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -33,13 +56,17 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/egor/IdeaProjects/DiplomProject",
+    "last_opened_file_path": "/Users/egor/IdeaProjects/DiplomProject/src/main/resources/sounds",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/sounds" />
+      <recent name="$PROJECT_DIR$/src/main/resources/projectiles" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java" />
       <recent name="$PROJECT_DIR$/src/main/java/main" />
