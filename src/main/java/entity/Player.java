@@ -237,6 +237,10 @@ public class Player extends Entity {
         // PROJECTILES COOLDOWN
         if (useProjectileCounter < 30)
             useProjectileCounter++;
+
+        if (currentLife > maxLife) currentLife = maxLife;
+
+        if (currentMana > maxMana) currentMana = maxMana;
     }
 
     // игрок атакует

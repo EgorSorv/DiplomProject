@@ -13,6 +13,7 @@ public class Coin extends Entity {
         type = typeNoneInventory;
         name = "Gold coin";
         costValue = 1;
+
         downIdle = setup("/objects/coin", gamePanel.tileSize, gamePanel.tileSize);
     }
 
