@@ -255,8 +255,7 @@ public abstract class Entity {
             if (dying)
                 dyingAnimation(graphics2D);
 
-            graphics2D.drawImage(image, screenX, screenY,
-                    gamePanel.tileSize, gamePanel.tileSize, null);
+            graphics2D.drawImage(image, screenX, screenY, null);
 
             changeTransparency(graphics2D, 1f);
         }

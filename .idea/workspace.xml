@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f121c77a-810b-43af-9510-a1ddb7ed8b1b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/object/ManaCrystal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/objects/manacrystal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/objects/manacrystal_blank.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Projectile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/EventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/EventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/object/Fireball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/Fireball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/object/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/Rock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
