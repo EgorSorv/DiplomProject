@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f121c77a-810b-43af-9510-a1ddb7ed8b1b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/object/Coin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/objects/coin.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/AssetSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/AssetSetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/object/RedPotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/RedPotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/monster/GreenSlime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/monster/GreenSlime.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,5 +96,16 @@
       <updated>1692106716960</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/main/GamePanel.java</url>
+          <line>203</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

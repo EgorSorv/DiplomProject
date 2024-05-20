@@ -22,6 +22,6 @@ public class ManaCrystal extends Entity {
     public void use(Entity entity) {
         gamePanel.playSoundEffect(2);
         gamePanel.userInterface.addMessage("Mana + " + manaRestoreValue);
-        entity.currentLife += manaRestoreValue;
+        entity.currentMana += manaRestoreValue;
     }
 }

@@ -123,6 +123,21 @@ public abstract class Entity {
 
     public void use(Entity entity) {}
 
+    // выбор предмета для выпадения
+    public void checkDrop() {}
+
+    // выпадение предмета
+    public void dropItem(Entity droppedItem) {
+        for (int index = 0; index < gamePanel.obj.length; index++)
+            if (gamePanel.obj[index] == null) {
+                gamePanel.obj[index] = droppedItem;
+                // предмет выпадает из объекта на тех же координатах
+                gamePanel.obj[index].worldX = worldX;
+                gamePanel.obj[index].worldY = worldY;
+                break;
+            }
+    }
+
     public void update() {
         if (!collisionOn) {
             setAction();
