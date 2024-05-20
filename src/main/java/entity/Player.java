@@ -284,16 +284,22 @@ public class Player extends Entity {
     // подобрать объект
     public void pickUpObject(int index) {
         if (index != -1) {
-            String text;
+            if (gamePanel.obj[index].type == typeNoneInventory) {
+                // NONE INVENTORY ITEMS
+                gamePanel.obj[index].use(this);
+            } else {
+                // INVENTORY ITEMS
+                String text;
 
-            if (inventory.size() != maxInventorySize) {
-                inventory.add(gamePanel.obj[index]);
-                gamePanel.playSoundEffect(1);
-                text = "Got a " + gamePanel.obj[index].name + "!";
+                if (inventory.size() != maxInventorySize) {
+                    inventory.add(gamePanel.obj[index]);
+                    gamePanel.playSoundEffect(1);
+                    text = "Got a " + gamePanel.obj[index].name + "!";
+                } else text = "You can't carry any more!";
+
+                gamePanel.userInterface.addMessage(text);
             }
-            else text = "You can't carry any more!";
 
-            gamePanel.userInterface.addMessage(text);
             gamePanel.obj[index] = null;
         }
     }

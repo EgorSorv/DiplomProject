@@ -18,17 +18,17 @@ public class AssetSetter {
         gamePanel.obj[index] = new BlueHeart(gamePanel);
         index++;
 
-        gamePanel.obj[index] = new Key(gamePanel);
+        gamePanel.obj[index] = new Coin(gamePanel);
         gamePanel.obj[index].worldX = gamePanel.tileSize * 25;
         gamePanel.obj[index].worldY = gamePanel.tileSize * 23;
         index++;
 
-        gamePanel.obj[index] = new Key(gamePanel);
+        gamePanel.obj[index] = new Coin(gamePanel);
         gamePanel.obj[index].worldX = gamePanel.tileSize * 21;
         gamePanel.obj[index].worldY = gamePanel.tileSize * 19;
         index++;
 
-        gamePanel.obj[index] = new Key(gamePanel);
+        gamePanel.obj[index] = new Coin(gamePanel);
         gamePanel.obj[index].worldX = gamePanel.tileSize * 26;
         gamePanel.obj[index].worldY = gamePanel.tileSize * 21;
         index++;

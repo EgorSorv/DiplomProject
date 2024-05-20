@@ -5,7 +5,6 @@ import main.GamePanel;
 
 public class RedPotion extends Entity {
     GamePanel gamePanel;
-    int healValue = 5;
 
     public RedPotion(GamePanel gamePanel) {
         super(gamePanel);
@@ -13,6 +12,7 @@ public class RedPotion extends Entity {
 
         type = typeConsumable;
         name = "Red potion";
+        healValue = 5;
         downIdle = setup("/objects/potion_red", gamePanel.tileSize, gamePanel.tileSize);
         description = "[" + name + "]\nHeals your wounds\nby " + healValue + " HP.";
     }

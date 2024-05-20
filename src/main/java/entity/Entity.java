@@ -72,8 +72,11 @@ public abstract class Entity {
     public Projectile currentProjectile;
 
     // ITEM ATTRIBUTES
-    public int attackValue;
-    public int defenseValue;
+    public int attackValue; // значение атаки
+    public int defenseValue; // значение защиты
+    public int healValue; // значение лечения
+    public int manaRestoreValue; // значение восстановления маны
+    public int costValue; // значение стоимости
     public String description = "";
     public int manaCost; // стоимость действия в мане
 
@@ -85,7 +88,8 @@ public abstract class Entity {
     public final int typeSword = 3;
     public final int typeAxe = 4;
     public final int typeShield = 5;
-    public final int typeConsumable = 6;
+    public final int typeConsumable = 6; // расходные предметы
+    public final int typeNoneInventory = 7; // предметы, не попадают в инвентарь
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
