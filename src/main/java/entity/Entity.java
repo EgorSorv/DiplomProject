@@ -166,13 +166,13 @@ public abstract class Entity {
         int maxLife = generator.getParticleMaxLife();
 
         Particle topLeftParticle = new Particle(
-                gamePanel, generator, color, size, speed, maxLife, -2, -1);
+                gamePanel, target, color, size, speed, maxLife, -2, -1);
         Particle topRightParticle = new Particle(
-                gamePanel, generator, color, size, speed, maxLife, 2, -1);
+                gamePanel, target, color, size, speed, maxLife, 2, -1);
         Particle bottomLeftParticle = new Particle(
-                gamePanel, generator, color, size, speed, maxLife, -2, 1);
+                gamePanel, target, color, size, speed, maxLife, -2, 1);
         Particle bottomRightParticle = new Particle(
-                gamePanel, generator, color, size, speed, maxLife, 2, 1);
+                gamePanel, target, color, size, speed, maxLife, 2, 1);
 
         gamePanel.particles.add(topLeftParticle);
         gamePanel.particles.add(topRightParticle);
