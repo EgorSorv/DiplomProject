@@ -138,6 +138,48 @@ public abstract class Entity {
             }
     }
 
+    // цвет частиц
+    public Color getParticleColor() {
+        return null;
+    }
+
+    // размер частиц
+    public int getParticleSize() {
+        return 0; // к-во пикселей
+    }
+
+    // скорость частиц
+    public int getParticleSpeed() {
+        return 0;
+    }
+
+    // продолжительность появления частиц
+    public int getParticleMaxLife() {
+        return 0;
+    }
+
+    // генерация частиц
+    public void generateParticle(Entity generator, Entity target) {
+        Color color = generator.getParticleColor();
+        int size = generator.getParticleSize();
+        int speed = generator.getParticleSpeed();
+        int maxLife = generator.getParticleMaxLife();
+
+        Particle topLeftParticle = new Particle(
+                gamePanel, generator, color, size, speed, maxLife, -2, -1);
+        Particle topRightParticle = new Particle(
+                gamePanel, generator, color, size, speed, maxLife, 2, -1);
+        Particle bottomLeftParticle = new Particle(
+                gamePanel, generator, color, size, speed, maxLife, -2, 1);
+        Particle bottomRightParticle = new Particle(
+                gamePanel, generator, color, size, speed, maxLife, 2, 1);
+
+        gamePanel.particles.add(topLeftParticle);
+        gamePanel.particles.add(topRightParticle);
+        gamePanel.particles.add(bottomLeftParticle);
+        gamePanel.particles.add(bottomRightParticle);
+    }
+
     public void update() {
         if (!collisionOn) {
             setAction();

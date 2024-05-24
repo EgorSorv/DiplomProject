@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[] monster = new Entity[20]; // массив для хранения монстров
     public InteractiveTile[] iTiles = new InteractiveTile[50]; // массив с объектами для взаимодействия
     public ArrayList<Entity> projectiles = new ArrayList<>(); // список всех снарядов
+    public ArrayList<Entity> particles = new ArrayList<>(); // список всех частиц
     ArrayList<Entity> entities = new ArrayList<>(); // список всех сущностей
 
     // GAME STATE
@@ -127,6 +128,13 @@ public class GamePanel extends JPanel implements Runnable {
                     else projectiles.remove(i);
                 }
 
+            // PARTICLE
+            for (int i = 0; i < particles.size(); i++)
+                if (particles.get(i) != null) {
+                    if (particles.get(i).alive) particles.get(i).update();
+                    else particles.remove(i);
+                }
+
             // INTERACTIVE TILE
             for (InteractiveTile iTile : iTiles)
                 if (iTile != null)
@@ -170,6 +178,8 @@ public class GamePanel extends JPanel implements Runnable {
             for (Entity entity : obj) if (entity != null) entities.add(entity);
 
             for (Entity projectile : projectiles) if (projectile != null) entities.add(projectile);
+
+            for (Entity particle : particles) if (particle != null) entities.add(particle);
 
             // SORT ENTITIES
             entities.sort(Comparator.comparingInt(e -> e.worldY));

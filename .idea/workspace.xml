@@ -5,20 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f121c77a-810b-43af-9510-a1ddb7ed8b1b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/interactive_tile/DryTree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/interactive_tile/InteractiveTile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/interactive_tile/Trunk.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/interactive_tiles/drytree.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/interactive_tiles/trunk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sounds/cuttree.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/Particle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/AssetSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/AssetSetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Projectile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interactive_tile/DryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interactive_tile/DryTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interactive_tile/InteractiveTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interactive_tile/InteractiveTile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Sound.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tile/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tile/TileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/maps/world.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/maps/world.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/Fireball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/Fireball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/Rock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +112,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/main/GamePanel.java</url>
-          <line>215</line>
+          <line>225</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
