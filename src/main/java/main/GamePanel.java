@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.Player;
+import interactive_tile.InteractiveTile;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -44,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[] obj = new Entity[20]; // массив для хранения предметов
     public Entity[] npc = new Entity[10]; // массив для хранения нип
     public Entity[] monster = new Entity[20]; // массив для хранения монстров
+    public InteractiveTile[] iTiles = new InteractiveTile[50]; // массив с объектами для взаимодействия
     public ArrayList<Entity> projectiles = new ArrayList<>(); // список всех снарядов
     ArrayList<Entity> entities = new ArrayList<>(); // список всех сущностей
 
@@ -67,6 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setObject();
         assetSetter.setNPC();
         assetSetter.setMonster();
+        assetSetter.setInteractiveTile();
 
         gameState = titleState;
     }
@@ -123,6 +126,11 @@ public class GamePanel extends JPanel implements Runnable {
                     if (projectiles.get(i).alive) projectiles.get(i).update();
                     else projectiles.remove(i);
                 }
+
+            // INTERACTIVE TILE
+            for (InteractiveTile iTile : iTiles)
+                if (iTile != null)
+                    iTile.update();
         }
 
         if (gameState == pauseState)
@@ -146,6 +154,11 @@ public class GamePanel extends JPanel implements Runnable {
         } else {
             // TILE
             tileManager.draw(graphics2D);
+
+            // INTERACTIVE TILE
+            for (int i = 0; i < iTiles.length; i++)
+                if (iTiles[i] != null)
+                    iTiles[i].draw(graphics2D);
 
             // ADD ENTITIES
             entities.add(player);

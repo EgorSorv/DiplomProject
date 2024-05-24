@@ -146,6 +146,7 @@ public abstract class Entity {
             gamePanel.collisionChecker.checkObject(this, false);
             gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
             gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
+            gamePanel.collisionChecker.checkEntity(this, gamePanel.iTiles);
             boolean contactPlayer = gamePanel.collisionChecker.checkPlayer(this);
 
             if (this.type == typeMonster && contactPlayer)
@@ -212,7 +213,7 @@ public abstract class Entity {
         }
     }
 
-    public void draw (Graphics2D graphics2D) {
+    public void draw(Graphics2D graphics2D) {
         BufferedImage image = null;
 
         int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;

@@ -1,6 +1,7 @@
 package main;
 
 import entity.OldMan;
+import interactive_tile.DryTree;
 import monster.GreenSlime;
 import object.*;
 
@@ -91,5 +92,32 @@ public class AssetSetter {
         gamePanel.monster[index] = new GreenSlime(gamePanel);
         gamePanel.monster[index].worldX = gamePanel.tileSize * 38;
         gamePanel.monster[index].worldY = gamePanel.tileSize * 42;
+    }
+
+    public void setInteractiveTile() {
+        int index = 0;
+
+        gamePanel.iTiles[index] = new DryTree(gamePanel, 28, 37);
+        index++;
+
+        gamePanel.iTiles[index] = new DryTree(gamePanel, 27, 12);
+        index++;
+
+        gamePanel.iTiles[index] = new DryTree(gamePanel, 28, 12);
+        index++;
+
+        gamePanel.iTiles[index] = new DryTree(gamePanel, 29, 12);
+        index++;
+
+        gamePanel.iTiles[index] = new DryTree(gamePanel, 30, 12);
+        index++;
+
+        gamePanel.iTiles[index] = new DryTree(gamePanel, 31, 12);
+        index++;
+
+        gamePanel.iTiles[index] = new DryTree(gamePanel, 32, 12);
+        index++;
+
+        gamePanel.iTiles[index] = new DryTree(gamePanel, 33, 12);
     }
 }

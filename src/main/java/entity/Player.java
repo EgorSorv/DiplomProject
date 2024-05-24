@@ -162,6 +162,9 @@ public class Player extends Entity {
                 int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
                 contactMonster(monsterIndex);
 
+                // CHECK INTERACTIVE TILE COLLISION
+                int iTileIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.iTiles);
+
                 // CHECK EVENT
                 gamePanel.eventHandler.checkEvent();
 
@@ -273,6 +276,10 @@ public class Player extends Entity {
             int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
             damageMonster(monsterIndex, attack);
 
+            // проверка попал ли разрушаемый объект в зону удара
+            int iTileIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.iTiles);
+            damageInteractiveTile(iTileIndex);
+
             // восстановление значений позиции игрока
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -362,6 +369,21 @@ public class Player extends Entity {
                     checkLevelUp();
                 }
             }
+    }
+
+    // повреждение разрушаемых объектов
+    public void damageInteractiveTile(int index) {
+        if (index != -1 && gamePanel.iTiles[index].destructible &&
+                gamePanel.iTiles[index].isCorrectItem(this) &&
+                !gamePanel.iTiles[index].invincible) {
+
+            gamePanel.iTiles[index].playSoundEffect();
+            gamePanel.iTiles[index].currentLife--;
+            gamePanel.iTiles[index].invincible = true;
+
+            if (gamePanel.iTiles[index].currentLife == 0)
+                gamePanel.iTiles[index] = gamePanel.iTiles[index].getDestroyedForm();
+        }
     }
 
     // повышение уровня
