@@ -474,8 +474,50 @@ public class UserInterface {
         String text = "Settings";
         textX = getXForCenteredText(text);
         textY = frameY + gamePanel.tileSize;
-
         graphics2D.drawString(text, textX, textY);
+
+        // FULL SCREEN ON/OFF
+        textX = frameX + gamePanel.tileSize;
+        textY += gamePanel.tileSize * 2;
+        graphics2D.drawString("Full Screen", textX, textY);
+
+        if (commandNumber == 0)
+            graphics2D.drawString("<>", textX - 26, textY);
+
+        // MUSIC
+        textY += gamePanel.tileSize;
+        graphics2D.drawString("Music", textX, textY);
+
+        if (commandNumber == 1)
+            graphics2D.drawString("<>", textX - 26, textY);
+
+        // SOUND EFFECTS
+        textY += gamePanel.tileSize;
+        graphics2D.drawString("Sound effects", textX, textY);
+
+        if (commandNumber == 2)
+            graphics2D.drawString("<>", textX - 26, textY);
+
+        // CONTROL
+        textY += gamePanel.tileSize;
+        graphics2D.drawString("Control", textX, textY);
+
+        if (commandNumber == 3)
+            graphics2D.drawString("<>", textX - 26, textY);
+
+        // QUIT
+        textY += gamePanel.tileSize;
+        graphics2D.drawString("Quit", textX, textY);
+
+        if (commandNumber == 4)
+            graphics2D.drawString("<>", textX - 26, textY);
+
+        // RETURN
+        textY += gamePanel.tileSize * 2;
+        graphics2D.drawString("Return", textX, textY);
+
+        if (commandNumber == 5)
+            graphics2D.drawString("<>", textX - 26, textY);
     }
 
     // индекс предмета в инвентаре

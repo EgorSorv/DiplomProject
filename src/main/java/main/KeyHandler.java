@@ -53,6 +53,7 @@ public class KeyHandler implements KeyListener {
     public void titleState(int code) {
         if (code == KeyEvent.VK_W) {
             gamePanel.userInterface.commandNumber--;
+            gamePanel.playSoundEffect(9);
 
             if (gamePanel.userInterface.commandNumber < 0)
                 gamePanel.userInterface.commandNumber = 2;
@@ -60,6 +61,7 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_S) {
             gamePanel.userInterface.commandNumber++;
+            gamePanel.playSoundEffect(9);
 
             if (gamePanel.userInterface.commandNumber > 2)
                 gamePanel.userInterface.commandNumber = 0;
@@ -164,6 +166,22 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_E)
             interactPressed = true;
+
+        if (code == KeyEvent.VK_W) {
+            gamePanel.userInterface.commandNumber--;
+            gamePanel.playSoundEffect(9);
+
+            if (gamePanel.userInterface.commandNumber < 0)
+                gamePanel.userInterface.commandNumber = 5;
+        }
+
+        if (code == KeyEvent.VK_S) {
+            gamePanel.userInterface.commandNumber++;
+            gamePanel.playSoundEffect(9);
+
+            if (gamePanel.userInterface.commandNumber > 5)
+                gamePanel.userInterface.commandNumber = 0;
+        }
     }
 
     @Override

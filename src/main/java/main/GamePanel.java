@@ -86,7 +86,7 @@ public class GamePanel extends JPanel implements Runnable {
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         graphics2D = (Graphics2D) tempScreen.getGraphics();
 
-        // setFullScreen();
+        setFullScreen();
     }
 
     // вывод игры на весь экран

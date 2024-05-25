@@ -148,8 +148,9 @@ public class EventHandler {
                 gamePanel.player.currentLife = gamePanel.player.maxLife;
                 gamePanel.player.currentMana = gamePanel.player.maxMana;
 
-                gamePanel.assetSetter.setMonster();
             } else gamePanel.userInterface.currentDialogue = "Your health and mana are full.";
+
+            gamePanel.assetSetter.setMonster();
         }
     }
 
