@@ -64,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int characterState = 4;
+    public final int settingsState = 5;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // размеры окна
@@ -90,14 +91,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     // вывод игры на весь экран
     public void setFullScreen() {
-//        // GET LOCAL SCREEN DEVICE
-//        GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//        GraphicsDevice graphicsDevice = graphicsEnvironment.getDefaultScreenDevice();
-//        graphicsDevice.setFullScreenWindow(Main.window);
-//
-//        // GET FULL SCREEN WIDTH AND HEIGHT
-//        fullScreenWidth = Main.window.getWidth();
-//        fullScreenHeight = Main.window.getHeight();
+        // GET LOCAL SCREEN DEVICE
+        GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice graphicsDevice = graphicsEnvironment.getDefaultScreenDevice();
+        graphicsDevice.setFullScreenWindow(Main.window);
+
+        // GET FULL SCREEN WIDTH AND HEIGHT
+        fullScreenWidth = Main.window.getWidth();
+        fullScreenHeight = Main.window.getHeight();
 
 //        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 //        double width = screenSize.getWidth();

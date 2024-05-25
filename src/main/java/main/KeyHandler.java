@@ -43,6 +43,11 @@ public class KeyHandler implements KeyListener {
         // CHARACTER STATE
         else if (gamePanel.gameState == gamePanel.characterState)
             characterState(code);
+
+        // SETTINGS STATE
+        else if (gamePanel.gameState == gamePanel.settingsState) {
+            settingsState(code);
+        }
     }
 
     public void titleState(int code) {
@@ -98,6 +103,10 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_F)
             shotKeyPressed = true;
 
+        // SETTINGS
+        if (code == KeyEvent.VK_ESCAPE)
+            gamePanel.gameState = gamePanel.settingsState;
+
         // DEBUG
         if (code == KeyEvent.VK_F1)
             showDebugText = !showDebugText;
@@ -148,6 +157,15 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_E)
             gamePanel.player.selectItem();
     }
+
+    public void settingsState(int code) {
+        if (code == KeyEvent.VK_ESCAPE)
+            gamePanel.gameState = gamePanel.playState;
+
+        if (code == KeyEvent.VK_E)
+            interactPressed = true;
+    }
+
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();

@@ -25,6 +25,7 @@ public class UserInterface {
     public int commandNumber = 0;
     public int slotCol = 0;
     public int slotRow = 0;
+    int subState;
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -82,9 +83,14 @@ public class UserInterface {
             drawDialogueScreen();
 
         // CHARACTER STATE
-        else if (gamePanel.gameState == gamePanel.characterState) {
+        if (gamePanel.gameState == gamePanel.characterState) {
             drawCharacterScreen();
             drawInventory();
+        }
+
+        // SETTINGS STATE
+        if (gamePanel.gameState == gamePanel.settingsState) {
+            drawSettingsScreen();
         }
     }
 
@@ -437,6 +443,39 @@ public class UserInterface {
                 textY += 32;
             }
         }
+    }
+
+    // окно с настройками
+    public void drawSettingsScreen() {
+        graphics2D.setColor(Color.white);
+        graphics2D.setFont(graphics2D.getFont().deriveFont(32F));
+
+        // SUB WINDOW
+        int frameX = gamePanel.tileSize * 6;
+        int frameY = gamePanel.tileSize;
+        int frameWidth = gamePanel.tileSize * 8;
+        int frameHeight = gamePanel.tileSize * 10;
+
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        switch (subState) {
+            case 0 -> settingsTop(frameX, frameY);
+            case 1 -> subState = 1;
+            case 2 -> subState = 2;
+
+        }
+    }
+
+    public void settingsTop(int frameX, int frameY) {
+        int textX;
+        int textY;
+
+        // TITLE
+        String text = "Settings";
+        textX = getXForCenteredText(text);
+        textY = frameY + gamePanel.tileSize;
+
+        graphics2D.drawString(text, textX, textY);
     }
 
     // индекс предмета в инвентаре

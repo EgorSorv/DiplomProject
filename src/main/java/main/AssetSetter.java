@@ -47,15 +47,6 @@ public class AssetSetter {
         gamePanel.obj[index] = new RedPotion(gamePanel);
         gamePanel.obj[index].worldX = gamePanel.tileSize * 22;
         gamePanel.obj[index].worldY = gamePanel.tileSize * 27;
-
-        gamePanel.obj[index] = new Heart(gamePanel);
-        gamePanel.obj[index].worldX = gamePanel.tileSize * 22;
-        gamePanel.obj[index].worldY = gamePanel.tileSize * 29;
-
-        gamePanel.obj[index] = new ManaCrystal(gamePanel);
-        gamePanel.obj[index].worldX = gamePanel.tileSize * 22;
-        gamePanel.obj[index].worldY = gamePanel.tileSize * 31;
-
     }
 
     // размещение нип на карте
