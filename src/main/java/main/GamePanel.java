@@ -7,6 +7,7 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -17,14 +18,20 @@ public class GamePanel extends JPanel implements Runnable {
     public final int scale = 3;
 
     public final int tileSize = originalTileSize * scale; // итоговый размер плитки 48x48
-    public final int maxScreenCol = 16;
+    public final int maxScreenCol = 20;
     public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * maxScreenCol; // ширина 768 пикселей
+    public final int screenWidth = tileSize * maxScreenCol; // ширина 960 пикселей
     public final int screenHeight = tileSize * maxScreenRow; // высота 576 пикселей
 
     // WORLD SETTINGS
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
+
+    // FOR FULL SCREEN
+    int fullScreenWidth = screenWidth;
+    int fullScreenHeight = screenHeight;
+    BufferedImage tempScreen;
+    Graphics2D graphics2D;
 
     // FPS
     double FPS = 60;
@@ -73,6 +80,31 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setInteractiveTile();
 
         gameState = titleState;
+
+        // временный экран, на котором будет отрисовываться игра перед выводом на экран
+        tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
+        graphics2D = (Graphics2D) tempScreen.getGraphics();
+
+        // setFullScreen();
+    }
+
+    // вывод игры на весь экран
+    public void setFullScreen() {
+//        // GET LOCAL SCREEN DEVICE
+//        GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//        GraphicsDevice graphicsDevice = graphicsEnvironment.getDefaultScreenDevice();
+//        graphicsDevice.setFullScreenWindow(Main.window);
+//
+//        // GET FULL SCREEN WIDTH AND HEIGHT
+//        fullScreenWidth = Main.window.getWidth();
+//        fullScreenHeight = Main.window.getHeight();
+
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        double width = screenSize.getWidth();
+//        double height = screenSize.getHeight();
+//        Main.window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        fullScreenWidth = (int) width;
+//        fullScreenHeight = (int) height;
     }
 
     public void startGameThread() {
@@ -96,7 +128,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (delta >= 1) {
                 update(); // обновление данных игры
-                repaint(); // встроенный метод вызова paintComponent
+                drawToTempScreen();
+                drawToScreen();
                 delta--; // сброс счетчика
             }
         }
@@ -145,11 +178,8 @@ public class GamePanel extends JPanel implements Runnable {
             stopMusic();
     }
 
-    public void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics); // отрисовка изображения
-
-        Graphics2D graphics2D = (Graphics2D) graphics; // класс-наследник с расширенным функционалом
-
+    // отрисовка временного экрана
+    public void drawToTempScreen() {
         // DEBUG (BEGIN)
         long drawStart = 0;
 
@@ -164,9 +194,9 @@ public class GamePanel extends JPanel implements Runnable {
             tileManager.draw(graphics2D);
 
             // INTERACTIVE TILE
-            for (int i = 0; i < iTiles.length; i++)
-                if (iTiles[i] != null)
-                    iTiles[i].draw(graphics2D);
+            for (InteractiveTile iTile : iTiles)
+                if (iTile != null)
+                    iTile.draw(graphics2D);
 
             // ADD ENTITIES
             entities.add(player);
@@ -216,8 +246,13 @@ public class GamePanel extends JPanel implements Runnable {
             y += lineHeight;
             graphics2D.drawString("Draw Time: " + passed, x, y);
         }
+    }
 
-        graphics2D.dispose(); // удаляет метод для освобождения памяти
+    // отрисовка основного экрана
+    public void drawToScreen() {
+        Graphics graphics = getGraphics();
+        graphics.drawImage(tempScreen, 0, 0, fullScreenWidth, fullScreenHeight, null);
+        graphics.dispose();
     }
 
     // воспроизведение основной музыки

@@ -252,7 +252,7 @@ public class UserInterface {
 
     // инфо по игроку
     public void drawCharacterScreen() {
-        final int frameX = gamePanel.tileSize;
+        final int frameX = gamePanel.tileSize * 2;
         final int frameY = gamePanel.tileSize;
         final int frameWidth = gamePanel.tileSize * 6;
         final int frameHeight = gamePanel.tileSize * 10;
@@ -368,7 +368,7 @@ public class UserInterface {
     // инвентарь игрока
     public void drawInventory() {
         // FRAME
-        int frameX = gamePanel.tileSize * 9;
+        int frameX = gamePanel.tileSize * 12;
         int frameY = gamePanel.tileSize;
         int frameWidth = gamePanel.tileSize * 6;
         int frameHeight = gamePanel.tileSize * 5;

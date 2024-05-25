@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f121c77a-810b-43af-9510-a1ddb7ed8b1b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/entity/Particle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Projectile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interactive_tile/DryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interactive_tile/DryTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/interactive_tile/InteractiveTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interactive_tile/InteractiveTile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/object/Fireball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/Fireball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/object/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/Rock.java" afterDir="false" />
-    </list>
+    <list default="true" id="f121c77a-810b-43af-9510-a1ddb7ed8b1b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,21 +31,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Notification.DisplayName-DoNotAsk-Vcs Important Messages": "VCS important messages",
-    "Notification.DoNotAsk-Vcs Important Messages": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/egor/IdeaProjects/DiplomProject/src/main/resources/sounds",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Vcs Important Messages&quot;: &quot;VCS important messages&quot;,
+    &quot;Notification.DoNotAsk-Vcs Important Messages&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/egor/IdeaProjects/DiplomProject/src/main/resources/sounds&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/sounds" />
@@ -106,16 +95,5 @@
       <updated>1692106716960</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/main/GamePanel.java</url>
-          <line>225</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
