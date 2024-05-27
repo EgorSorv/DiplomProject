@@ -30,8 +30,9 @@ public class GamePanel extends JPanel implements Runnable {
     // FOR FULL SCREEN
     int fullScreenWidth = screenWidth;
     int fullScreenHeight = screenHeight;
-    BufferedImage tempScreen;
+    BufferedImage windowScreen;
     Graphics2D graphics2D;
+    public boolean fullScreenOn = false; // проверка на работающий полноэкранный режим
 
     // FPS
     double FPS = 60;
@@ -82,11 +83,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         gameState = titleState;
 
-        // временный экран, на котором будет отрисовываться игра перед выводом на экран
-        tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
-        graphics2D = (Graphics2D) tempScreen.getGraphics();
-
-        setFullScreen();
+        setWindowScreen();
     }
 
     // вывод игры на весь экран
@@ -99,13 +96,15 @@ public class GamePanel extends JPanel implements Runnable {
         // GET FULL SCREEN WIDTH AND HEIGHT
         fullScreenWidth = Main.window.getWidth();
         fullScreenHeight = Main.window.getHeight();
+    }
 
-//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//        double width = screenSize.getWidth();
-//        double height = screenSize.getHeight();
-//        Main.window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        fullScreenWidth = (int) width;
-//        fullScreenHeight = (int) height;
+    // вывод игры в окне
+    public void setWindowScreen() {
+        windowScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
+        graphics2D = (Graphics2D) windowScreen.getGraphics();
+
+        fullScreenWidth = screenWidth;
+        fullScreenHeight = screenHeight;
     }
 
     public void startGameThread() {
@@ -177,6 +176,96 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (gameState == pauseState)
             stopMusic();
+    }
+
+//    public void paintComponent(Graphics graphics) {
+//        super.paintComponent(graphics);
+//
+//        Graphics2D graphics2D = (Graphics2D) graphics;
+//
+//        // DEBUG (BEGIN)
+//        long drawStart = 0;
+//
+//        if (keyHandler.showDebugText)
+//            drawStart = System.nanoTime();
+//
+//        // TITLE SCREEN
+//        if (gameState == titleState) {
+//            userInterface.draw(graphics2D);
+//        } else {
+//            // TILE
+//            tileManager.draw(graphics2D);
+//
+//            // INTERACTIVE TILE
+//            for (InteractiveTile iTile : iTiles)
+//                if (iTile != null)
+//                    iTile.draw(graphics2D);
+//
+//            // ADD ENTITIES
+//            entities.add(player);
+//
+//            for (Entity entity : npc) if (entity != null) entities.add(entity);
+//
+//            for (Entity entity : monster) if (entity != null) entities.add(entity);
+//
+//            for (Entity entity : obj) if (entity != null) entities.add(entity);
+//
+//            for (Entity projectile : projectiles) if (projectile != null) entities.add(projectile);
+//
+//            for (Entity particle : particles) if (particle != null) entities.add(particle);
+//
+//            // SORT ENTITIES
+//            entities.sort(Comparator.comparingInt(e -> e.worldY));
+//
+//            // DRAW ENTITIES
+//            for (Entity entity : entities) entity.draw(graphics2D);
+//
+//            // RESET ENTITIES
+//            entities.clear();
+//
+//            // UI
+//            userInterface.draw(graphics2D);
+//        }
+//
+//        //  DEBUG (END)
+//        if (keyHandler.showDebugText) {
+//            long drawEnd = System.nanoTime();
+//            long passed = drawEnd - drawStart;
+//
+//            graphics2D.setFont(new Font("Arial", Font.PLAIN, 20));
+//            graphics2D.setColor(Color.green);
+//
+//            int x = 10;
+//            int y = 400;
+//            int lineHeight = 20;
+//
+//            graphics2D.drawString("WorldX: " + player.worldX, x, y);
+//            y += lineHeight;
+//            graphics2D.drawString("WorldY: " + player.worldY, x, y);
+//            y += lineHeight;
+//            graphics2D.drawString("Col: " + (player.worldX + player.solidArea.x) / tileSize, x, y);
+//            y += lineHeight;
+//            graphics2D.drawString("Row: " + (player.worldY + player.solidArea.y) / tileSize, x, y);
+//            y += lineHeight;
+//            graphics2D.drawString("Draw Time: " + passed, x, y);
+//
+//            graphics.dispose();
+//        }
+//    }
+
+    //  изменение размера экрана
+    public void switchScreenSize() {
+        if (fullScreenOn) {
+            Main.window.dispose();
+            Main.window.setUndecorated(true); // убрать рамку окна
+            setFullScreen();
+            Main.window.setVisible(true);
+        } else {
+            Main.window.dispose();
+            Main.window.setUndecorated(false);
+            setWindowScreen();
+            Main.window.setVisible(true);
+        }
     }
 
     // отрисовка временного экрана
@@ -252,7 +341,7 @@ public class GamePanel extends JPanel implements Runnable {
     // отрисовка основного экрана
     public void drawToScreen() {
         Graphics graphics = getGraphics();
-        graphics.drawImage(tempScreen, 0, 0, fullScreenWidth, fullScreenHeight, null);
+        graphics.drawImage(windowScreen, 0, 0, fullScreenWidth, fullScreenHeight, null);
         graphics.dispose();
     }
 

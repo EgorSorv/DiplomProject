@@ -202,7 +202,7 @@ public class UserInterface {
 
         text = "NEW GAME";
         x = getXForCenteredText(text);
-        y += gamePanel.tileSize * 3.5;
+        y += (int) (gamePanel.tileSize * 3.5);
         graphics2D.drawString(text, x, y);
 
         if (commandNumber == 0)
@@ -462,8 +462,9 @@ public class UserInterface {
             case 0 -> settingsTop(frameX, frameY);
             case 1 -> subState = 1;
             case 2 -> subState = 2;
-
         }
+
+        gamePanel.keyHandler.interactPressed = false;
     }
 
     public void settingsTop(int frameX, int frameY) {
@@ -476,48 +477,92 @@ public class UserInterface {
         textY = frameY + gamePanel.tileSize;
         graphics2D.drawString(text, textX, textY);
 
-        // FULL SCREEN ON/OFF
+        // CONTINUE
         textX = frameX + gamePanel.tileSize;
-        textY += gamePanel.tileSize * 2;
+        textY += gamePanel.tileSize;
+        graphics2D.drawString("Continue", textX, textY);
+
+        if (commandNumber == 0) {
+            graphics2D.drawString("<>", textX - 26, textY);
+
+            if (gamePanel.keyHandler.interactPressed) {
+                gamePanel.playSoundEffect(9);
+                gamePanel.gameState = gamePanel.playState;
+            }
+        }
+
+        // CHARACTER ATTRIBUTES AND STATUS
+        textY += gamePanel.tileSize;
+        graphics2D.drawString("Character", textX, textY);
+
+        if (commandNumber == 1)
+            graphics2D.drawString("<>", textX - 26, textY);
+
+        // FULL SCREEN ON/OFF
+        textY += gamePanel.tileSize;
         graphics2D.drawString("Full Screen", textX, textY);
 
-        if (commandNumber == 0)
+        if (commandNumber == 2) {
             graphics2D.drawString("<>", textX - 26, textY);
+
+            if (gamePanel.keyHandler.interactPressed) {
+                gamePanel.fullScreenOn = !gamePanel.fullScreenOn;
+                gamePanel.playSoundEffect(9);
+                gamePanel.switchScreenSize();
+            }
+        }
 
         // MUSIC
         textY += gamePanel.tileSize;
         graphics2D.drawString("Music", textX, textY);
 
-        if (commandNumber == 1)
+        if (commandNumber == 3)
             graphics2D.drawString("<>", textX - 26, textY);
 
         // SOUND EFFECTS
         textY += gamePanel.tileSize;
         graphics2D.drawString("Sound effects", textX, textY);
 
-        if (commandNumber == 2)
+        if (commandNumber == 4)
             graphics2D.drawString("<>", textX - 26, textY);
 
         // CONTROL
         textY += gamePanel.tileSize;
         graphics2D.drawString("Control", textX, textY);
 
-        if (commandNumber == 3)
+        if (commandNumber == 5)
+            graphics2D.drawString("<>", textX - 26, textY);
+
+        // RETURN TO TITLE
+        textY += gamePanel.tileSize;
+        graphics2D.drawString("Return to Title", textX, textY);
+
+        if (commandNumber == 6)
             graphics2D.drawString("<>", textX - 26, textY);
 
         // QUIT
         textY += gamePanel.tileSize;
         graphics2D.drawString("Quit", textX, textY);
 
-        if (commandNumber == 4)
+        if (commandNumber == 7)
             graphics2D.drawString("<>", textX - 26, textY);
 
-        // RETURN
-        textY += gamePanel.tileSize * 2;
-        graphics2D.drawString("Return", textX, textY);
+        // FULL SCREEN CHECK BOX
+        textX = frameX + (int) (gamePanel.tileSize * 4.5);
+        textY = frameY + gamePanel.tileSize * 3 + 24;
+        graphics2D.setStroke(new BasicStroke(3));
+        graphics2D.drawRect(textX, textY, 24, 24);
 
-        if (commandNumber == 5)
-            graphics2D.drawString("<>", textX - 26, textY);
+        if (gamePanel.fullScreenOn)
+            graphics2D.fillRect(textX, textY, 24, 24);
+
+        // MUSIC VOLUME
+        textY += gamePanel.tileSize;
+        graphics2D.drawRect(textX, textY, 120, 24);
+
+        // SOUND EFFECTS VOLUME
+        textY += gamePanel.tileSize;
+        graphics2D.drawRect(textX, textY, 120, 24);
     }
 
     // индекс предмета в инвентаре
