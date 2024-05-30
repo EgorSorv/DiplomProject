@@ -462,6 +462,7 @@ public class UserInterface {
             case 0 -> mainSettings(frameX, frameY);
             case 1 -> controlSettings(frameX, frameY);
             case 2 -> returnToTitleSettings(frameY);
+            case 3 -> quitSettings(frameY);
         }
 
         gamePanel.keyHandler.interactPressed = false;
@@ -545,6 +546,7 @@ public class UserInterface {
 
         if (commandNumber == 6) {
             graphics2D.drawString("<>", textX - 26, textY);
+
             if (gamePanel.keyHandler.interactPressed) {
                 subState = 2;
                 commandNumber = 0;
@@ -557,6 +559,11 @@ public class UserInterface {
 
         if (commandNumber == 7) {
             graphics2D.drawString("<>", textX - 26, textY);
+
+            if (gamePanel.keyHandler.interactPressed) {
+                subState = 3;
+                commandNumber = 0;
+            }
         }
         // FULL SCREEN CHECK BOX
         textX = frameX + (int) (gamePanel.tileSize * 4.5);
@@ -696,6 +703,46 @@ public class UserInterface {
             if (gamePanel.keyHandler.interactPressed) {
                 subState = 0;
                 commandNumber = 6;
+            }
+        }
+    }
+
+    // окно для подтверждения выхода на главный экран
+    public void quitSettings(int frameY) {
+        int textY = frameY + gamePanel.tileSize * 3;
+
+        currentDialogue = "Close the \ngame?";
+
+        for (String line: currentDialogue.split("\n")) {
+            graphics2D.drawString(line, getXForCenteredText(line), textY);
+            textY += 40;
+        }
+
+        String text = "Yes";
+        int textX = getXForCenteredText(text);
+        textY += gamePanel.tileSize * 3;
+        graphics2D.drawString(text, textX, textY);
+
+        if (commandNumber == 0) {
+            graphics2D.drawString("<>", textX - 26, textY);
+
+            if (gamePanel.keyHandler.interactPressed) {
+                subState = 0;
+                System.exit(1);
+            }
+        }
+
+        text = "No";
+        textX = getXForCenteredText(text);
+        textY += gamePanel.tileSize;
+        graphics2D.drawString(text, textX, textY);
+
+        if (commandNumber == 1) {
+            graphics2D.drawString("<>", textX - 26, textY);
+
+            if (gamePanel.keyHandler.interactPressed) {
+                subState = 0;
+                commandNumber = 7;
             }
         }
     }

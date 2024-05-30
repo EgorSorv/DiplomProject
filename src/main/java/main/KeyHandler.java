@@ -197,7 +197,7 @@ public class KeyHandler implements KeyListener {
 
                  if (gamePanel.userInterface.commandNumber < 0)
                      gamePanel.userInterface.commandNumber = 7;
-             } else if (gamePanel.userInterface.subState == 2) {
+             } else if (gamePanel.userInterface.subState == 2 || gamePanel.userInterface.subState == 3) {
                  gamePanel.userInterface.commandNumber--;
                  gamePanel.playSoundEffect(9);
 
@@ -214,7 +214,7 @@ public class KeyHandler implements KeyListener {
 
                  if (gamePanel.userInterface.commandNumber > 7)
                      gamePanel.userInterface.commandNumber = 0;
-             } else if (gamePanel.userInterface.subState == 2) {
+             } else if (gamePanel.userInterface.subState == 2 || gamePanel.userInterface.subState == 3) {
                  gamePanel.userInterface.commandNumber++;
                  gamePanel.playSoundEffect(9);
 
