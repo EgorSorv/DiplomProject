@@ -136,6 +136,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_I)
             gamePanel.gameState = gamePanel.playState;
 
+        if (code == KeyEvent.VK_ESCAPE)
+            gamePanel.gameState = gamePanel.settingsState;
+
         if (code == KeyEvent.VK_W)
             if (gamePanel.userInterface.slotRow != 0) {
                 gamePanel.userInterface.slotRow--;
@@ -164,44 +167,48 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ESCAPE)
             gamePanel.gameState = gamePanel.playState;
 
-        if (code == KeyEvent.VK_E)
+        if (code == KeyEvent.VK_E) {
             interactPressed = true;
-
-        if (code == KeyEvent.VK_W) {
-            gamePanel.userInterface.commandNumber--;
             gamePanel.playSoundEffect(9);
-
-            if (gamePanel.userInterface.commandNumber < 0)
-                gamePanel.userInterface.commandNumber = 7;
         }
 
-        if (code == KeyEvent.VK_S) {
-            gamePanel.userInterface.commandNumber++;
-            gamePanel.playSoundEffect(9);
-
-            if (gamePanel.userInterface.commandNumber > 7)
-                gamePanel.userInterface.commandNumber = 0;
-        }
-
-        if (code == KeyEvent.VK_A) {
-            if (gamePanel.userInterface.commandNumber == 3 && gamePanel.music.volumeScale > 0) {
-                gamePanel.music.volumeScale--;
-                gamePanel.music.checkVolume();
+        if (gamePanel.userInterface.subState == 0) {
+            if (code == KeyEvent.VK_W) {
+                gamePanel.userInterface.commandNumber--;
                 gamePanel.playSoundEffect(9);
-            } else if (gamePanel.userInterface.commandNumber == 4 && gamePanel.soundEffect.volumeScale > 0) {
-                gamePanel.soundEffect.volumeScale--;
-                gamePanel.playSoundEffect(9);
+
+                if (gamePanel.userInterface.commandNumber < 0)
+                    gamePanel.userInterface.commandNumber = 7;
             }
-        }
 
-        if (code == KeyEvent.VK_D) {
-            if (gamePanel.userInterface.commandNumber == 3 && gamePanel.music.volumeScale < 5) {
-                gamePanel.music.volumeScale++;
-                gamePanel.music.checkVolume();
+            if (code == KeyEvent.VK_S) {
+                gamePanel.userInterface.commandNumber++;
                 gamePanel.playSoundEffect(9);
-            } else if (gamePanel.userInterface.commandNumber == 4 && gamePanel.soundEffect.volumeScale < 5) {
-                gamePanel.soundEffect.volumeScale++;
-                gamePanel.playSoundEffect(9);
+
+                if (gamePanel.userInterface.commandNumber > 7)
+                    gamePanel.userInterface.commandNumber = 0;
+            }
+
+            if (code == KeyEvent.VK_A) {
+                if (gamePanel.userInterface.commandNumber == 3 && gamePanel.music.volumeScale > 0) {
+                    gamePanel.music.volumeScale--;
+                    gamePanel.music.checkVolume();
+                    gamePanel.playSoundEffect(9);
+                } else if (gamePanel.userInterface.commandNumber == 4 && gamePanel.soundEffect.volumeScale > 0) {
+                    gamePanel.soundEffect.volumeScale--;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+
+            if (code == KeyEvent.VK_D) {
+                if (gamePanel.userInterface.commandNumber == 3 && gamePanel.music.volumeScale < 5) {
+                    gamePanel.music.volumeScale++;
+                    gamePanel.music.checkVolume();
+                    gamePanel.playSoundEffect(9);
+                } else if (gamePanel.userInterface.commandNumber == 4 && gamePanel.soundEffect.volumeScale < 5) {
+                    gamePanel.soundEffect.volumeScale++;
+                    gamePanel.playSoundEffect(9);
+                }
             }
         }
     }

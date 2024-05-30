@@ -460,13 +460,13 @@ public class UserInterface {
 
         switch (subState) {
             case 0 -> mainSettings(frameX, frameY);
-            case 1 -> subState = 1;
-            case 2 -> subState = 2;
+            case 1 -> controlSettings(frameX, frameY);
         }
 
         gamePanel.keyHandler.interactPressed = false;
     }
 
+    // окно настроек
     public void mainSettings(int frameX, int frameY) {
         int textX;
         int textY;
@@ -485,19 +485,20 @@ public class UserInterface {
         if (commandNumber == 0) {
             graphics2D.drawString("<>", textX - 26, textY);
 
-            if (gamePanel.keyHandler.interactPressed) {
-                gamePanel.playSoundEffect(9);
+            if (gamePanel.keyHandler.interactPressed)
                 gamePanel.gameState = gamePanel.playState;
-            }
         }
 
         // CHARACTER ATTRIBUTES AND STATUS
         textY += gamePanel.tileSize;
         graphics2D.drawString("Character", textX, textY);
 
-        if (commandNumber == 1)
+        if (commandNumber == 1) {
             graphics2D.drawString("<>", textX - 26, textY);
 
+            if (gamePanel.keyHandler.interactPressed)
+                gamePanel.gameState = gamePanel.characterState;
+        }
         // FULL SCREEN ON/OFF
         textY += gamePanel.tileSize;
         graphics2D.drawString("Full Screen", textX, textY);
@@ -507,7 +508,6 @@ public class UserInterface {
 
             if (gamePanel.keyHandler.interactPressed) {
                 gamePanel.fullScreenOn = !gamePanel.fullScreenOn;
-                gamePanel.playSoundEffect(9);
                 gamePanel.switchScreenSize();
             }
         }
@@ -530,8 +530,13 @@ public class UserInterface {
         textY += gamePanel.tileSize;
         graphics2D.drawString("Control", textX, textY);
 
-        if (commandNumber == 5)
+        if (commandNumber == 5) {
             graphics2D.drawString("<>", textX - 26, textY);
+            if (gamePanel.keyHandler.interactPressed) {
+                subState = 1;
+                commandNumber = 0;
+            }
+        }
 
         // RETURN TO TITLE
         textY += gamePanel.tileSize;
@@ -569,6 +574,81 @@ public class UserInterface {
 
         volumeWidth = 24 * gamePanel.soundEffect.volumeScale;
         graphics2D.fillRect(textX, textY, volumeWidth, 24);
+    }
+
+    // окно управления
+    public void controlSettings(int frameX, int frameY) {
+        int textX;
+        int textY;
+
+        String text = "Control";
+        textX = getXForCenteredText(text);
+        textY = frameY + gamePanel.tileSize;
+        graphics2D.drawString(text, textX, textY);
+
+        textX = frameX + gamePanel.tileSize;
+        textY += gamePanel.tileSize;
+
+        // MOVEMENT
+        graphics2D.drawString("Move", textX, textY);
+        textY += gamePanel.tileSize;
+
+        // INTERACT
+        graphics2D.drawString("Interact/Attack", textX, textY);
+        textY += gamePanel.tileSize;
+
+        // CAST
+        graphics2D.drawString("Cast Magic/Throw", textX, textY);
+        textY += gamePanel.tileSize;
+
+        // INVENTORY
+        graphics2D.drawString("Inventory", textX, textY);
+        textY += gamePanel.tileSize;
+
+        // PAUSE
+        graphics2D.drawString("Pause", textX, textY);
+        textY += gamePanel.tileSize;
+
+        // SETTINGS
+        graphics2D.drawString("Settings", textX, textY);
+
+        textX = frameX + gamePanel.tileSize * 6;
+        textY = frameY + gamePanel.tileSize * 2;
+
+        // MOVEMENT KEYS
+        graphics2D.drawString("WASD", textX, textY);
+        textY += gamePanel.tileSize;
+
+        // INTERACT KEY
+        graphics2D.drawString("E", textX, textY);
+        textY += gamePanel.tileSize;
+
+        // CAST KEY
+        graphics2D.drawString("F", textX, textY);
+        textY += gamePanel.tileSize;
+
+        // INVENTORY KEY
+        graphics2D.drawString("I", textX, textY);
+        textY += gamePanel.tileSize;
+
+        // PAUSE KEY
+        graphics2D.drawString("P", textX, textY);
+        textY += gamePanel.tileSize;
+
+        // SETTINGS KEY
+        graphics2D.drawString("Esc", textX, textY);
+
+        // RETURN TO SETTINGS
+        textX = frameX + gamePanel.tileSize;
+        textY = frameY + gamePanel.tileSize * 9;
+        graphics2D.drawString("Back", textX, textY);
+
+        if (commandNumber == 0) {
+            graphics2D.drawString("<>", textX - 26, textY);
+
+            if (gamePanel.keyHandler.interactPressed)
+                subState = 0;
+        }
     }
 
     // индекс предмета в инвентаре
