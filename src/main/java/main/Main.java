@@ -1,10 +1,9 @@
 package main;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Main {
-   public static JFrame window, fullWindow;
+   public static JFrame window;
     public static void main(String[] args) {
         window = new JFrame(); // создание окна
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // закрытие окна по нажатию на кнопку "X"

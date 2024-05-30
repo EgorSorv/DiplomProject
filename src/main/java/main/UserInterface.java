@@ -459,7 +459,7 @@ public class UserInterface {
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         switch (subState) {
-            case 0 -> settingsTop(frameX, frameY);
+            case 0 -> mainSettings(frameX, frameY);
             case 1 -> subState = 1;
             case 2 -> subState = 2;
         }
@@ -467,7 +467,7 @@ public class UserInterface {
         gamePanel.keyHandler.interactPressed = false;
     }
 
-    public void settingsTop(int frameX, int frameY) {
+    public void mainSettings(int frameX, int frameY) {
         int textX;
         int textY;
 
@@ -560,9 +560,15 @@ public class UserInterface {
         textY += gamePanel.tileSize;
         graphics2D.drawRect(textX, textY, 120, 24);
 
+        int volumeWidth = 24 * gamePanel.music.volumeScale;
+        graphics2D.fillRect(textX, textY, volumeWidth, 24);
+
         // SOUND EFFECTS VOLUME
         textY += gamePanel.tileSize;
         graphics2D.drawRect(textX, textY, 120, 24);
+
+        volumeWidth = 24 * gamePanel.soundEffect.volumeScale;
+        graphics2D.fillRect(textX, textY, volumeWidth, 24);
     }
 
     // индекс предмета в инвентаре

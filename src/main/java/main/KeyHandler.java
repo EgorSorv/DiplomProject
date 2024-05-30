@@ -182,6 +182,28 @@ public class KeyHandler implements KeyListener {
             if (gamePanel.userInterface.commandNumber > 7)
                 gamePanel.userInterface.commandNumber = 0;
         }
+
+        if (code == KeyEvent.VK_A) {
+            if (gamePanel.userInterface.commandNumber == 3 && gamePanel.music.volumeScale > 0) {
+                gamePanel.music.volumeScale--;
+                gamePanel.music.checkVolume();
+                gamePanel.playSoundEffect(9);
+            } else if (gamePanel.userInterface.commandNumber == 4 && gamePanel.soundEffect.volumeScale > 0) {
+                gamePanel.soundEffect.volumeScale--;
+                gamePanel.playSoundEffect(9);
+            }
+        }
+
+        if (code == KeyEvent.VK_D) {
+            if (gamePanel.userInterface.commandNumber == 3 && gamePanel.music.volumeScale < 5) {
+                gamePanel.music.volumeScale++;
+                gamePanel.music.checkVolume();
+                gamePanel.playSoundEffect(9);
+            } else if (gamePanel.userInterface.commandNumber == 4 && gamePanel.soundEffect.volumeScale < 5) {
+                gamePanel.soundEffect.volumeScale++;
+                gamePanel.playSoundEffect(9);
+            }
+        }
     }
 
     @Override

@@ -1,14 +1,14 @@
 package main;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
 import java.net.URL;
 
 public class Sound {
     Clip clip;
     URL[] soundURL = new URL[30]; // массив звуков
+    FloatControl floatControl; // тип получаемых значений для изменения громкости (-80f до 6f)
+    int volumeScale = 3;
+    float volume;
 
     public Sound() {
         soundURL[0] = getClass().getResource("/sounds/Game.wav");
@@ -31,6 +31,11 @@ public class Sound {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundURL[index]);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+
+            // прием значений для изменения громкости
+            floatControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+
+            checkVolume();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,5 +54,19 @@ public class Sound {
     // остановка звука
     public void stop() {
         clip.stop();
+    }
+
+    // изменение громкости
+    public void checkVolume() {
+        switch (volumeScale) {
+            case 0 -> volume = -80f;
+            case 1 -> volume = -20f;
+            case 2 -> volume = -12f;
+            case 3 -> volume = -5f;
+            case 4 -> volume = 1f;
+            case 5 -> volume = 6f;
+        }
+
+        floatControl.setValue(volume);
     }
 }
