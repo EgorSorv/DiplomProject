@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     int fullScreenHeight = screenHeight;
     BufferedImage windowScreen;
     Graphics2D graphics2D;
-    public boolean fullScreenOn = false; // проверка на работающий полноэкранный режим
+    public boolean fullScreenOn; // проверка на работающий полноэкранный режим
 
     // FPS
     double FPS = 60;
@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter assetSetter = new AssetSetter(this);
     public UserInterface userInterface = new UserInterface(this);
     public EventHandler eventHandler = new EventHandler(this);
+    Config config = new Config(this); // конфигурация игры
     Thread gameThread; // создание потока
 
     // ENTITY AND OBJECT
@@ -84,6 +85,8 @@ public class GamePanel extends JPanel implements Runnable {
         gameState = titleState;
 
         setWindowScreen();
+
+        switchScreenSize();
     }
 
     // вывод игры на весь экран
@@ -177,81 +180,6 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == pauseState)
             stopMusic();
     }
-
-//    public void paintComponent(Graphics graphics) {
-//        super.paintComponent(graphics);
-//
-//        Graphics2D graphics2D = (Graphics2D) graphics;
-//
-//        // DEBUG (BEGIN)
-//        long drawStart = 0;
-//
-//        if (keyHandler.showDebugText)
-//            drawStart = System.nanoTime();
-//
-//        // TITLE SCREEN
-//        if (gameState == titleState) {
-//            userInterface.draw(graphics2D);
-//        } else {
-//            // TILE
-//            tileManager.draw(graphics2D);
-//
-//            // INTERACTIVE TILE
-//            for (InteractiveTile iTile : iTiles)
-//                if (iTile != null)
-//                    iTile.draw(graphics2D);
-//
-//            // ADD ENTITIES
-//            entities.add(player);
-//
-//            for (Entity entity : npc) if (entity != null) entities.add(entity);
-//
-//            for (Entity entity : monster) if (entity != null) entities.add(entity);
-//
-//            for (Entity entity : obj) if (entity != null) entities.add(entity);
-//
-//            for (Entity projectile : projectiles) if (projectile != null) entities.add(projectile);
-//
-//            for (Entity particle : particles) if (particle != null) entities.add(particle);
-//
-//            // SORT ENTITIES
-//            entities.sort(Comparator.comparingInt(e -> e.worldY));
-//
-//            // DRAW ENTITIES
-//            for (Entity entity : entities) entity.draw(graphics2D);
-//
-//            // RESET ENTITIES
-//            entities.clear();
-//
-//            // UI
-//            userInterface.draw(graphics2D);
-//        }
-//
-//        //  DEBUG (END)
-//        if (keyHandler.showDebugText) {
-//            long drawEnd = System.nanoTime();
-//            long passed = drawEnd - drawStart;
-//
-//            graphics2D.setFont(new Font("Arial", Font.PLAIN, 20));
-//            graphics2D.setColor(Color.green);
-//
-//            int x = 10;
-//            int y = 400;
-//            int lineHeight = 20;
-//
-//            graphics2D.drawString("WorldX: " + player.worldX, x, y);
-//            y += lineHeight;
-//            graphics2D.drawString("WorldY: " + player.worldY, x, y);
-//            y += lineHeight;
-//            graphics2D.drawString("Col: " + (player.worldX + player.solidArea.x) / tileSize, x, y);
-//            y += lineHeight;
-//            graphics2D.drawString("Row: " + (player.worldY + player.solidArea.y) / tileSize, x, y);
-//            y += lineHeight;
-//            graphics2D.drawString("Draw Time: " + passed, x, y);
-//
-//            graphics.dispose();
-//        }
-//    }
 
     //  изменение размера экрана
     public void switchScreenSize() {

@@ -468,7 +468,7 @@ public class UserInterface {
         gamePanel.keyHandler.interactPressed = false;
     }
 
-    // окно настроек
+    // основное окно настроек
     public void mainSettings(int frameX, int frameY) {
         int textX;
         int textY;
@@ -587,6 +587,8 @@ public class UserInterface {
 
         volumeWidth = 24 * gamePanel.soundEffect.volumeScale;
         graphics2D.fillRect(textX, textY, volumeWidth, 24);
+
+        gamePanel.config.saveConfig(); // сохранение настроек
     }
 
     // окно управления

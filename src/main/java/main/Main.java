@@ -13,6 +13,8 @@ public class Main {
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel); // добавление параметров экрана
 
+        gamePanel.config.loadConfig(); // применение настроек
+
         window.pack(); // установка оптимального размера для окна
 
         window.setLocationRelativeTo(null); // отображение окна по центру
