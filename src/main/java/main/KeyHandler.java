@@ -45,9 +45,12 @@ public class KeyHandler implements KeyListener {
             characterState(code);
 
         // SETTINGS STATE
-        else if (gamePanel.gameState == gamePanel.settingsState) {
+        else if (gamePanel.gameState == gamePanel.settingsState)
             settingsState(code);
-        }
+
+            // GAME OVER STATE
+        else if (gamePanel.gameState == gamePanel.gameOverState)
+            gameOverState(code);
     }
 
     public void titleState(int code) {
@@ -246,6 +249,39 @@ public class KeyHandler implements KeyListener {
                     gamePanel.playSoundEffect(9);
                 }
             }
+        }
+    }
+
+    public void gameOverState(int code) {
+        if (code == KeyEvent.VK_W) {
+            gamePanel.userInterface.commandNumber--;
+
+            if (gamePanel.userInterface.commandNumber < 0)
+                gamePanel.userInterface.commandNumber = 1;
+
+            gamePanel.playSoundEffect(9);
+        }
+
+        if (code == KeyEvent.VK_S) {
+            gamePanel.userInterface.commandNumber++;
+
+            if (gamePanel.userInterface.commandNumber > 1)
+                gamePanel.userInterface.commandNumber = 0;
+
+            gamePanel.playSoundEffect(9);
+        }
+
+        if (code == KeyEvent.VK_E) {
+            if (gamePanel.userInterface.commandNumber == 0) {
+                gamePanel.gameState = gamePanel.playState;
+                gamePanel.retry();
+                gamePanel.playMusic(0);
+            } else if (gamePanel.userInterface.commandNumber == 1) {
+                gamePanel.gameState = gamePanel.titleState;
+                gamePanel.restart();
+            }
+
+            gamePanel.playSoundEffect(9);
         }
     }
 

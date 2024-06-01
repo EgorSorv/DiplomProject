@@ -36,6 +36,7 @@ public class Player extends Entity {
         worldY = gamePanel.tileSize * 21;
         speed = 4;
         direction = "down";
+        invincible = false;
 
         // PLAYER STATUS
         level = 1;
@@ -57,8 +58,24 @@ public class Player extends Entity {
         defense = getDefense();
     }
 
+    // расположение игрока по умолчанию
+    public void setDefaultPosition() {
+        worldX = gamePanel.tileSize * 23;
+        worldY = gamePanel.tileSize * 21;
+        direction = "down";
+    }
+
+    // восстановление здоровья, маны и обнуление монет
+    public void restoreHealthManaAndCoins() {
+        currentLife = maxLife;
+        currentMana = maxMana;
+        coins = 0;
+        invincible = false;
+    }
+
     // вещи в инвентаре по умолчанию
     public void setItems() {
+        inventory.clear(); // очищение инвенторя при перезапуске
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new Key(gamePanel));
@@ -244,6 +261,13 @@ public class Player extends Entity {
         if (currentLife > maxLife) currentLife = maxLife;
 
         if (currentMana > maxMana) currentMana = maxMana;
+
+        // GAME OVER
+        if (currentLife <= 0) {
+            gamePanel.gameState = gamePanel.gameOverState;
+            gamePanel.playSoundEffect(12);
+            gamePanel.stopMusic();
+        }
     }
 
     // игрок атакует

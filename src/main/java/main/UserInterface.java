@@ -92,6 +92,11 @@ public class UserInterface {
         if (gamePanel.gameState == gamePanel.settingsState) {
             drawSettingsScreen();
         }
+
+        // GAME OVER STATE
+        if (gamePanel.gameState == gamePanel.gameOverState) {
+            drawGameOverScreen();
+        }
     }
 
     // здоровье игрока
@@ -466,6 +471,52 @@ public class UserInterface {
         }
 
         gamePanel.keyHandler.interactPressed = false;
+    }
+
+    // конец игры
+    public void drawGameOverScreen() {
+        int x;
+        int y;
+        String text;
+
+        // затемнение экрана
+        graphics2D.setColor(new Color(0, 0, 0, 150));
+        graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+        // шрифт
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 110F));
+        text = "Game Over";
+
+        // тень надписи
+        graphics2D.setColor(Color.black);
+        x = getXForCenteredText(text);
+        y = gamePanel.tileSize * 4;
+        graphics2D.drawString(text, x, y);
+
+        // надпись
+        graphics2D.setColor(Color.white);
+        graphics2D.drawString(text, x - 4, y - 4);
+
+        // перезапуск
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 50F));
+        text = "Retry";
+        x = getXForCenteredText(text);
+        y += gamePanel.tileSize * 4;
+        graphics2D.drawString(text, x, y);
+
+        if (commandNumber == 0) {
+            graphics2D.drawString("<>", x - 41, y);
+        }
+
+        // возврат на главный экран
+        text = "Quit";
+        x = getXForCenteredText(text);
+        y += 55;
+        graphics2D.drawString(text, x, y);
+
+        if (commandNumber == 1) {
+            graphics2D.drawString("<>", x - 41, y);
+        }
     }
 
     // основное окно настроек

@@ -67,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dialogueState = 3;
     public final int characterState = 4;
     public final int settingsState = 5;
+    public final int gameOverState = 6;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // размеры окна
@@ -87,6 +88,26 @@ public class GamePanel extends JPanel implements Runnable {
         setWindowScreen();
 
         switchScreenSize();
+    }
+
+    // повторный запуск игры с контрольной точки
+    public void retry() {
+        player.setDefaultPosition();
+        player.restoreHealthManaAndCoins();
+
+        assetSetter.setNPC();
+        assetSetter.setMonster();
+    }
+
+    // перезапуск игры
+    public void restart() {
+        player.setDefaultValues();
+        player.setItems();
+
+        assetSetter.setObject();
+        assetSetter.setNPC();
+        assetSetter.setMonster();
+        assetSetter.setInteractiveTile();
     }
 
     // вывод игры на весь экран
