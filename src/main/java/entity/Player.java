@@ -265,6 +265,7 @@ public class Player extends Entity {
         // GAME OVER
         if (currentLife <= 0) {
             gamePanel.gameState = gamePanel.gameOverState;
+            gamePanel.userInterface.commandNumber = -1;
             gamePanel.playSoundEffect(12);
             gamePanel.stopMusic();
         }

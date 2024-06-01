@@ -71,6 +71,8 @@ public class KeyHandler implements KeyListener {
         }
 
         if (code == KeyEvent.VK_E) {
+            gamePanel.playSoundEffect(9);
+
             if (gamePanel.userInterface.commandNumber == 0) {
                 gamePanel.gameState = gamePanel.playState;
                 gamePanel.playMusic(0);
@@ -273,15 +275,15 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_E) {
             if (gamePanel.userInterface.commandNumber == 0) {
+                gamePanel.playSoundEffect(9);
                 gamePanel.gameState = gamePanel.playState;
                 gamePanel.retry();
                 gamePanel.playMusic(0);
             } else if (gamePanel.userInterface.commandNumber == 1) {
+                gamePanel.playSoundEffect(9);
                 gamePanel.gameState = gamePanel.titleState;
                 gamePanel.restart();
             }
-
-            gamePanel.playSoundEffect(9);
         }
     }
 
