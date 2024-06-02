@@ -7,6 +7,7 @@ public class EventHandler {
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
 
+    int tempMap, tempCol, tempRow; // временные параметры для перехода
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
@@ -181,13 +182,11 @@ public class EventHandler {
 
     // переход между картами
     public void transition(int map, int col, int row) {
-        gamePanel.currentMap = map;
+        gamePanel.gameState = gamePanel.transitionState;
 
-        gamePanel.player.worldX = gamePanel.tileSize * col;
-        gamePanel.player.worldY = gamePanel.tileSize * row;
-
-        previousEventX = gamePanel.player.worldX;
-        previousEventY = gamePanel.player.worldY;
+        tempMap = map;
+        tempCol = col;
+        tempRow = row;
 
         canTouchEvent = false;
 

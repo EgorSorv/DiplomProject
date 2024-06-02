@@ -25,7 +25,8 @@ public class UserInterface {
     public int commandNumber = 0;
     public int slotCol = 0;
     public int slotRow = 0;
-    int subState;
+    int subState = 0;
+    int counter = 0;
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -97,6 +98,10 @@ public class UserInterface {
         if (gamePanel.gameState == gamePanel.gameOverState) {
             drawGameOverScreen();
         }
+
+        // TRANSITION STATE
+        if (gamePanel.gameState == gamePanel.transitionState)
+            drawTransition();
     }
 
     // здоровье игрока
@@ -517,6 +522,26 @@ public class UserInterface {
         if (commandNumber == 1) {
             graphics2D.drawString("<>", x - 41, y);
         }
+    }
+
+    // переход
+    public void drawTransition() {
+       counter++;
+
+       graphics2D.setColor(new Color(0, 0, 0, counter * 5));
+       graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+       if (counter == 50) {
+           counter = 0;
+           gamePanel.gameState = gamePanel.playState;
+
+           gamePanel.currentMap = gamePanel.eventHandler.tempMap;
+           gamePanel.player.worldX = gamePanel.tileSize * gamePanel.eventHandler.tempCol;
+           gamePanel.player.worldY = gamePanel.tileSize * gamePanel.eventHandler.tempRow;
+
+           gamePanel.eventHandler.previousEventX = gamePanel.player.worldX;
+           gamePanel.eventHandler.previousEventY = gamePanel.player.worldY;
+       }
     }
 
     // основное окно настроек

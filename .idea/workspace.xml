@@ -5,21 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f121c77a-810b-43af-9510-a1ddb7ed8b1b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/maps/interior01.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sounds/stairs.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Projectile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/AssetSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/AssetSetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/CollisionChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/EventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/EventHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/KeyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Sound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Sound.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tile/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tile/TileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/maps/world.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/maps/world.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
