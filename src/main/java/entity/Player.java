@@ -176,7 +176,7 @@ public class Player extends Entity {
                 interactNPC(npcIndex);
 
                 // CHECK MONSTER COLLISION
-                int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
+                int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monsters);
                 contactMonster(monsterIndex);
 
                 // CHECK INTERACTIVE TILE COLLISION
@@ -298,7 +298,7 @@ public class Player extends Entity {
             solidArea.height = attackArea.height;
 
             // проверка попал ли монстр в зону удара
-            int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
+            int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monsters);
             damageMonster(monsterIndex, attack);
 
             // проверка попал ли разрушаемый объект в зону удара
@@ -320,23 +320,23 @@ public class Player extends Entity {
     // подобрать объект
     public void pickUpObject(int index) {
         if (index != -1) {
-            if (gamePanel.obj[index].type == typeNoneInventory) {
+            if (gamePanel.obj[gamePanel.currentMap][index].type == typeNoneInventory) {
                 // NONE INVENTORY ITEMS
-                gamePanel.obj[index].use(this);
+                gamePanel.obj[gamePanel.currentMap][index].use(this);
             } else {
                 // INVENTORY ITEMS
                 String text;
 
                 if (inventory.size() != maxInventorySize) {
-                    inventory.add(gamePanel.obj[index]);
+                    inventory.add(gamePanel.obj[gamePanel.currentMap][index]);
                     gamePanel.playSoundEffect(1);
-                    text = "Got a " + gamePanel.obj[index].name + "!";
+                    text = "Got a " + gamePanel.obj[gamePanel.currentMap][index].name + "!";
                 } else text = "You can't carry any more!";
 
                 gamePanel.userInterface.addMessage(text);
             }
 
-            gamePanel.obj[index] = null;
+            gamePanel.obj[gamePanel.currentMap][index] = null;
         }
     }
 
@@ -346,7 +346,7 @@ public class Player extends Entity {
             if (index != -1) {
                 attackCanceled = true;
                 gamePanel.gameState = gamePanel.dialogueState;
-                gamePanel.npc[index].speak();
+                gamePanel.npc[gamePanel.currentMap][index].speak();
             }
         }
     }
@@ -354,10 +354,10 @@ public class Player extends Entity {
     // контакт с монстром
     public void contactMonster(int index) {
         if (index != -1)
-            if (!invincible && !gamePanel.monster[index].dying) {
+            if (!invincible && !gamePanel.monsters[gamePanel.currentMap][index].dying) {
                 gamePanel.playSoundEffect(6);
 
-                int damage = gamePanel.monster[index].attack - defense;
+                int damage = gamePanel.monsters[gamePanel.currentMap][index].attack - defense;
 
                 if (damage < 0)
                     damage = 0;
@@ -370,27 +370,29 @@ public class Player extends Entity {
     // нанесение урона монстрам
     public void damageMonster(int index, int attackPower) {
         if (index != -1)
-            if (!gamePanel.monster[index].invincible) {
+            if (!gamePanel.monsters[gamePanel.currentMap][index].invincible) {
                 gamePanel.playSoundEffect(5);
 
-                int damage = attackPower - gamePanel.monster[index].defense;
+                int damage = attackPower - gamePanel.monsters[gamePanel.currentMap][index].defense;
 
                 if (damage < 0)
                     damage = 0;
 
-                gamePanel.monster[index].currentLife -= damage;
+                gamePanel.monsters[gamePanel.currentMap][index].currentLife -= damage;
                 gamePanel.userInterface.addMessage(damage + " damage!");
 
-                gamePanel.monster[index].invincible = true;
-                gamePanel.monster[index].damageReaction();
+                gamePanel.monsters[gamePanel.currentMap][index].invincible = true;
+                gamePanel.monsters[gamePanel.currentMap][index].damageReaction();
 
-                if (gamePanel.monster[index].currentLife <= 0) {
-                    gamePanel.monster[index].dying = true;
+                if (gamePanel.monsters[gamePanel.currentMap][index].currentLife <= 0) {
+                    gamePanel.monsters[gamePanel.currentMap][index].dying = true;
 
-                    gamePanel.userInterface.addMessage("killed the " + gamePanel.monster[index].name + "!");
-                    gamePanel.userInterface.addMessage(gamePanel.monster[index].exp + " exp");
+                    gamePanel.userInterface.addMessage("killed the " +
+                            gamePanel.monsters[gamePanel.currentMap][index].name + "!");
+                    gamePanel.userInterface.addMessage(gamePanel.monsters[gamePanel.currentMap][index].exp +
+                            " exp");
 
-                    exp += gamePanel.monster[index].exp;
+                    exp += gamePanel.monsters[gamePanel.currentMap][index].exp;
                     checkLevelUp();
                 }
             }
@@ -398,18 +400,20 @@ public class Player extends Entity {
 
     // повреждение разрушаемых объектов
     public void damageInteractiveTile(int index) {
-        if (index != -1 && gamePanel.iTiles[index].destructible &&
-                gamePanel.iTiles[index].isCorrectItem(this) &&
-                !gamePanel.iTiles[index].invincible) {
+        if (index != -1 && gamePanel.iTiles[gamePanel.currentMap][index].destructible &&
+                gamePanel.iTiles[gamePanel.currentMap][index].isCorrectItem(this) &&
+                !gamePanel.iTiles[gamePanel.currentMap][index].invincible) {
 
-            gamePanel.iTiles[index].playSoundEffect();
-            gamePanel.iTiles[index].currentLife--;
-            gamePanel.iTiles[index].invincible = true;
+            gamePanel.iTiles[gamePanel.currentMap][index].playSoundEffect();
+            gamePanel.iTiles[gamePanel.currentMap][index].currentLife--;
+            gamePanel.iTiles[gamePanel.currentMap][index].invincible = true;
 
-            generateParticle(gamePanel.iTiles[index], gamePanel.iTiles[index]);
+            generateParticle(gamePanel.iTiles[gamePanel.currentMap][index],
+                             gamePanel.iTiles[gamePanel.currentMap][index]);
 
-            if (gamePanel.iTiles[index].currentLife == 0)
-                gamePanel.iTiles[index] = gamePanel.iTiles[index].getDestroyedForm();
+            if (gamePanel.iTiles[gamePanel.currentMap][index].currentLife == 0)
+                gamePanel.iTiles[gamePanel.currentMap][index] =
+                        gamePanel.iTiles[gamePanel.currentMap][index].getDestroyedForm();
         }
     }
 

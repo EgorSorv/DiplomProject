@@ -14,16 +14,17 @@ import java.util.Objects;
 public class TileManager {
     GamePanel gamePanel;
     public Tile[] tiles; // массив для хранения плиток
-    public int[][] mapTileNum; // двумерный массив для хранения карт
+    public int[][][] mapTileNum; // трехмерный массив для хранения карт
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
         tiles = new Tile[50];
-        mapTileNum = new int [gamePanel.maxWorldCol][gamePanel.maxWorldRow];
+        mapTileNum = new int [gamePanel.maxMap][gamePanel.maxWorldCol][gamePanel.maxWorldRow];
 
         getTileImage();
-        loadMap("/maps/world.txt");
+        loadMap("/maps/world.txt", 0);
+        loadMap("/maps/interior01.txt", 1);
     }
 
     // вывод плиток
@@ -74,6 +75,9 @@ public class TileManager {
         setup(39, "earth", false);
         setup(40, "wall", true);
         setup(41, "tree", true);
+        setup(42, "hut", false);
+        setup(43, "floor01", false);
+        setup(44, "table01", true);
     }
 
     // подготовка плиток
@@ -95,7 +99,7 @@ public class TileManager {
     }
 
     // загрузка карты
-    public void loadMap(String filePath) {
+    public void loadMap(String filePath, int mapNum) {
         try {
             InputStream inputStream = getClass().getResourceAsStream(filePath); // импорт файла
             assert inputStream != null;
@@ -113,7 +117,7 @@ public class TileManager {
 
                     int num = Integer.parseInt(numbers[col]);
 
-                    mapTileNum[col][row] = num;
+                    mapTileNum[mapNum][col][row] = num;
                     col++;
                 }
 
@@ -135,7 +139,7 @@ public class TileManager {
 
         // автозаполнение экрана
         while (worldCol < gamePanel.maxWorldCol && worldRow < gamePanel.maxWorldRow) {
-            int tileNum = mapTileNum[worldCol][worldRow];
+            int tileNum = mapTileNum[gamePanel.currentMap][worldCol][worldRow];
 
             // позиция плитки на карте
             int worldX = worldCol * gamePanel.tileSize;

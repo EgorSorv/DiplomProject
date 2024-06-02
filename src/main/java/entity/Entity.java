@@ -128,12 +128,12 @@ public abstract class Entity {
 
     // выпадение предмета
     public void dropItem(Entity droppedItem) {
-        for (int index = 0; index < gamePanel.obj.length; index++)
-            if (gamePanel.obj[index] == null) {
-                gamePanel.obj[index] = droppedItem;
+        for (int index = 0; index < gamePanel.obj[1].length; index++)
+            if (gamePanel.obj[gamePanel.currentMap][index] == null) {
+                gamePanel.obj[gamePanel.currentMap][index] = droppedItem;
                 // предмет выпадает из объекта на тех же координатах
-                gamePanel.obj[index].worldX = worldX;
-                gamePanel.obj[index].worldY = worldY;
+                gamePanel.obj[gamePanel.currentMap][index].worldX = worldX;
+                gamePanel.obj[gamePanel.currentMap][index].worldY = worldY;
                 break;
             }
     }
@@ -187,7 +187,7 @@ public abstract class Entity {
             gamePanel.collisionChecker.checkTile(this);
             gamePanel.collisionChecker.checkObject(this, false);
             gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
-            gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
+            gamePanel.collisionChecker.checkEntity(this, gamePanel.monsters);
             gamePanel.collisionChecker.checkEntity(this, gamePanel.iTiles);
             boolean contactPlayer = gamePanel.collisionChecker.checkPlayer(this);
 

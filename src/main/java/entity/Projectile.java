@@ -21,11 +21,11 @@ public class Projectile extends Entity {
 
     public void update() {
         if (entity == gamePanel.player) {
-            int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
+            int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monsters);
 
             if (monsterIndex != -1) {
                 gamePanel.player.damageMonster(monsterIndex, attack);
-                generateParticle(entity.currentProjectile, gamePanel.monster[monsterIndex]);
+                generateParticle(entity.currentProjectile, gamePanel.monsters[gamePanel.currentMap][monsterIndex]);
                 alive = false;
             }
         } else {

@@ -119,8 +119,12 @@ public class KeyHandler implements KeyListener {
             showDebugText = !showDebugText;
 
         // MAP REFRESH
-        if (code == KeyEvent.VK_F2)
-            gamePanel.tileManager.loadMap("/maps/world.txt");
+        if (code == KeyEvent.VK_F2) {
+            switch (gamePanel.currentMap) {
+                case 0 -> gamePanel.tileManager.loadMap("/maps/world.txt", 0);
+                case 1 -> gamePanel.tileManager.loadMap("/maps/interior01.txt", 1);
+            }
+        }
     }
 
     public void pauseState(int code) {

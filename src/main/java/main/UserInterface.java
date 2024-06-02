@@ -199,7 +199,7 @@ public class UserInterface {
         // IMAGE
         x = gamePanel.screenWidth / 2 - gamePanel.tileSize;
         y += gamePanel.tileSize * 2;
-        graphics2D.drawImage(gamePanel.obj[0].image, x, y,
+        graphics2D.drawImage(gamePanel.obj[0][0].image, x, y,
                 gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
 
         // MENU

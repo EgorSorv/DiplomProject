@@ -14,101 +14,140 @@ public class AssetSetter {
 
     // размещение предметов на карте
     public void setObject() {
+        int mapNum = 0;
         int index = 0;
 
-        gamePanel.obj[index] = new BlueHeart(gamePanel);
+        gamePanel.obj[mapNum][index] = new BlueHeart(gamePanel);
         index++;
 
-        gamePanel.obj[index] = new Coin(gamePanel);
-        gamePanel.obj[index].worldX = gamePanel.tileSize * 25;
-        gamePanel.obj[index].worldY = gamePanel.tileSize * 23;
+        gamePanel.obj[mapNum][index] = new Coin(gamePanel);
+        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 25;
+        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 23;
         index++;
 
-        gamePanel.obj[index] = new Coin(gamePanel);
-        gamePanel.obj[index].worldX = gamePanel.tileSize * 21;
-        gamePanel.obj[index].worldY = gamePanel.tileSize * 19;
+        gamePanel.obj[mapNum][index] = new Coin(gamePanel);
+        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 21;
+        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 19;
         index++;
 
-        gamePanel.obj[index] = new Coin(gamePanel);
-        gamePanel.obj[index].worldX = gamePanel.tileSize * 26;
-        gamePanel.obj[index].worldY = gamePanel.tileSize * 21;
+        gamePanel.obj[mapNum][index] = new Coin(gamePanel);
+        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 26;
+        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 21;
         index++;
 
-        gamePanel.obj[index] = new Axe(gamePanel);
-        gamePanel.obj[index].worldX = gamePanel.tileSize * 33;
-        gamePanel.obj[index].worldY = gamePanel.tileSize * 21;
+        gamePanel.obj[mapNum][index] = new Axe(gamePanel);
+        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 33;
+        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 21;
         index++;
 
-        gamePanel.obj[index] = new BlueShield(gamePanel);
-        gamePanel.obj[index].worldX = gamePanel.tileSize * 35;
-        gamePanel.obj[index].worldY = gamePanel.tileSize * 21;
+        gamePanel.obj[mapNum][index] = new BlueShield(gamePanel);
+        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 35;
+        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 21;
         index++;
 
-        gamePanel.obj[index] = new RedPotion(gamePanel);
-        gamePanel.obj[index].worldX = gamePanel.tileSize * 22;
-        gamePanel.obj[index].worldY = gamePanel.tileSize * 27;
+        gamePanel.obj[mapNum][index] = new RedPotion(gamePanel);
+        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 22;
+        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 27;
     }
 
     // размещение нип на карте
     public void setNPC() {
-        gamePanel.npc[0] = new OldMan(gamePanel);
-        gamePanel.npc[0].worldX = gamePanel.tileSize * 21;
-        gamePanel.npc[0].worldY = gamePanel.tileSize * 21;
+        int mapNum = 0;
+        int i = 0;
+
+        gamePanel.npc[mapNum][i] = new OldMan(gamePanel);
+        gamePanel.npc[mapNum][i].worldX = gamePanel.tileSize * 21;
+        gamePanel.npc[mapNum][i].worldY = gamePanel.tileSize * 21;
     }
 
     // размещение монстров на карте
     public void setMonster() {
+        int mapNum = 0;
         int index = 0;
 
-        gamePanel.monster[index] = new GreenSlime(gamePanel);
-        gamePanel.monster[index].worldX = gamePanel.tileSize * 21;
-        gamePanel.monster[index].worldY = gamePanel.tileSize * 38;
+        gamePanel.monsters[mapNum][index] = new GreenSlime(gamePanel);
+        gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 21;
+        gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 38;
         index++;
 
-        gamePanel.monster[index] = new GreenSlime(gamePanel);
-        gamePanel.monster[index].worldX = gamePanel.tileSize * 23;
-        gamePanel.monster[index].worldY = gamePanel.tileSize * 42;
+        gamePanel.monsters[mapNum][index] = new GreenSlime(gamePanel);
+        gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 23;
+        gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 42;
         index++;
 
-        gamePanel.monster[index] = new GreenSlime(gamePanel);
-        gamePanel.monster[index].worldX = gamePanel.tileSize * 24;
-        gamePanel.monster[index].worldY = gamePanel.tileSize * 37;
+        gamePanel.monsters[mapNum][index] = new GreenSlime(gamePanel);
+        gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 24;
+        gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 37;
         index++;
 
-        gamePanel.monster[index] = new GreenSlime(gamePanel);
-        gamePanel.monster[index].worldX = gamePanel.tileSize * 34;
-        gamePanel.monster[index].worldY = gamePanel.tileSize * 42;
+        gamePanel.monsters[mapNum][index] = new GreenSlime(gamePanel);
+        gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 34;
+        gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 42;
         index++;
 
-        gamePanel.monster[index] = new GreenSlime(gamePanel);
-        gamePanel.monster[index].worldX = gamePanel.tileSize * 38;
-        gamePanel.monster[index].worldY = gamePanel.tileSize * 42;
+        gamePanel.monsters[mapNum][index] = new GreenSlime(gamePanel);
+        gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 38;
+        gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 42;
     }
 
     public void setInteractiveTile() {
+        int mapNum = 0;
         int index = 0;
 
-        gamePanel.iTiles[index] = new DryTree(gamePanel, 28, 37);
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 28, 37);
         index++;
 
-        gamePanel.iTiles[index] = new DryTree(gamePanel, 27, 12);
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 27, 12);
         index++;
 
-        gamePanel.iTiles[index] = new DryTree(gamePanel, 28, 12);
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 28, 12);
         index++;
 
-        gamePanel.iTiles[index] = new DryTree(gamePanel, 29, 12);
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 29, 12);
         index++;
 
-        gamePanel.iTiles[index] = new DryTree(gamePanel, 30, 12);
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 30, 12);
         index++;
 
-        gamePanel.iTiles[index] = new DryTree(gamePanel, 31, 12);
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 31, 12);
         index++;
 
-        gamePanel.iTiles[index] = new DryTree(gamePanel, 32, 12);
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 32, 12);
         index++;
 
-        gamePanel.iTiles[index] = new DryTree(gamePanel, 33, 12);
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 33, 12);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 18, 40);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 17, 40);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 16, 40);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 15, 40);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 14, 40);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 13, 40);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 13, 41);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 12, 41);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 11, 41);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 10, 41);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 10, 40);
     }
 }
