@@ -12,5 +12,6 @@ public class WoodShield extends Entity {
         downIdle = setup("/objects/shield_wood", gamePanel.tileSize, gamePanel.tileSize);
         defenseValue = 1;
         description = "[" + name + "]\nSimple wooden shield.";
+        price = 35;
     }
 }

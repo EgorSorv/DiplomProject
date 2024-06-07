@@ -13,5 +13,6 @@ public class BlueShield extends Entity {
         downIdle = setup("/objects/shield_blue", gamePanel.tileSize, gamePanel.tileSize);
         defenseValue = 2;
         description = "[" + name + "]\nA shiny blue shield.";
+        price = 250;
     }
 }

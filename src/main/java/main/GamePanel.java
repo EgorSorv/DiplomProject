@@ -71,6 +71,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int settingsState = 5;
     public final int gameOverState = 6;
     public final int transitionState = 7;
+    public final int tradeState = 8;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // размеры окна
@@ -95,6 +96,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // повторный запуск игры с контрольной точки
     public void retry() {
+        player.invincible = false;
         player.setDefaultPosition();
         player.restoreHealthManaAndCoins();
 
@@ -104,6 +106,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // перезапуск игры
     public void restart() {
+        player.setDefaultPosition();
         player.setDefaultValues();
         player.setItems();
 

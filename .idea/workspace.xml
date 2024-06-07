@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f121c77a-810b-43af-9510-a1ddb7ed8b1b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/entity/Merchant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/npc/merchant_idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/npc/merchant_move.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/AssetSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/AssetSetter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/EventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/EventHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/KeyHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/Axe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/Axe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/BlueShield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/BlueShield.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/Key.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/Key.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/RedPotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/RedPotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/Sword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/Sword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/WoodShield.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/WoodShield.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,11 +73,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources/projectiles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\egorv\IdeaProjects\Game\src\main\resources\npc" />
       <recent name="C:\Users\egorv\IdeaProjects\Game\src\main\resources\sounds" />
       <recent name="C:\Users\egorv\IdeaProjects\Game\src\main\resources\tiles" />
       <recent name="C:\Users\egorv\IdeaProjects\Game\src\main\resources\maps" />
       <recent name="$PROJECT_DIR$/src/main/java" />
-      <recent name="$PROJECT_DIR$/src/main/java/main" />
     </key>
   </component>
   <component name="RunManager">

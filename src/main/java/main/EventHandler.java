@@ -72,6 +72,9 @@ public class EventHandler {
             else if (hit(1, 12, 13, "any", false))
                 transition(0, 10, 39);
 
+            else if (hit(1, 12, 8, "up", true))
+                shop(0);
+
             else if (hit(0, 21, 12, "up", true) ||
                 hit(0, 22, 12, "up", true) ||
                 hit(0, 23, 12, "up", true) ||
@@ -191,5 +194,10 @@ public class EventHandler {
         canTouchEvent = false;
 
         gamePanel.playSoundEffect(13);
+    }
+
+    // начать диалог с торговцем
+    public void shop(int npcIndex) {
+        gamePanel.player.interactNPC(npcIndex);
     }
 }

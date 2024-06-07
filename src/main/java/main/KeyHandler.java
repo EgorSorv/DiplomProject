@@ -36,21 +36,25 @@ public class KeyHandler implements KeyListener {
         else if (gamePanel.gameState == gamePanel.pauseState)
             pauseState(code);
 
-            // DIALOGUE STATE
+        // DIALOGUE STATE
         else if (gamePanel.gameState == gamePanel.dialogueState)
             dialogueState(code);
 
-            // CHARACTER STATE
+        // CHARACTER STATE
         else if (gamePanel.gameState == gamePanel.characterState)
             characterState(code);
 
-            // SETTINGS STATE
+        // SETTINGS STATE
         else if (gamePanel.gameState == gamePanel.settingsState)
             settingsState(code);
 
-            // GAME OVER STATE
+        // GAME OVER STATE
         else if (gamePanel.gameState == gamePanel.gameOverState)
             gameOverState(code);
+
+        // TRADE STATE
+        else if (gamePanel.gameState == gamePanel.tradeState)
+            tradeState(code);
     }
 
     public void titleState(int code) {
@@ -150,28 +154,12 @@ public class KeyHandler implements KeyListener {
             gamePanel.gameState = gamePanel.settingsState;
         }
 
-        if (code == KeyEvent.VK_W)
-            if (gamePanel.userInterface.slotRow != 0) {
-                gamePanel.userInterface.slotRow--;
-                gamePanel.playSoundEffect(9);
-            }
-        if (code == KeyEvent.VK_A)
-            if (gamePanel.userInterface.slotCol != 0) {
-                gamePanel.userInterface.slotCol--;
-                gamePanel.playSoundEffect(9);
-            }
-        if (code == KeyEvent.VK_S)
-            if (gamePanel.userInterface.slotRow != 3) {
-                gamePanel.userInterface.slotRow++;
-                gamePanel.playSoundEffect(9);
-            }
-        if (code == KeyEvent.VK_D)
-            if (gamePanel.userInterface.slotCol != 4) {
-                gamePanel.userInterface.slotCol++;
-                gamePanel.playSoundEffect(9);
-            }
-        if (code == KeyEvent.VK_E)
+        if (code == KeyEvent.VK_E) {
+            gamePanel.playSoundEffect(9);
             gamePanel.player.selectItem();
+        }
+
+        playerInventory(code);
     }
 
     public void settingsState(int code) {
@@ -289,6 +277,103 @@ public class KeyHandler implements KeyListener {
                 gamePanel.restart();
             }
         }
+    }
+
+    public void tradeState(int code) {
+        if (code== KeyEvent.VK_E)
+            interactPressed = true;
+
+        if (gamePanel.userInterface.subState == 0) {
+            if (code == KeyEvent.VK_W) {
+                gamePanel.userInterface.commandNumber--;
+
+                if (gamePanel.userInterface.commandNumber < 0)
+                    gamePanel.userInterface.commandNumber = 2;
+
+                gamePanel.playSoundEffect(9);
+            }
+
+            if (code == KeyEvent.VK_S) {
+                gamePanel.userInterface.commandNumber++;
+
+                if (gamePanel.userInterface.commandNumber > 2)
+                    gamePanel.userInterface.commandNumber = 0;
+
+                gamePanel.playSoundEffect(9);
+            }
+        }
+
+        if (gamePanel.userInterface.subState == 1) {
+            npcInventory(code);
+
+            if (code == KeyEvent.VK_ESCAPE) {
+                gamePanel.userInterface.subState = 0;
+                gamePanel.playSoundEffect(9);
+            }
+        }
+
+        if (gamePanel.userInterface.subState == 2) {
+            playerInventory(code);
+
+            if (code == KeyEvent.VK_ESCAPE) {
+                gamePanel.userInterface.subState = 0;
+                gamePanel.playSoundEffect(9);
+            }
+        }
+    }
+
+    // перемещение по инвентарю игрока
+    public void playerInventory(int code) {
+        if (code == KeyEvent.VK_W)
+            if (gamePanel.userInterface.playerSlotRow != 0) {
+                gamePanel.userInterface.playerSlotRow--;
+                gamePanel.playSoundEffect(9);
+            }
+
+        if (code == KeyEvent.VK_A)
+            if (gamePanel.userInterface.playerSlotCol != 0) {
+                gamePanel.userInterface.playerSlotCol--;
+                gamePanel.playSoundEffect(9);
+            }
+
+        if (code == KeyEvent.VK_S)
+            if (gamePanel.userInterface.playerSlotRow != 3) {
+                gamePanel.userInterface.playerSlotRow++;
+                gamePanel.playSoundEffect(9);
+            }
+
+        if (code == KeyEvent.VK_D)
+            if (gamePanel.userInterface.playerSlotCol != 4) {
+                gamePanel.userInterface.playerSlotCol++;
+                gamePanel.playSoundEffect(9);
+            }
+    }
+
+    // перемещение по инвентарю торговца
+    public void npcInventory(int code) {
+        if (code == KeyEvent.VK_W)
+            if (gamePanel.userInterface.npcSlotRow != 0) {
+                gamePanel.userInterface.npcSlotRow--;
+                gamePanel.playSoundEffect(9);
+            }
+
+        if (code == KeyEvent.VK_A)
+            if (gamePanel.userInterface.npcSlotCol != 0) {
+                gamePanel.userInterface.npcSlotCol--;
+                gamePanel.playSoundEffect(9);
+            }
+
+        if (code == KeyEvent.VK_S)
+            if (gamePanel.userInterface.npcSlotRow != 3) {
+                gamePanel.userInterface.npcSlotRow++;
+                gamePanel.playSoundEffect(9);
+            }
+
+        if (code == KeyEvent.VK_D)
+            if (gamePanel.userInterface.npcSlotCol != 4) {
+                gamePanel.userInterface.npcSlotCol++;
+                gamePanel.playSoundEffect(9);
+            }
     }
 
     @Override

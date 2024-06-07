@@ -4,19 +4,16 @@ import main.GamePanel;
 import main.KeyHandler;
 import object.Fireball;
 import object.Key;
-import object.WoodShield;
 import object.Sword;
+import object.WoodShield;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class Player extends Entity {
     KeyHandler keyHandler;
     public final int screenX, screenY; // позиция игрока на экране
     public boolean attackCanceled = false;
-    public ArrayList<Entity> inventory = new ArrayList<>();
-    public final int maxInventorySize = 20;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         super(gamePanel);
@@ -25,6 +22,7 @@ public class Player extends Entity {
         screenX = gamePanel.screenWidth / 2 - gamePanel.tileSize / 2; // перенос персонажа в центр экрана
         screenY = gamePanel.screenHeight / 2 - gamePanel.tileSize / 2;
 
+        setDefaultPosition();
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
@@ -32,11 +30,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gamePanel.tileSize * 23;
-        worldY = gamePanel.tileSize * 21;
-        speed = 4;
-        direction = "down";
         invincible = false;
+        speed = 4;
 
         // PLAYER STATUS
         level = 1;
@@ -70,7 +65,6 @@ public class Player extends Entity {
         currentLife = maxLife;
         currentMana = maxMana;
         coins = 0;
-        invincible = false;
     }
 
     // вещи в инвентаре по умолчанию
@@ -438,7 +432,8 @@ public class Player extends Entity {
 
     // использование предметов
     public void selectItem() {
-        int itemIndex = gamePanel.userInterface.getItemIndexOnSlot();
+        int itemIndex = gamePanel.userInterface
+                    .getItemIndexOnSlot(gamePanel.userInterface.playerSlotCol, gamePanel.userInterface.playerSlotRow);
 
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);

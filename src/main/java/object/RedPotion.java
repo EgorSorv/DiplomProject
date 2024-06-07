@@ -15,6 +15,7 @@ public class RedPotion extends Entity {
         healValue = 5;
         downIdle = setup("/objects/potion_red", gamePanel.tileSize, gamePanel.tileSize);
         description = "[" + name + "]\nHeals your wounds\nby " + healValue + " HP.";
+        price = 25;
     }
 
     public void use(Entity entity) {

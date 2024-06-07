@@ -1,5 +1,6 @@
 package main;
 
+import entity.Merchant;
 import entity.OldMan;
 import interactive_tile.DryTree;
 import monster.GreenSlime;
@@ -58,6 +59,18 @@ public class AssetSetter {
         gamePanel.npc[mapNum][i] = new OldMan(gamePanel);
         gamePanel.npc[mapNum][i].worldX = gamePanel.tileSize * 21;
         gamePanel.npc[mapNum][i].worldY = gamePanel.tileSize * 21;
+        i++;
+
+        gamePanel.npc[mapNum][i] = new Merchant(gamePanel);
+        gamePanel.npc[mapNum][i].worldX = gamePanel.tileSize * 23;
+        gamePanel.npc[mapNum][i].worldY = gamePanel.tileSize * 19;
+
+        mapNum = 1;
+        i = 0;
+
+        gamePanel.npc[mapNum][i] = new Merchant(gamePanel);
+        gamePanel.npc[mapNum][i].worldX = gamePanel.tileSize * 12;
+        gamePanel.npc[mapNum][i].worldY = gamePanel.tileSize * 7;
     }
 
     // размещение монстров на карте

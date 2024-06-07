@@ -9,9 +9,8 @@ public class Key extends Entity {
         super(gamePanel);
 
         name = "Key";
-
         downIdle = setup("/objects/key", gamePanel.tileSize, gamePanel.tileSize);
-
         description = "[" + name + "]\nAn old key.\nIt opens something.";
+        price = 100;
     }
 }

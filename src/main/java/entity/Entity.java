@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public abstract class Entity {
@@ -72,6 +73,8 @@ public abstract class Entity {
     public Projectile currentProjectile;
 
     // ITEM ATTRIBUTES
+    public ArrayList<Entity> inventory = new ArrayList<>(); // инвентарь
+    public final int maxInventorySize = 20; // максимальный размер инвенторя
     public int attackValue; // значение атаки
     public int defenseValue; // значение защиты
     public int healValue; // значение лечения
@@ -79,6 +82,7 @@ public abstract class Entity {
     public int costValue; // значение стоимости
     public String description = "";
     public int manaCost; // стоимость действия в мане
+    public int price; // стоимость предмета
 
     // TYPE
     public int type;
@@ -205,8 +209,8 @@ public abstract class Entity {
 
             spriteCounter++;
 
-            if (!collisionOn) {
-                if (spriteCounter > 10 - speed) {
+            if (speed == 0) {
+                if (spriteCounter > 24) {
                     if (spriteNum == 0 && !idleCheck) {
                         spriteNum = 1;
                         idleCheck = true;
@@ -219,6 +223,23 @@ public abstract class Entity {
                         spriteNum = 0;
 
                     spriteCounter = 0;
+                }
+            } else {
+                if (!collisionOn) {
+                    if (spriteCounter > 10 - speed) {
+                        if (spriteNum == 0 && !idleCheck) {
+                            spriteNum = 1;
+                            idleCheck = true;
+                        } else if (spriteNum == 0) {
+                            spriteNum = 2;
+                            idleCheck = false;
+                        } else if (spriteNum == 1)
+                            spriteNum = 0;
+                        else if (spriteNum == 2)
+                            spriteNum = 0;
+
+                        spriteCounter = 0;
+                    }
                 }
             }
 
