@@ -31,7 +31,8 @@ public class Player extends Entity {
 
     public void setDefaultValues() {
         invincible = false;
-        speed = 4;
+        defaultSpeed = 4;
+        speed = defaultSpeed;
 
         // PLAYER STATUS
         level = 1;
@@ -297,7 +298,7 @@ public class Player extends Entity {
 
             // проверка попал ли монстр в зону удара
             int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monsters);
-            damageMonster(monsterIndex, attack);
+            damageMonster(monsterIndex, attack, currentWeapon.knockBackPower);
 
             // проверка попал ли разрушаемый объект в зону удара
             int iTileIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.iTiles);
@@ -370,10 +371,14 @@ public class Player extends Entity {
     }
 
     // нанесение урона монстрам
-    public void damageMonster(int index, int attackPower) {
+    public void damageMonster(int index, int attackPower, int knockBackPower) {
         if (index != -1)
             if (!gamePanel.monsters[gamePanel.currentMap][index].invincible) {
                 gamePanel.playSoundEffect(5);
+
+                if (knockBackPower > 0) {
+                    knockBack(gamePanel.monsters[gamePanel.currentMap][index], knockBackPower);
+                }
 
                 int damage = attackPower - gamePanel.monsters[gamePanel.currentMap][index].defense;
 
@@ -426,6 +431,13 @@ public class Player extends Entity {
             projectile.alive = false;
             generateParticle(projectile, projectile);
         }
+    }
+
+    // эффект отбрасывания
+    public void knockBack(Entity entity, int knockBackPower) {
+        entity.direction = direction;
+        entity.speed += knockBackPower;
+        entity.knockBack = true;
     }
 
     // повышение уровня

@@ -45,6 +45,7 @@ public abstract class Entity {
     boolean hpBarOn = false;
     public boolean pathFollow = false;
     public boolean monsterAgro = false;
+    public boolean knockBack = false;
 
     // COUNTERS
     public int spriteCounter = 0; // интервал обновления изображения
@@ -53,6 +54,7 @@ public abstract class Entity {
     public int useProjectileCounter = 0; // перезарядка снаряда перед использованием
     int hpBarCounter = 0;
     int dyingCounter = 0;
+    int knockBackCounter = 0;
 
     // CHARACTER ATTRIBUTES
     public String name;
@@ -68,6 +70,7 @@ public abstract class Entity {
     public int attack;
     public int defense;
     public int ammo; // количество снарядов
+    public int defaultSpeed;
     public int speed; // скорость перемещения
     public int coins;
     public Entity currentWeapon;
@@ -85,6 +88,7 @@ public abstract class Entity {
     public String description = "";
     public int manaCost; // стоимость действия в мане
     public int price; // стоимость предмета
+    public int knockBackPower = 0; // сила отбрасывания
 
     // TYPE
     public int type;
@@ -187,15 +191,34 @@ public abstract class Entity {
     }
 
     public void update() {
-        setAction();
-        checkCollision();
+        if (knockBack) {
+            checkCollision();
 
-        if (!collisionOn) {
-            switch (direction) {
-                case "up" -> worldY -= speed;
-                case "down" -> worldY += speed;
-                case "left" -> worldX -= speed;
-                case "right" -> worldX += speed;
+            if (collisionOn || knockBackCounter == 10) {
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            } else {
+                switch (gamePanel.player.direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
+
+            knockBackCounter++;
+        } else {
+            setAction();
+            checkCollision();
+
+            if (!collisionOn) {
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
             }
         }
 

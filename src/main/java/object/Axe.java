@@ -13,6 +13,7 @@ public class Axe extends Entity {
         attackValue = 2;
         attackArea.width = 30;
         attackArea.height = 30;
+        knockBackPower = 10;
         description = "[Woodcutter's axe]\nA bit rusty axe. It\nstill can cut some trees.";
         price = 75;
     }
