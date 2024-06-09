@@ -1,5 +1,6 @@
 package main;
 
+import ai.PathFinder;
 import entity.Entity;
 import entity.Player;
 import interactive_tile.InteractiveTile;
@@ -49,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
     public UserInterface userInterface = new UserInterface(this);
     public EventHandler eventHandler = new EventHandler(this);
     Config config = new Config(this); // конфигурация игры
+    public PathFinder pathFinder = new PathFinder(this);
     Thread gameThread; // создание потока
 
     // ENTITY AND OBJECT

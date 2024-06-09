@@ -43,6 +43,7 @@ public abstract class Entity {
     public boolean dying = false;
     public boolean idleCheck; // переменная для срабатывания idle анимаций во время движения
     boolean hpBarOn = false;
+    boolean pathFollow = false;
 
     // COUNTERS
     public int spriteCounter = 0; // интервал обновления изображения
@@ -185,32 +186,38 @@ public abstract class Entity {
     }
 
     public void update() {
+        setAction();
+        checkCollision();
+
         if (!collisionOn) {
-            setAction();
-
-            gamePanel.collisionChecker.checkTile(this);
-            gamePanel.collisionChecker.checkObject(this, false);
-            gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
-            gamePanel.collisionChecker.checkEntity(this, gamePanel.monsters);
-            gamePanel.collisionChecker.checkEntity(this, gamePanel.iTiles);
-            boolean contactPlayer = gamePanel.collisionChecker.checkPlayer(this);
-
-            if (this.type == typeMonster && contactPlayer)
-                damagePlayer(attack);
-
-            if (!collisionOn) {
-                switch (direction) {
-                    case "up" -> worldY -= speed;
-                    case "down" -> worldY += speed;
-                    case "left" -> worldX -= speed;
-                    case "right" -> worldX += speed;
-                }
+            switch (direction) {
+                case "up" -> worldY -= speed;
+                case "down" -> worldY += speed;
+                case "left" -> worldX -= speed;
+                case "right" -> worldX += speed;
             }
+        }
 
-            spriteCounter++;
+        spriteCounter++;
 
-            if (speed == 0) {
-                if (spriteCounter > 24) {
+        if (speed == 0) {
+            if (spriteCounter > 24) {
+                if (spriteNum == 0 && !idleCheck) {
+                    spriteNum = 1;
+                    idleCheck = true;
+                } else if (spriteNum == 0) {
+                    spriteNum = 2;
+                    idleCheck = false;
+                } else if (spriteNum == 1)
+                    spriteNum = 0;
+                else if (spriteNum == 2)
+                    spriteNum = 0;
+
+                spriteCounter = 0;
+            }
+        } else {
+            if (!collisionOn) {
+                if (spriteCounter > 10 - speed) {
                     if (spriteNum == 0 && !idleCheck) {
                         spriteNum = 1;
                         idleCheck = true;
@@ -225,41 +232,38 @@ public abstract class Entity {
                     spriteCounter = 0;
                 }
             } else {
-                if (!collisionOn) {
-                    if (spriteCounter > 10 - speed) {
-                        if (spriteNum == 0 && !idleCheck) {
-                            spriteNum = 1;
-                            idleCheck = true;
-                        } else if (spriteNum == 0) {
-                            spriteNum = 2;
-                            idleCheck = false;
-                        } else if (spriteNum == 1)
-                            spriteNum = 0;
-                        else if (spriteNum == 2)
-                            spriteNum = 0;
-
-                        spriteCounter = 0;
-                    }
-                }
+                collisionOn = false;
+                spriteNum = 0;
             }
+        }
 
-            // INVINCIBLE
-            if (invincible) {
-                invincibleCounter++;
+        // INVINCIBLE
+        if (invincible) {
+            invincibleCounter++;
 
-                if (invincibleCounter > 40) {
-                    invincible = false;
-                    invincibleCounter = 0;
-                }
+            if (invincibleCounter > 40) {
+                invincible = false;
+                invincibleCounter = 0;
             }
-        } else {
-            collisionOn = false;
-            spriteNum = 0;
         }
 
         // PROJECTILES COOLDOWN
         if (useProjectileCounter < 30)
             useProjectileCounter++;
+    }
+
+    // проверка на столкновение объектов
+    public void checkCollision() {
+        collisionOn = false;
+        gamePanel.collisionChecker.checkTile(this);
+        gamePanel.collisionChecker.checkObject(this, false);
+        gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
+        gamePanel.collisionChecker.checkEntity(this, gamePanel.monsters);
+        gamePanel.collisionChecker.checkEntity(this, gamePanel.iTiles);
+        boolean contactPlayer = gamePanel.collisionChecker.checkPlayer(this);
+
+        if (this.type == typeMonster && contactPlayer)
+            damagePlayer(attack);
     }
 
     // урон по игроку
@@ -379,5 +383,76 @@ public abstract class Entity {
         }
 
         return image;
+    }
+
+    // поиск пути до точки на карте
+    public void searchPath(int goalCol, int goalRow) {
+        int startCol = (worldX + solidArea.x) / gamePanel.tileSize;
+        int startRow = (worldY + solidArea.y) / gamePanel.tileSize;
+
+        gamePanel.pathFinder.setNodes(startCol, startRow, goalCol, goalRow);
+
+        if (gamePanel.pathFinder.search()) {
+            int nextX = gamePanel.pathFinder.pathList.getFirst().col * gamePanel.tileSize;
+            int nextY = gamePanel.pathFinder.pathList.getFirst().row * gamePanel.tileSize;
+
+            // SOLID AREA
+            int solidLeftX = worldX + solidArea.x;
+            int solidRightX = worldX + solidArea.x + solidArea.width;
+            int solidTopY = worldY + solidArea.y;
+            int solidBottomY = worldY + solidArea.y + solidArea.height;
+
+            if (solidTopY > nextY && solidLeftX >= nextX && solidRightX < nextX + gamePanel.tileSize)
+                direction = "up";
+            
+            else if (solidTopY < nextY && solidLeftX >= nextX && solidRightX < nextX + gamePanel.tileSize)
+                direction = "down";
+
+            else if (solidTopY >= nextY && solidBottomY < nextY + gamePanel.tileSize) {
+                if (solidLeftX > nextX)
+                    direction = "left";
+
+                if (solidLeftX < nextX)
+                    direction = "right";
+            }
+
+            else if (solidTopY > nextY && solidLeftX > nextX) {
+                direction = "up";
+                checkCollision();
+
+                if (collisionOn)
+                    direction = "left";
+            }
+
+            else if (solidTopY > nextY && solidLeftX < nextX) {
+                direction = "up";
+                checkCollision();
+
+                if (collisionOn)
+                    direction = "right";
+            }
+
+            else if (solidTopY < nextY && solidLeftX > nextX) {
+                direction = "down";
+                checkCollision();
+
+                if (collisionOn)
+                    direction = "left";
+            }
+
+            else if (solidTopY < nextY && solidLeftX < nextX) {
+                direction = "down";
+                checkCollision();
+
+                if (collisionOn)
+                    direction = "right";
+            }
+
+            int nextCol = gamePanel.pathFinder.pathList.getFirst().col;
+            int nextRow = gamePanel.pathFinder.pathList.getFirst().row;
+
+            if (nextCol == goalCol && nextRow == goalRow)
+                pathFollow = false;
+        }
     }
 }

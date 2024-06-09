@@ -38,26 +38,34 @@ public class OldMan extends Entity {
     }
 
     public void setAction() {
-        actionLockCounter++;
+        if (pathFollow) {
+            int goalCol = 10;
+            int goalRow = 9;
+            
+            searchPath(goalCol, goalRow);
+        } else {
+            actionLockCounter++;
 
-        if (actionLockCounter == 120) {
-            Random random = new Random();
-            int integer = random.nextInt(100) + 1;
+            if (actionLockCounter == 120) {
+                Random random = new Random();
+                int integer = random.nextInt(100) + 1;
 
-            if (integer <= 25)
-                direction = "up";
-            else if (integer <= 50)
-                direction = "down";
-            else if (integer <= 75)
-                direction = "left";
-            else
-                direction = "right";
+                if (integer <= 25)
+                    direction = "up";
+                else if (integer <= 50)
+                    direction = "down";
+                else if (integer <= 75)
+                    direction = "left";
+                else
+                    direction = "right";
 
-            actionLockCounter = 0;
+                actionLockCounter = 0;
+            }
         }
     }
 
     public void speak() {
         super.speak();
+        pathFollow = true;
     }
 }

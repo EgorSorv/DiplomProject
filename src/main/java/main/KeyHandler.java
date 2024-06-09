@@ -78,6 +78,7 @@ public class KeyHandler implements KeyListener {
             gamePanel.playSoundEffect(9);
 
             if (gamePanel.userInterface.commandNumber == 0) {
+                gamePanel.restart();
                 gamePanel.gameState = gamePanel.playState;
                 gamePanel.playMusic(0);
             }

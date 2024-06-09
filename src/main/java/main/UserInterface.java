@@ -1016,7 +1016,7 @@ public class UserInterface {
                 gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentShield) {
                     subState = 0;
                     gamePanel.gameState = gamePanel.dialogueState;
-                    currentDialogue = "Unequipped an item to sell it.";
+                    currentDialogue = "You must unequip an item to sell it.";
                 } else {
                     gamePanel.player.inventory.remove(itemIndex);
                     gamePanel.player.coins += price;
