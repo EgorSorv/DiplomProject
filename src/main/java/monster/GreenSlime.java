@@ -51,40 +51,65 @@ public class GreenSlime extends Entity {
         right2 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
     }
 
-    public void setAction() {
-        actionLockCounter++;
+    public void update() {
+        super.update();
 
-        if (actionLockCounter == 120) {
-            Random random = new Random();
-            int integer = random.nextInt(100) + 1;
+        int xDistance = Math.abs(worldX - gamePanel.player.worldX);
+        int yDistance = Math.abs(worldY - gamePanel.player.worldY);
+        int tileDistance = (xDistance + yDistance) / gamePanel.tileSize;
 
-            if (integer <= 25)
-                direction = "up";
-            else if (integer <= 50)
-                direction = "down";
-            else if (integer <= 75)
-                direction = "left";
-            else
-                direction = "right";
+        if (!monsterAgro && tileDistance < 2) {
+            int random = new Random().nextInt(100) + 1;
 
-            actionLockCounter = 0;
+            if (random > 75)
+                monsterAgro = true;
         }
 
-        int integer = new Random().nextInt(100) + 1;
+        if (monsterAgro && tileDistance > 10)
+            monsterAgro = false;
+    }
 
-        if (integer > 99 && !currentProjectile.alive && useProjectileCounter == 30) {
-            currentProjectile.set(worldX, worldY, direction, true, this);
+    public void setAction() {
+        if (monsterAgro) {
+            int goalCol = (gamePanel.player.worldX + gamePanel.player.solidArea.x) / gamePanel.tileSize;
+            int goalRow = (gamePanel.player.worldY + gamePanel.player.solidArea.y) / gamePanel.tileSize;
 
-            gamePanel.projectiles.add(currentProjectile);
+            chasePlayer(goalCol, goalRow);
 
-            useProjectileCounter = 0;
+            int integer = new Random().nextInt(100) + 1;
+
+            if (integer > 99 && !currentProjectile.alive && useProjectileCounter == 30) {
+                currentProjectile.set(worldX, worldY, direction, true, this);
+
+                gamePanel.projectiles.add(currentProjectile);
+
+                useProjectileCounter = 0;
+            }
+        } else {
+            actionLockCounter++;
+
+            if (actionLockCounter == 120) {
+                Random random = new Random();
+                int integer = random.nextInt(100) + 1;
+
+                if (integer <= 25)
+                    direction = "up";
+                else if (integer <= 50)
+                    direction = "down";
+                else if (integer <= 75)
+                    direction = "left";
+                else
+                    direction = "right";
+
+                actionLockCounter = 0;
+            }
         }
     }
 
     // реакция на атаку
     public void damageReaction() {
         actionLockCounter = 0;
-        direction = gamePanel.player.direction;
+        monsterAgro = true;
     }
 
     public void checkDrop() {

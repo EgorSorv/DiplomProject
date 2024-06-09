@@ -43,7 +43,8 @@ public abstract class Entity {
     public boolean dying = false;
     public boolean idleCheck; // переменная для срабатывания idle анимаций во время движения
     boolean hpBarOn = false;
-    boolean pathFollow = false;
+    public boolean pathFollow = false;
+    public boolean monsterAgro = false;
 
     // COUNTERS
     public int spriteCounter = 0; // интервал обновления изображения
@@ -453,6 +454,71 @@ public abstract class Entity {
 
             if (nextCol == goalCol && nextRow == goalRow)
                 pathFollow = false;
+        }
+    }
+
+    // поиск пути до игрока на карте
+    public void chasePlayer(int goalCol, int goalRow) {
+        int startCol = (worldX + solidArea.x) / gamePanel.tileSize;
+        int startRow = (worldY + solidArea.y) / gamePanel.tileSize;
+
+        gamePanel.pathFinder.setNodes(startCol, startRow, goalCol, goalRow);
+
+        if (gamePanel.pathFinder.search()) {
+            int nextX = gamePanel.pathFinder.pathList.getFirst().col * gamePanel.tileSize;
+            int nextY = gamePanel.pathFinder.pathList.getFirst().row * gamePanel.tileSize;
+
+            // SOLID AREA
+            int solidLeftX = worldX + solidArea.x;
+            int solidRightX = worldX + solidArea.x + solidArea.width;
+            int solidTopY = worldY + solidArea.y;
+            int solidBottomY = worldY + solidArea.y + solidArea.height;
+
+            if (solidTopY > nextY && solidLeftX >= nextX && solidRightX < nextX + gamePanel.tileSize)
+                direction = "up";
+
+            else if (solidTopY < nextY && solidLeftX >= nextX && solidRightX < nextX + gamePanel.tileSize)
+                direction = "down";
+
+            else if (solidTopY >= nextY && solidBottomY < nextY + gamePanel.tileSize) {
+                if (solidLeftX > nextX)
+                    direction = "left";
+
+                if (solidLeftX < nextX)
+                    direction = "right";
+            }
+
+            else if (solidTopY > nextY && solidLeftX > nextX) {
+                direction = "up";
+                checkCollision();
+
+                if (collisionOn)
+                    direction = "left";
+            }
+
+            else if (solidTopY > nextY && solidLeftX < nextX) {
+                direction = "up";
+                checkCollision();
+
+                if (collisionOn)
+                    direction = "right";
+            }
+
+            else if (solidTopY < nextY && solidLeftX > nextX) {
+                direction = "down";
+                checkCollision();
+
+                if (collisionOn)
+                    direction = "left";
+            }
+
+            else if (solidTopY < nextY && solidLeftX < nextX) {
+                direction = "down";
+                checkCollision();
+
+                if (collisionOn)
+                    direction = "right";
+            }
         }
     }
 }
