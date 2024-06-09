@@ -231,7 +231,11 @@ public class Player extends Entity {
             // SUBTRACT THE COST
             currentProjectile.subtractResource(this);
 
-            gamePanel.projectiles.add(currentProjectile);
+            for (int i = 0; i < gamePanel.projectiles[1].length; i++)
+                if (gamePanel.projectiles[gamePanel.currentMap][i] == null) {
+                    gamePanel.projectiles[gamePanel.currentMap][i] = currentProjectile;
+                    break;
+                }
 
             useProjectileCounter = 0;
 
@@ -298,6 +302,10 @@ public class Player extends Entity {
             // проверка попал ли разрушаемый объект в зону удара
             int iTileIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.iTiles);
             damageInteractiveTile(iTileIndex);
+
+            // проверка попал ли снаряд в зону удара
+            int projectileIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.projectiles);
+            damageProjectile(projectileIndex);
 
             // восстановление значений позиции игрока
             worldX = currentWorldX;
@@ -408,6 +416,15 @@ public class Player extends Entity {
             if (gamePanel.iTiles[gamePanel.currentMap][index].currentLife == 0)
                 gamePanel.iTiles[gamePanel.currentMap][index] =
                         gamePanel.iTiles[gamePanel.currentMap][index].getDestroyedForm();
+        }
+    }
+
+    // повреждение снарядов
+    public void damageProjectile(int index) {
+        if (index != -1) {
+            Entity projectile = gamePanel.projectiles[gamePanel.currentMap][index];
+            projectile.alive = false;
+            generateParticle(projectile, projectile);
         }
     }
 

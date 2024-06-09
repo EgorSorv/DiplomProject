@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[][] npc = new Entity[maxMap][10]; // массив для хранения нип
     public Entity[][] monsters = new Entity[maxMap][20]; // массив для хранения монстров
     public InteractiveTile[][] iTiles = new InteractiveTile[maxMap][50]; // массив с объектами для взаимодействия
-    public ArrayList<Entity> projectiles = new ArrayList<>(); // список всех снарядов
+    public Entity[][] projectiles = new Entity[maxMap][20]; // список всех снарядов
     public ArrayList<Entity> particles = new ArrayList<>(); // список всех частиц
     ArrayList<Entity> entities = new ArrayList<>(); // список всех сущностей
 
@@ -190,10 +190,10 @@ public class GamePanel extends JPanel implements Runnable {
                 }
 
             // PROJECTILE
-            for (int i = 0; i < projectiles.size(); i++)
-                if (projectiles.get(i) != null) {
-                    if (projectiles.get(i).alive) projectiles.get(i).update();
-                    else projectiles.remove(i);
+            for (int i = 0; i < projectiles[1].length; i++)
+                if (projectiles[currentMap][i] != null) {
+                    if (projectiles[currentMap][i].alive) projectiles[currentMap][i].update();
+                    else projectiles[currentMap][i] = null;
                 }
 
             // PARTICLE
@@ -263,9 +263,9 @@ public class GamePanel extends JPanel implements Runnable {
                 if (obj[currentMap][i] != null)
                     entities.add(obj[currentMap][i]);
 
-            for (Entity projectile : projectiles)
-                if (projectile != null)
-                    entities.add(projectile);
+            for (int i = 0; i < projectiles[1].length; i++)
+                if (projectiles[currentMap][i] != null)
+                    entities.add(projectiles[currentMap][i]);
 
             for (Entity particle : particles)
                 if (particle != null)

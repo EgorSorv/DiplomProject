@@ -76,12 +76,17 @@ public class GreenSlime extends Entity {
 
             chasePlayer(goalCol, goalRow);
 
-            int integer = new Random().nextInt(100) + 1;
+            int random = new Random().nextInt(100) + 1;
 
-            if (integer > 99 && !currentProjectile.alive && useProjectileCounter == 30) {
+            if (random > 99 && !currentProjectile.alive && useProjectileCounter == 30) {
                 currentProjectile.set(worldX, worldY, direction, true, this);
 
-                gamePanel.projectiles.add(currentProjectile);
+                for (int i = 0; i < gamePanel.projectiles[1].length; i++) {
+                    if (gamePanel.projectiles[gamePanel.currentMap][i] == null) {
+                        gamePanel.projectiles[gamePanel.currentMap][i] = currentProjectile;
+                        break;
+                    }
+                }
 
                 useProjectileCounter = 0;
             }
