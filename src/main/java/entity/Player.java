@@ -3,7 +3,6 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import object.Fireball;
-import object.Key;
 import object.Sword;
 import object.WoodShield;
 
@@ -14,6 +13,8 @@ public class Player extends Entity {
     KeyHandler keyHandler;
     public final int screenX, screenY; // позиция игрока на экране
     public boolean attackCanceled = false;
+    public int currentWeaponSlot = 0;
+    public int currentShieldSlot = 0;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         super(gamePanel);
@@ -61,11 +62,13 @@ public class Player extends Entity {
         direction = "down";
     }
 
-    // восстановление здоровья, маны и обнуление монет
-    public void restoreHealthManaAndCoins() {
+    // восстановление основных показателей
+    public void restoreCharacterStatus() {
         currentLife = maxLife;
         currentMana = maxMana;
         coins = 0;
+        attacking = false;
+        knockBack = false;
     }
 
     // вещи в инвентаре по умолчанию
@@ -73,7 +76,6 @@ public class Player extends Entity {
         inventory.clear(); // очищение инвенторя при перезапуске
         inventory.add(currentWeapon);
         inventory.add(currentShield);
-        inventory.add(new Key(gamePanel));
     }
 
     public int getAttack() {
@@ -83,6 +85,15 @@ public class Player extends Entity {
 
     public int getDefense() {
         return dexterity * currentShield.defenseValue;
+    }
+
+    public void getEquipmentSlots() {
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == currentWeapon)
+                currentWeaponSlot = i;
+            else if (inventory.get(i) == currentShield)
+                currentShieldSlot = i;
+        }
     }
 
     // получение изображения

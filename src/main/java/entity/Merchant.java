@@ -37,7 +37,6 @@ public class Merchant extends Entity {
     // предметы у продавца
     public void setItems() {
         inventory.add(new RedPotion(gamePanel));
-        inventory.add(new Key(gamePanel));
         inventory.add(new Sword(gamePanel));
         inventory.add(new Axe(gamePanel));
         inventory.add(new WoodShield(gamePanel));

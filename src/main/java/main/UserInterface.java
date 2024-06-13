@@ -798,6 +798,7 @@ public class UserInterface {
             if (gamePanel.keyHandler.interactPressed) {
                 subState = 0;
                 gamePanel.stopMusic();
+                gamePanel.restart();
                 gamePanel.gameState = gamePanel.titleState;
             }
         }
@@ -838,7 +839,7 @@ public class UserInterface {
 
             if (gamePanel.keyHandler.interactPressed) {
                 subState = 0;
-                System.exit(1);
+                System.exit(0);
             }
         }
 
@@ -966,6 +967,7 @@ public class UserInterface {
                 } else {
                     gamePanel.player.coins -= price;
                     gamePanel.player.inventory.add(npc.inventory.get(itemIndex));
+                    gamePanel.playSoundEffect(3);
                 }
             }
         }
@@ -1020,6 +1022,7 @@ public class UserInterface {
                 } else {
                     gamePanel.player.inventory.remove(itemIndex);
                     gamePanel.player.coins += price;
+                    gamePanel.playSoundEffect(3);
                 }
             }
         }

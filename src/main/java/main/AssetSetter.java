@@ -3,7 +3,9 @@ package main;
 import entity.Merchant;
 import entity.OldMan;
 import interactive_tile.DryTree;
+import monster.BlackSlime;
 import monster.GreenSlime;
+import monster.RedSlime;
 import object.*;
 
 public class AssetSetter {
@@ -21,34 +23,14 @@ public class AssetSetter {
         gamePanel.obj[mapNum][index] = new BlueHeart(gamePanel);
         index++;
 
-        gamePanel.obj[mapNum][index] = new Coin(gamePanel);
-        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 25;
-        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 23;
-        index++;
-
-        gamePanel.obj[mapNum][index] = new Coin(gamePanel);
-        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 21;
-        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 19;
-        index++;
-
-        gamePanel.obj[mapNum][index] = new Coin(gamePanel);
-        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 26;
-        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 21;
-        index++;
-
         gamePanel.obj[mapNum][index] = new Axe(gamePanel);
-        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 33;
-        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 21;
+        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 37;
+        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 41;
         index++;
 
         gamePanel.obj[mapNum][index] = new BlueShield(gamePanel);
-        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 35;
-        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 21;
-        index++;
-
-        gamePanel.obj[mapNum][index] = new RedPotion(gamePanel);
-        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 22;
-        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 27;
+        gamePanel.obj[mapNum][index].worldX = gamePanel.tileSize * 13;
+        gamePanel.obj[mapNum][index].worldY = gamePanel.tileSize * 9;
     }
 
     // размещение нип на карте
@@ -88,14 +70,38 @@ public class AssetSetter {
         gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 37;
         index++;
 
-        gamePanel.monsters[mapNum][index] = new GreenSlime(gamePanel);
+        gamePanel.monsters[mapNum][index] = new BlackSlime(gamePanel);
         gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 34;
         gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 42;
         index++;
 
-        gamePanel.monsters[mapNum][index] = new GreenSlime(gamePanel);
+        gamePanel.monsters[mapNum][index] = new BlackSlime(gamePanel);
         gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 38;
         gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 42;
+
+        index++;
+
+        gamePanel.monsters[mapNum][index] = new RedSlime(gamePanel);
+        gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 34;
+        gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 7;
+
+        index++;
+
+        gamePanel.monsters[mapNum][index] = new RedSlime(gamePanel);
+        gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 40;
+        gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 7;
+
+        index++;
+
+        gamePanel.monsters[mapNum][index] = new RedSlime(gamePanel);
+        gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 34;
+        gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 11;
+
+        index++;
+
+        gamePanel.monsters[mapNum][index] = new RedSlime(gamePanel);
+        gamePanel.monsters[mapNum][index].worldX = gamePanel.tileSize * 40;
+        gamePanel.monsters[mapNum][index].worldY = gamePanel.tileSize * 11;
     }
 
     public void setInteractiveTile() {
@@ -157,5 +163,8 @@ public class AssetSetter {
         index++;
 
         gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 10, 40);
+        index++;
+
+        gamePanel.iTiles[mapNum][index] = new DryTree(gamePanel, 38, 13);
     }
 }

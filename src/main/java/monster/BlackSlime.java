@@ -6,23 +6,23 @@ import object.*;
 
 import java.util.Random;
 
-public class GreenSlime extends Entity {
+public class BlackSlime extends Entity {
     GamePanel gamePanel;
 
-    public GreenSlime(GamePanel gamePanel) {
+    public BlackSlime(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
         type = typeMonster;
-        name = "green slime";
-        defaultSpeed = 1;
+        name = "black slime";
+        defaultSpeed = 2;
         speed = defaultSpeed;
-        exp = 2;
-        maxLife = 4;
+        exp = 4;
+        maxLife = 8;
         currentLife = maxLife;
-        attack = 5;
-        defense = 0;
-        currentProjectile = new SlimeBall(gamePanel);
+        attack = 6;
+        defense = 1;
+        currentProjectile = new Rock(gamePanel);
 
         solidArea.x = 3;
         solidArea.y = 18;
@@ -35,18 +35,18 @@ public class GreenSlime extends Entity {
     }
 
     public void getImage() {
-        upIdle = setup("/monsters/greenslime_idle", gamePanel.tileSize, gamePanel.tileSize);
-        up1 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
-        up2 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
-        downIdle = setup("/monsters/greenslime_idle", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
-        down2 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
-        leftIdle = setup("/monsters/greenslime_idle", gamePanel.tileSize, gamePanel.tileSize);
-        left1 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
-        left2 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
-        rightIdle = setup("/monsters/greenslime_idle", gamePanel.tileSize, gamePanel.tileSize);
-        right1 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
-        right2 = setup("/monsters/greenslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        upIdle = setup("/monsters/blackslime_idle", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("/monsters/blackslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/monsters/blackslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        downIdle = setup("/monsters/blackslime_idle", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/monsters/blackslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/monsters/blackslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        leftIdle = setup("/monsters/blackslime_idle", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/monsters/blackslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/monsters/blackslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        rightIdle = setup("/monsters/blackslime_idle", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/monsters/blackslime_move", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/monsters/blackslime_move", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public void update() {
@@ -59,7 +59,7 @@ public class GreenSlime extends Entity {
         if (!monsterAgro && tileDistance < 2) {
             int random = new Random().nextInt(100) + 1;
 
-            if (random > 75)
+            if (random > 50)
                 monsterAgro = true;
         }
 

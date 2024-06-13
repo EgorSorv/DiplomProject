@@ -17,7 +17,7 @@ public class Rock extends Projectile {
         speed = 8;
         maxLife = 20;
         currentLife = maxLife;
-        attack = 2;
+        attack = 4;
         manaCost = 1;
         alive = false;
 
@@ -50,7 +50,7 @@ public class Rock extends Projectile {
     }
 
     public Color getParticleColor() {
-        return new Color(42, 40, 0);
+        return new Color(20, 20, 20);
     }
 
     public int getParticleSize() {

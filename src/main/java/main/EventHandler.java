@@ -61,9 +61,9 @@ public class EventHandler {
                 damagePit(0, 23, 18, gamePanel.dialogueState, true);
 
             else if (hit(0, 30, 37, "right", false))
-                teleport(gamePanel.dialogueState, 8, 38);
+                teleport(gamePanel.dialogueState, 16, 9);
 
-            else if (hit(0, 8, 38, "up", false))
+            else if (hit(0, 16, 9, "right", false))
                 teleport(gamePanel.dialogueState, 30, 37);
 
             else if (hit(0, 10, 39, "any", false))
@@ -161,15 +161,19 @@ public class EventHandler {
 
             if (gamePanel.player.currentLife < gamePanel.player.maxLife ||
                     gamePanel.player.currentMana < gamePanel.player.maxMana) {
-                gamePanel.userInterface.currentDialogue = "You drink the water.\n" +
-                        "Your health and mana have been restored.";
+                gamePanel.userInterface.currentDialogue = """
+                        You drink the water.
+                        Your health and mana have been restored.
+                        The progress has been saved.""";
 
                 gamePanel.player.currentLife = gamePanel.player.maxLife;
                 gamePanel.player.currentMana = gamePanel.player.maxMana;
 
-            } else gamePanel.userInterface.currentDialogue = "Your health and mana are full.";
+            } else gamePanel.userInterface.currentDialogue = "Your health and mana are full.\n" +
+                                                            "The progress has been saved.";
 
             gamePanel.assetSetter.setMonster();
+            gamePanel.saveLoad.save();
         }
     }
 

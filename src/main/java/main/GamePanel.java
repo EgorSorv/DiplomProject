@@ -1,6 +1,7 @@
 package main;
 
 import ai.PathFinder;
+import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import interactive_tile.InteractiveTile;
@@ -51,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
     public EventHandler eventHandler = new EventHandler(this);
     Config config = new Config(this); // конфигурация игры
     public PathFinder pathFinder = new PathFinder(this);
+    SaveLoad saveLoad = new SaveLoad(this);
     Thread gameThread; // создание потока
 
     // ENTITY AND OBJECT
@@ -100,7 +102,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void retry() {
         player.invincible = false;
         player.setDefaultPosition();
-        player.restoreHealthManaAndCoins();
+        player.restoreCharacterStatus();
 
         assetSetter.setNPC();
         assetSetter.setMonster();
@@ -116,6 +118,8 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setNPC();
         assetSetter.setMonster();
         assetSetter.setInteractiveTile();
+
+        currentMap = 0;
     }
 
     // вывод игры на весь экран
